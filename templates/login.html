@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% load static %}
+        <div class="container">
+            <section>
+                <div class="modal-body customer-box row">
+                    <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+                    <a class="hiddenanchor" id="toregister"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                    <div class="col-md-12">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <h1>Log in</h1>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Login">
+                                <form  action="/login" autocomplete="on" method="post" class="form-horizontal">
+                                     {% csrf_token %}
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input class="form-control" name="username" id="username" placeholder="Email" type="text" data-icon="u">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input class="form-control" id="password" name="password" placeholder="Password" type="password">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
+                                            Submit
+                                        </button>
+                                        <a class="for-pwd" href="javascript:;">Forgot your password?</a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-10" style="margin-top:20px">
+                                        <p class="change_link">Not a member yet ?<a href="/register" class="to_register">Join us</a></p>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+			    </div>
+            </section>
+        </div>
+
+{% endblock %}

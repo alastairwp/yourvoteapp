@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% load staticfiles %}
+    <header class="header header_style_01">
+        <nav class="megamenu navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html"><img width="150px" src="{% static "images/logos/bethebusiness-logo.png" %}" alt="image"></a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/members/benchmark">Benchmark </a></li>
+                        <li><a class="active" href="#">Dashboard</a></li>
+                        <li><a href="contact">Contact</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                         {% if user.is_authenticated %}
+                            <li><a href="/logout" class="btn btn-radius btn-brd">Logout</a></li>
+                        {% else %}
+                            <li><a class="btn-light btn-radius btn-brd log" href="/login" data-toggle="modal" data-target="#login"><i class="flaticon-padlock"></i> Customer Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+	<div class="all-title-box">
+		<div class="container text-center">
+			<h1>Dashboard</h1>
+		</div>
+	</div>
+
+
+    <div class="section lb">
+        <div class="container">
+            <div class="section-title text-center">
+                <h3>You are enroled on the following courses</h3>
+				<div class="dmoain-pricing">
+					<div class="table-responsive-sm">
+						<table>
+							<thead>
+								<tr class="domain-head">
+									<th scope="col">
+										Course ID
+									</th>
+									<th scope="col">
+										Title
+									</th>
+									<th scope="col">
+										Location
+									</th>
+									<th scope="col">
+										Start date
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+                                {% for usercourse in courses %}
+								<tr>
+                                    <td data-label="Course Code"><a href="/members/benchmark">{{ usercourse.course.code }}</a></td>
+									<td data-label="Title">{{ usercourse.course.title }}</td>
+									<td data-label="Location">{{ usercourse.course.location.name }}</td>
+									<td data-label="Start Date">{{ usercourse.course.start_date }}</td>
+								</tr>
+                                {% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load staticfiles %}
+        <!-- Basic -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <!-- Mobile Metas -->
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+         <!-- Site Metas -->
+        <title>{% block title %}PtP Home{% endblock %}</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="stylesheet" href="{% static "css/style.css" %}" />
+        <link rel="shortcut icon" href="{% static "images/favicon.ico" %}" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="{% static "images/apple-touch-icon.png" %}">
+        <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+        <!--<link rel="stylesheet" href="{% static "css/colors.css" %}">-->
+        <link rel="stylesheet" href="{% static "css/versions.css" %}">
+        <link rel="stylesheet" href="{% static "css/responsive.css" %}">
+        <link rel="stylesheet" href="{% static "css/custom.css" %}">
+
+        <script src="{% static "js/modernizer.js" %}"></script>
+
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        	{% block head %}{% endblock %}
+
+    </head>
+<body class="host_version">
+
+	{% block content %}{% endblock %}
+
+   <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <img style="width:150px" src="{% static "images/logos/bethebusiness-logo.png" %}" alt="">
+                        </div>
+                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
+                        <p>Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
+                    </div>
+                </div>
+
+				<div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>Information Link</h3>
+                        </div>
+                        <ul class="footer-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Pricing</a></li>
+							<li><a href="#">About</a></li>
+							<li><a href="#">Faq</a></li>
+							<li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>Contact Details</h3>
+                        </div>
+
+                        <ul class="footer-links">
+                            <li><a href="mailto:#">ptp@bethebusiness.com</a></li>
+                            <li><a href="#">www.bethebusiness.com</a></li>
+                            <li>25-28 Glasshouse Yard, London. </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>Social</h3>
+                        </div>
+                        <ul class="footer-links">
+                            <li><a href="#"><i class="fa fa-facebook"></i> 22.543 Likes</a></li>
+                            <li><a href="#"><i class="fa fa-github"></i> 128 Projects</a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i> 12.860 Followers</a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i> 3312 Shots</a></li>
+                            <li><a href="#"><i class="fa fa-pinterest"></i>3331 Pins</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <div class="copyrights">
+        <div class="container">
+            <div class="footer-distributed">
+                <div class="footer-left">
+                    <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">HostCloud</a> Design By : <a href="https://html.design/">html design</a></p>
+                </div>
+
+                <div class="footer-right">
+                    <form method="get" action="#">
+                        <input placeholder="Subscribe our newsletter.." name="search">
+                        <i class="fa fa-envelope-o"></i>
+                    </form>
+                </div>
+            </div>
+        </div><!-- end container -->
+    </div><!-- end copyrights -->
+
+    <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+
+    <script src="{% static "js/all.js" %}"></script>
+    <script src="{% static "js/custom.js" %}"></script>
+    <script src="{% static "js/plotly.js" %}"></script>
+</body>
+</html>

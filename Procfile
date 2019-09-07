@@ -1,0 +1,1 @@
+web: gunicorn pullingapp.wsgi:application
