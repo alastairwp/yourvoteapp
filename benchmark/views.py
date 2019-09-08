@@ -65,8 +65,16 @@ def save_comment_data(request):
 
 
 def get_chart_data(request):
-    question_id = request.POST['question_id']
-    course_id = request.POST['course_id']
+    try:
+        question_id = request.POST['question_id']
+    except MultiValueDictKeyError:
+        question_id = None
+
+    try:
+        course_id = request.POST['course_id']
+    except MultiValueDictKeyError:
+        course_id = None
+
     # print(course_id)
 
     allVote = Vote.objects.filter(question_id__exact=question_id, course_id=course_id)
