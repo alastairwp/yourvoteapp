@@ -4,62 +4,74 @@
 
 {% block content %}
 
-        <div class="container">
-            <section>
-                <div id="container_demo" >
-                    <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
-                    <a class="hiddenanchor" id="toregister"></a>
-                    <a class="hiddenanchor" id="tologin"></a>
-                    <div id="wrapper">
+        <div style="margin-top:100px;margin-bottom:100px">
+        <section>
+            <div style="width:50%; margin-left:auto;margin-right:auto;">
 
-                        <div id="register" class="animate form">
-                            <form  action="register" autocomplete="on" method="post">
+                    <ul class="nav nav-tabs">
+                        <h1>Sign Up</h1>
+                    </ul>
 
-                                {% csrf_token %}
+                         <div class="tab-content">
+                        <div class="tab-pane active" id="register">
+                        <form  action="register" autocomplete="on" method="post" class="form-horizontal">
 
-                                <h1> Sign up </h1>
-                                <p>
-                                    <label for="usernamesignup" class="uname" data-icon="u">Your name</label>
-                                    <input id="usernamesignup" name="name" required="required" type="text" placeholder="mysuperusername690" />
-                                </p>
-                                <p>
-                                    <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
-                                    <input id="usernamesignup" name="username" required="required" type="text" placeholder="mysuperusername690" />
-                                </p>
-                                <p>
-                                    <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
-                                    <input id="emailsignup" name="email" required="required" type="email" placeholder="mysupermail@mail.com"/>
-                                </p>
-                                <p>
-                                    <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
-                                    <input id="passwordsignup" name="password1" required="required" type="password" placeholder="eg. X8df!90EO"/>
-                                </p>
-                                <p>
-                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
-                                    <input id="passwordsignup_confirm" name="password2" required="required" type="password" placeholder="eg. X8df!90EO"/>
-                                </p>
-                                <p class="signin button">
-									<input type="submit" value="Sign up"/>
-								</p>
-                                <div style="    margin-bottom: 10px;">
-                                    {% for message in messages %}
-                                        <h2>{{ message }}</h2>
-                                    {% endfor %}
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input class="form-control" name="firstname" required="required" id="firstname" placeholder="First name" type="text">
                                 </div>
-                                <p class="change_link">
-									Already a member ?
-									<a href="/login" class="to_register"> Go and log in </a>
-								</p>
+                            </div>
 
-                            </form>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input class="form-control" name="lastname" required="required" id="lastname" placeholder="Last name" type="text">
+                                </div>
+                            </div>
 
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input class="form-control" name="email" required="required" id="email" placeholder="Email" type="email">
+                                </div>
+                            </div>
 
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input class="form-control" name="password1" required="required" id="password1" placeholder="Password" type="password">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input class="form-control" name="password2" required="required" id="password2" placeholder="Confirm password" type="password">
+                                </div>
+                            </div>
+
+                            <p class="signin button">
+                                <input type="submit" value="Sign up"/>
+                            </p>
+
+                            <p class="change_link">
+                                Already a member ?
+                                <a href="/login" class="to_register"> Go and log in </a>
+                            </p>
+
+                            <div style="margin-bottom: 10px;">
+                                {% for message in messages %}
+                                    <h2>{{ message }}</h2>
+                                {% endfor %}
+                            </div>
+
+                        </form>
 
                         </div>
-
+                         </div>
                     </div>
-                </div>
-            </section>
-        </div>
+
+
+            </div>
+        </section>
+    </div>
 
 {% endblock %}
