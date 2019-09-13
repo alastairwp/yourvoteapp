@@ -5,7 +5,7 @@ setInterval(function () {
                $.ajax({
                    url: url,
                    type: "POST",
-                   data:{question_id:question_id,course_id:course_id,csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()},
+                   data:{question_id:question_id, course_id:course_id, csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()},
                    success: function (result) {
                        var xvalue = new Array();
                        var votes = [1,2,3,4,5,6,7,8,9];
@@ -78,7 +78,7 @@ setInterval(function () {
 
        $('document').ready(function () {
 
-           $('.newcell').click(function () {
+           $('.vote-radio').click(function () {
                var valueget = $(this).attr('data-type');
                var question_id = $('#question_id').val();
                var next_iddata  = $('#next_id').val();

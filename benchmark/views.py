@@ -151,9 +151,9 @@ def benchmark(request):
                 right_hints = None
 
             try:
-                vote_data = Vote.objects.get(question_id__exact=question_id, user__exact=current_user.id)
+                vote_value = Vote.objects.filter(question_id__exact=question_id).filter(user__exact=current_user.id).first()
             except Vote.DoesNotExist:
-                vote_data = None
+                vote_value = None
 
             try:
                 usercourse = UserCourse.objects.get(user__exact=current_user.id)
@@ -163,7 +163,7 @@ def benchmark(request):
         else:
             questiondata = None
             next_issue = None
-            vote_data = None
+            vote_value = None
 
         return render(
             request,
@@ -176,8 +176,8 @@ def benchmark(request):
                 'left_hints':  left_hints,
                 'middle_hints': middle_hints,
                 'right_hints': right_hints,
-                'vote_data': vote_data,
-                'course_id': usercourse.course_id
+                'course_id': usercourse.course_id,
+                'vote_value': vote_value
             }
         )
 

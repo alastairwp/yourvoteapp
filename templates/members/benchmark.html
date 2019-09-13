@@ -3,7 +3,107 @@
 {% block head %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<style>
 
+.vote-container {
+  display: block;
+  position: relative;
+  padding-left: 65px;
+  margin-bottom: 20px;
+  margin-top: 11px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-family: Arial, Verdana, Helvetica;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+}
+
+/* Hide the browser's default radio button */
+.vote-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.vote-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.vote-container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.vote-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.vote-container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+.section-bar-blue {
+    background-color: blue
+}
+
+.section-bar-pink {
+    background-color: pink
+}
+
+.section-bar {
+    solid blue;
+    height: 140px;
+    width: 360px;
+    display: block;
+}
+
+.hint-box {
+    width: 250px;
+    float: left;
+    height: 140px;
+    background-color: white;
+    font-family: Arial, Helvetica, Verdana;
+    font-size: 0.8em;
+    font-weight: bold;
+    font-style: italic;
+    padding-left:5px;
+    padding-top:20px;
+}
+
+.vote-box {
+    width: 100px;
+    float: left;
+}
+
+</style>
 {% endblock %}
 
 {% block content %}
@@ -65,56 +165,75 @@
                                         <div id="container">
 
                                             <form action="" method="post">
-                                                <div class="row  col-sm-12 all_data" style="padding-top:30px">
-                                                    <div class="cell newcell checkbox" data-type="1"></div>
-                                                    <div class="cell newcell checkbox" data-type="2"></div>
-                                                    <div class="cell newcell checkbox" data-type="3"></div>
-                                                    <div class="cell newcell checkbox" data-type="4"></div>
-                                                    <div class="cell newcell checkbox" data-type="5"></div>
-                                                    <div class="cell newcell checkbox" data-type="6"></div>
-                                                    <div class="cell newcell checkbox" data-type="7"></div>
-                                                    <div class="cell newcell checkbox" data-type="8"></div>
-                                                    <div class="cell newcell checkbox" data-type="9"></div>
+                                                <div style="max-width:500px; height: 480px; margin-left:auto; margin-right:auto; display:relative; background-color:white; ">
+                                                    <div class="section-bar-blue; section-bar">
+                                                    <div class="hint-box hint_left">
+                                                        {% for left_hint in left_hints %}
+                                                            <span class="hint">{{ left_hint.text }}</span><br />
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="vote-box">
+                                                        <label class="vote-container">1
+                                                            <input type="radio" {% if vote_value.value == 1 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="1">
+                                                          <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="vote-container">2
+                                                            <input type="radio" {% if vote_value.value == 2 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="2">
+                                                          <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="vote-container">3
+                                                            <input type="radio" {% if vote_value.value == 3 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="3">
+                                                          <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                                <div class="row  col-sm-12 all_data">
-                                                    <div class="cell">1</div>
-                                                    <div class="cell">2</div>
-                                                    <div class="cell">3</div>
-                                                    <div class="cell">4</div>
-                                                    <div class="cell">5</div>
-                                                    <div class="cell">6</div>
-                                                    <div class="cell">7</div>
-                                                    <div class="cell">8</div>
-                                                    <div class="cell">9</div>
+                                                    <div class="section-bar-pink; section-bar">
+                                                        <div class="hint-box hint_left">
+                                                            {% for middle_hint in middle_hints %}
+                                                                <span class="hint">{{ middle_hint.text }}</span><br />
+                                                            {% endfor %}
+                                                        </div>
+                                                        <div class="vote-box">
+                                                            <label class="vote-container">4
+                                                                <input type="radio" {% if vote_value.value == 4 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="4">
+                                                              <span class="checkmark"></span>
+                                                            </label>
+                                                            <label class="vote-container">5
+                                                                <input type="radio" {% if vote_value.value == 5 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="5">
+                                                              <span class="checkmark"></span>
+                                                            </label>
+                                                            <label class="vote-container">6
+                                                              <input type="radio" {% if vote_value.value == 6 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="6">
+                                                              <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="section-bar-blue; section-bar">
+                                                        <div class="hint-box hint_left">
+                                                            {% for right_hint in right_hints %}
+                                                                <span class="hint">{{ right_hint.text }}</span><br />
+                                                            {% endfor %}
+                                                        </div>
+                                                        <div class="vote-box">
+                                                            <label class="vote-container">7
+                                                              <input type="radio" {% if vote_value.value == 7 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="7">
+                                                              <span class="checkmark"></span>
+                                                            </label>
+                                                            <label class="vote-container">8
+                                                              <input type="radio" {% if vote_value.value == 8 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="8">
+                                                              <span class="checkmark"></span>
+                                                            </label>
+                                                            <label class="vote-container">9
+                                                              <input type="radio" {% if vote_value.value == 9 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="9">
+                                                              <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
                                                 </div>
-
-
-                                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                                <p class="hint hint_left">{% for left_hint in left_hints %}
-                                                    {{ left_hint.text }} <br />
-                                                    {% endfor %}
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                                <p class="hint hint_center">{% for middle_hint in middle_hints %}
-                                                    {{ middle_hint.text }} <br />
-                                                    {% endfor %}
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                                <p class="hint hint_right">{% for right_hint in right_hints %}
-                                                    {{ right_hint.text }} <br />
-                                                    {% endfor %}
-                                                </p>
-                                            </div>
-
-
                                                 <div class="col-sm-12">
                                                     <textarea class="form-control" name="UserComment" id="UserComment" placeholder="Actions/Comment/Observations">{{  vote_data.comment_data }}</textarea>
                                                 </div>
-
                                             </form>
-
 
                                         </div>
 
