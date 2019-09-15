@@ -391,6 +391,12 @@
         padding: 10px 20px;
         text-align: center;
     }
+    .col-md-12 {
+    min-width: 100%
+    }
+    .container {
+    min-width: 100%
+    }
     body.app_version .btn-light i {
         display: none !important;
     }
