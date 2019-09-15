@@ -391,12 +391,20 @@
         padding: 10px 20px;
         text-align: center;
     }
+
+   /*My custom changes */
     .col-md-12 {
-    min-width: 100%
+        min-width: 100%
     }
     .container {
-    min-width: 100%
+        min-width: 100%
     }
+    .hint-box {
+        max-width: 200px;
+
+    }
+   /* end of my changes */
+
     body.app_version .btn-light i {
         display: none !important;
     }

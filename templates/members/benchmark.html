@@ -130,7 +130,7 @@
                     <ul class="nav navbar-nav navbar-right">
                             <li><a href="#" class="btn btn-radius btn-brd">{{ request.user.first_name }}</a></li>
                         {% if user.is_authenticated %}
-                            <li><a href="logout" class="btn btn-radius btn-brd">Logout</a></li>
+                            <li><a href="/logout" class="btn btn-radius btn-brd">Logout</a></li>
                         {% else %}
                             <li><a class="btn-light btn-radius btn-brd log" href="/login" data-toggle="modal" data-target="#login"><i class="flaticon-padlock"></i> Customer Login</a></li>
                         {% endif %}
