@@ -31,7 +31,7 @@ class Question(models.Model):
 
 class Vote(models.Model):
     user = models.IntegerField()
-    value = models.IntegerField()
+    value = models.PositiveIntegerField(default=0, null=True, blank=True)
     question = models.ForeignKey(Question, null=False, blank=False, on_delete=models.SET(0))
     course = models.ForeignKey(Course, null=True, on_delete=models.SET_NULL)
     comment_data = models.TextField(max_length=1000)

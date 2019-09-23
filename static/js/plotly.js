@@ -104,7 +104,6 @@ setInterval(function () {
 
 
        function savecomment(id) {
-
             var question_id = $('#question_id').val();
             var next_iddata  = $('#next_id').val();
             var back_iddata  = $('#back_id').val();

@@ -14,14 +14,12 @@ import json
 
 def save_vote_data(request):
     if request.is_ajax():
-
         current_user = request.user
         question_id = request.POST['question_id']
         value_data = request.POST['value']
         comment_data = request.POST['question_comment']
         course_id = request.POST['course_id']
         now = timezone.now()
-
         try:
             checkvote = Vote.objects.filter(user__exact=current_user.id, question_id__exact=question_id, course_id=course_id).count()
         except Question.DoesNotExist:
@@ -41,7 +39,6 @@ def save_vote_data(request):
 
 def save_comment_data(request):
     if request.is_ajax():
-        print(request.POST)
         current_user = request.user
         question_id = request.POST['question_id']
         comment_data = request.POST['question_comment']
@@ -50,7 +47,6 @@ def save_comment_data(request):
         except MultiValueDictKeyError:
             course_id = None
         now = timezone.now()
-        print(comment_data)
         try:
             checkvote = Vote.objects.filter(user__exact=current_user.id, question_id__exact=question_id, course_id=course_id).count()
         except Question.DoesNotExist:
@@ -78,8 +74,6 @@ def get_chart_data(request):
         course_id = request.POST['course_id']
     except MultiValueDictKeyError:
         course_id = None
-
-    # print(course_id)
 
     allVote = Vote.objects.filter(question_id__exact=question_id, course_id=course_id)
 

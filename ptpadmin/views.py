@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Course
+from .models import Course, UserCourse
 from django.http import HttpRequest, HttpResponseRedirect
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -40,11 +40,13 @@ def ptpadmin_home(request):
 @user_passes_test(lambda u: u.groups.filter(name='ptpadmins').exists())
 def edit_course(request, course_id):
     course = Course.objects.get(id=course_id)
+    course_users = UserCourse.objects.filter(course_id=course_id)
     return render(
         request,
         'ptpadmin/edit_course.html',
         {
             'title': 'Centre Admin',
             'course': course,
+            'course_users': course_users,
         }
     )

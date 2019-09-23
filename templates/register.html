@@ -4,16 +4,16 @@
 
 {% block content %}
 
-        <div style="margin-top:100px;margin-bottom:100px">
+    <div style="margin-top:100px;margin-bottom:100px">
         <section>
             <div style="width:50%; margin-left:auto;margin-right:auto;">
 
-                    <ul class="nav nav-tabs">
-                        <h1>Sign Up</h1>
-                    </ul>
+                <ul class="nav nav-tabs">
+                    <h1>Sign Up</h1>
+                </ul>
 
-                         <div class="tab-content">
-                        <div class="tab-pane active" id="register">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="register">
                         <form  action="register" autocomplete="on" method="post" class="form-horizontal">
 
                             {% csrf_token %}
@@ -48,6 +48,23 @@
                                 </div>
                             </div>
 
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div {% if message.tags %}class="{{ message.tags }}"{% endif %}>
+                                        {% if message.tags == "success" %}
+                                            <i class="fa fa-check"></i>
+                                            {% elif message.tags == "warning" %}
+                                            <i class="fa fa-warning"></i>
+                                            {% elif message.tags == "error" %}
+                                            <i class="fa fa-times-circle"></i>
+                                            {% elif message.tags == "info" %}
+                                            <i class="fa fa-info-circle"></i>
+                                        {% endif %}
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
                             <p class="signin button">
                                 <input type="submit" value="Sign up"/>
                             </p>
@@ -57,19 +74,9 @@
                                 <a href="/login" class="to_register"> Go and log in </a>
                             </p>
 
-                            <div style="margin-bottom: 10px;">
-                                {% for message in messages %}
-                                    <h2>{{ message }}</h2>
-                                {% endfor %}
-                            </div>
-
                         </form>
-
-                        </div>
-                         </div>
                     </div>
-
-
+                 </div>
             </div>
         </section>
     </div>

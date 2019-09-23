@@ -13,7 +13,7 @@ def login(request):
             auth.login(request, user)
             return redirect('/members/dashboard')
         else:
-            messages.info(request, 'Your username or password is incorrect')
+            messages.error(request, 'Your username or password is incorrect')
             return redirect('/login')
     else:
         return render(request, 'login.html')

@@ -26,15 +26,24 @@
                                         <input class="form-control" id="password" name="password" placeholder="Password" type="password">
                                     </div>
                                 </div>
-                                    {% for message in messages %}
-                                <div class="row">
-                                    <div class="col-sm-10 isa_error" style="margin-top:20px">
-                                        <i class="fa fa-times-circle"></i>
-                                        {{ message }}
 
-                                    </div>
-                                </div>
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div {% if message.tags %}class="{{ message.tags }}"{% endif %}>
+                                            {% if message.tags == "success" %}
+                                                <i class="fa fa-check"></i>
+                                                {% elif message.tags == "warning" %}
+                                                <i class="fa fa-warning"></i>
+                                                {% elif message.tags == "error" %}
+                                                <i class="fa fa-times-circle"></i>
+                                                {% elif message.tags == "info" %}
+                                                <i class="fa fa-info-circle"></i>
+                                            {% endif %}
+                                            {{ message }}
+                                        </div>
                                     {% endfor %}
+                                {% endif %}
+
                                 <div class="row">
                                     <div class="col-sm-10">
                                         <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
@@ -47,7 +56,6 @@
                                 <div class="row">
                                     <div class="col-sm-10" style="margin-top:20px">
                                         <p class="change_link">Not a member yet ?<a href="/register" class="to_register">Join us</a></p>
-                                        <p>{{ request.messages.info }}</p>
                                     </div>
                                 </div>
                                 </form>
