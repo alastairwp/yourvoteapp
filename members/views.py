@@ -3,6 +3,7 @@ from ptpadmin.models import UserCourse
 from django import template
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required, user_passes_test
+from pullingapp import settings
 
 register = template.Library()
 
