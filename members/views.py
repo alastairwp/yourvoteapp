@@ -14,8 +14,7 @@ def has_group(user, group_name):
     return True if group in user.groups.all() else False
 
 
-@login_required(login_url=settings.LOGIN_URL)
-@user_passes_test(lambda u: u.groups.filter(name='members').exists())
+@login_required()
 def dashboard(request):
     current_user = request.user
     courses = UserCourse.objects.filter(user=current_user.id)
