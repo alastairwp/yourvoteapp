@@ -109,11 +109,12 @@ setInterval(function () {
             var next_iddata  = $('#next_id').val();
             var back_iddata  = $('#back_id').val();
             var question_comment = $('#UserComment').val();
+            var course_id = $('#course_id').val();
             var url = '/save_comment_data';
                $.ajax({
                    url: url,
                    type: "POST",
-                   data: {question_id:question_id,question_comment:question_comment,csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()},
+                   data: {question_id:question_id,question_comment:question_comment,course_id:course_id,csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()},
                    success: function (result) {
                        console.log(result)
                        if(result.resultdata==1){
