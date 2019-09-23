@@ -2,47 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="936d9c73-59ae-44bd-a027-3356d22b3598" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/benchmark/templatetags/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/benchmark/templatetags/auth_extras.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/btbadmin/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/btbadmin/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/btbadmin/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/btbadmin/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/btbadmin/migrations/0002_centre_admin_user_group.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/btbadmin/migrations/0003_auto_20190919_2331.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/btbadmin/migrations/0004_auto_20190920_0057.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/btbadmin/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/btbadmin/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/btbadmin/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/btbadmin/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ptpadmin/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ptpadmin/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ptpadmin/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ptpadmin/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ptpadmin/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ptpadmin/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ptpadmin/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ptpadmin/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/ptpadmin.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/ptpadmin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/btbadmin/admin-layout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/btbadmin/btbadmin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/btbadmin/edit_centre.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/btbadmin/edit_user.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/ptpadmin/admin-layout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/ptpadmin/edit_course.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/ptpadmin/ptpadmin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmark/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/benchmark/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmark/migrations/0021_auto_20190907_2027.py" beforeDir="false" afterPath="$PROJECT_DIR$/benchmark/migrations/0021_auto_20190919_2120.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmark/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/benchmark/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmark/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/benchmark/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/members/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/members/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pullingapp/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/pullingapp/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pullingapp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/pullingapp/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sqlite3.db" beforeDir="false" afterPath="$PROJECT_DIR$/sqlite3.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/members/benchmark.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/members/benchmark.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/members/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/members/dashboard.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
