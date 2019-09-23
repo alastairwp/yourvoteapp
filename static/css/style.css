@@ -197,11 +197,187 @@ blockquote {
     padding: 30px;
 }
 
+/*------------------------------------------------------------------
+    MY CUSTOM CSS
+-------------------------------------------------------------------*/
 
+
+#container {
+	display: inline-block;
+	text-align: center;
+	font-size: 20px;
+	background: #afabab;
+	height: 100%;
+	width: 100%;
+	padding-top:30px;
+}
+
+#wrapper {
+	width:100%;
+	text-align: center;
+	overflow:display;
+}
+
+#chart {
+	width: 100%;
+	height:40vh;
+}
+
+.graph {
+	margin:25px auto;
+	border: 1px solid green;
+}
+
+#question {
+	font-weight: 500;
+	font-size: 2em;
+}
+
+#container .cell {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	margin: 0 10px;
+}
+
+#container .checkbox {
+	border: 1px solid black;
+	background: #FFFFFF;
+	cursor: pointer;
+}
+
+#container .checkbox:hover {
+	background: #d0cece;
+}
+
+.logout_button{
+  margin: 8px 50px 9px 0;
+  text-align: right;
+}
+
+.all_data{
+    justify-content: center;
+}
+
+.hint {
+    font-size: 0.8em;
+    font-style: italic;
+    font-weight: bold;
+    }
+
+.hint_left {
+    text-align: left;
+    }
+
+.hint_center {
+    text-align: center;
+    }
+
+.hint_right {
+    text-align: right;
+    }
+
+.vote-container {
+  display: block;
+  position: relative;
+  padding-left: 65px;
+  margin-bottom: 20px;
+  margin-top: 11px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-family: Arial, Verdana, Helvetica;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+}
+
+/* Hide the browser's default radio button */
+.vote-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.vote-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.vote-container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.vote-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.vote-container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+.section-bar-blue {
+    background-color: blue
+}
+
+.section-bar-pink {
+    background-color: pink
+}
+
+.section-bar {
+    solid blue;
+    height: 140px;
+    width: 360px;
+    display: block;
+}
+
+.hint-box {
+    width: 250px;
+    float: left;
+    height: 140px;
+    background-color: white;
+    font-family: Arial, Helvetica, Verdana;
+    font-size: 0.8em;
+    font-weight: bold;
+    font-style: italic;
+    padding-left:5px;
+    padding-top:20px;
+}
+
+.vote-box {
+    width: 100px;
+    float: left;
+}
 
 .info, .success, .warning, .error {
 margin: 10px 0px;
-padding:12px;
+padding:10px;
 
 }
 .info {
@@ -220,7 +396,11 @@ padding:12px;
     color: #D8000C;
     background-color: #FFD2D2;
 }
-
+.info i, .success i, .warning i, .error i {
+    margin:10px 10px;
+    font-size:1.8em;
+    vertical-align:middle;
+}
 
 
 /*------------------------------------------------------------------
@@ -2592,85 +2772,6 @@ span.m_1 {
 	display: none;
 }
 
-/*------------------------------------------------------------------
-    BENCHMARK PAGE
--------------------------------------------------------------------*/
-
-
-#container {
-	display: inline-block;
-	text-align: center;
-	font-size: 20px;
-	background: #afabab;
-	height: 100%;
-	width: 100%;
-	padding-top:30px;
-}
-
-#wrapper {
-	width:100%;
-	text-align: center;
-	overflow:display;
-}
-
-#chart {
-	width: 100%;
-	height:40vh;
-}
-
-.graph {
-	margin:25px auto;
-	border: 1px solid green;
-}
-
-#question {
-	font-weight: 500;
-	font-size: 2em;
-}
-
-#container .cell {
-	display: inline-block;
-	width: 50px;
-	height: 50px;
-	margin: 0 10px;
-}
-
-#container .checkbox {
-	border: 1px solid black;
-	background: #FFFFFF;
-	cursor: pointer;
-}
-
-#container .checkbox:hover {
-	background: #d0cece;
-}
-
-.logout_button{
-  margin: 8px 50px 9px 0;
-  text-align: right;
-}
-
-.all_data{
-    justify-content: center;
-}
-
-.hint {
-    font-size: 0.8em;
-    font-style: italic;
-    font-weight: bold;
-    }
-
-.hint_left {
-    text-align: left;
-    }
-
-.hint_center {
-    text-align: center;
-    }
-
-.hint_right {
-    text-align: right;
-    }
 
 
 

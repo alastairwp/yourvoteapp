@@ -2,68 +2,102 @@
 
 {% block content %}
 {% load static %}
-        <div class="container">
-            <section>
-                <div class="modal-body customer-box row">
 
-                    <div class="col-md-12">
-                        <!-- Nav tabs -->
+    <header class="header header_style_01">
+        <nav class="megamenu navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html"><img width="150px" src="{% static "images/logos/bethebusiness-logo.png" %}" alt="image"></a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#">Benchmark</a></li>
+                        <li><a href="/members/dashboard">Dashboard</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
 
-                            <h1>Log in</h1>
+                    <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#" class="btn btn-radius btn-brd">{{ request.user.first_name }}</a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href="/logout" class="btn btn-radius btn-brd">Logout</a></li>
+                        {% else %}
+                            <li><a class="btn-light btn-radius btn-brd log" href="/login" data-toggle="modal" data-target="#login"><i class="flaticon-padlock"></i> Customer Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="Login">
-                                <form  action="/login" autocomplete="on" method="post" class="form-horizontal">
-                                     {% csrf_token %}
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <input class="form-control" name="username" id="username" placeholder="Email" type="text" data-icon="u">
-                                    </div>
+    <div class="container">
+        <section>
+            <div class="modal-body customer-box row">
+
+                <div class="col-md-6">
+                    <!-- Nav tabs -->
+
+                        <h1>Log in</h1>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Login">
+                            <form  action="/login" autocomplete="on" method="post" class="form-horizontal">
+                                 {% csrf_token %}
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input class="form-control" name="username" id="username" placeholder="Email" type="text" data-icon="u">
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <input class="form-control" id="password" name="password" placeholder="Password" type="password">
-                                    </div>
-                                </div>
-
-                                {% if messages %}
-                                    {% for message in messages %}
-                                        <div {% if message.tags %}class="{{ message.tags }}"{% endif %}>
-                                            {% if message.tags == "success" %}
-                                                <i class="fa fa-check"></i>
-                                                {% elif message.tags == "warning" %}
-                                                <i class="fa fa-warning"></i>
-                                                {% elif message.tags == "error" %}
-                                                <i class="fa fa-times-circle"></i>
-                                                {% elif message.tags == "info" %}
-                                                <i class="fa fa-info-circle"></i>
-                                            {% endif %}
-                                            {{ message }}
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
-
-                                <div class="row">
-                                    <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
-                                            Submit
-                                        </button>
-                                        <a class="for-pwd" href="javascript:;">Forgot your password?</a>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-10" style="margin-top:20px">
-                                        <p class="change_link">Not a member yet ?<a href="/register" class="to_register">Join us</a></p>
-                                    </div>
-                                </div>
-                                </form>
                             </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input class="form-control" id="password" name="password" placeholder="Password" type="password">
+                                </div>
+                            </div>
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div {% if message.tags %}class="{{ message.tags }}"{% endif %}>
+                                        {% if message.tags == "success" %}
+                                            <i class="fa fa-check"></i>
+                                            {% elif message.tags == "warning" %}
+                                            <i class="fa fa-warning"></i>
+                                            {% elif message.tags == "error" %}
+                                            <i class="fa fa-times-circle"></i>
+                                            {% elif message.tags == "info" %}
+                                            <i class="fa fa-info-circle"></i>
+                                        {% endif %}
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
+                                        Submit
+                                    </button>
+                                    <a class="for-pwd" href="javascript:;">Forgot your password?</a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-10" style="margin-top:20px">
+                                    <p class="change_link">Not a member yet ?<a href="/register" class="to_register">Join us</a></p>
+                                </div>
+                            </div>
+                            </form>
                         </div>
                     </div>
-			    </div>
-            </section>
-        </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
 {% endblock %}

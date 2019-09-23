@@ -15,20 +15,20 @@ def btbadmin_home(request):
     if delete_centre:
         centre = Centre.objects.get(id=delete_centre)
         centre.delete()
-        return HttpResponseRedirect('/btbadmin')
+        return HttpResponseRedirect(reverse('btbadmin_home'))
 
     add_new_centre = request.POST.get('add_new_centre')
     if add_new_centre == "new_centre":
         centre_name = request.POST.get('centre_name')
         centre = Centre(name=centre_name)
         centre.save()
-        return HttpResponseRedirect('/btbadmin')
+        return HttpResponseRedirect(reverse('btbadmin_home'))
 
     delete_group = request.POST.get('delete_group')
     if delete_group:
         group = Group.objects.get(id=delete_group)
         group.delete()
-        return HttpResponseRedirect('/btbadmin')
+        return HttpResponseRedirect(reverse('btbadmin_home'))
 
     add_new_group = request.POST.get('add_new_group')
     if add_new_group == "new_group":
