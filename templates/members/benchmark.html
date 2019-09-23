@@ -147,6 +147,9 @@
 
             <div class="row">
                 <div class="col-md-12">
+
+                    {% if course_id != 0 %}
+
                     <div class="contact_form">
                         <div class="section-title text-center">
 
@@ -270,6 +273,13 @@
 
                         </div>
                     </div><!-- end col -->
+
+                {% else %}
+
+                <h1>You are not currently enroled onto a course</h1>
+
+                {% endif %}
+
                 </div><!-- end row -->
             </div><!-- end container -->
         </div><!-- end section -->

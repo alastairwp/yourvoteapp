@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "btbadmin/admin-layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="span12">
+        <h1>{{ user.get_full_name }}</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12" style="text-align:right;width:50%">
+        <form method="post" style="margin:0">
+            {% csrf_token %}
+        {% for group in all_groups %}
+            {% if group in my_groups %}
+                    <div style="margin-top;15px;margin-bottom:15px"><span>{{ group.name }}&nbsp;</span><input type="checkbox" checked="checked" name="groups[]" value="{{ group.id }}" /></div>
+                {% else %}
+                    <div style="margin-top;15px;margin-bottom:15px"><span>{{ group.name }}&nbsp;</span><input type="checkbox" name="groups[]" value="{{ group.id }}" /></div>
+        {% endif %}
+        {% endfor %}
+                    <button class="button" type="submit">Save</button>
+                    <input type="hidden" name="save_groups" value="{{ 'save-group' }}">
+            </form>
+    </div>
+</div>
+
+{% endblock %}

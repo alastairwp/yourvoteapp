@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "ptpadmin/admin-layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="span12">
+        <h1>{{ centre.name}}</h1>
+    </div>
+</div>
+
+<div class="row results-bar">
+    <div class="span12">
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <table class="table table-bordered table-striped table-status">
+        <form method="post" style="margin:0">
+            <tbody>
+
+                <tr>
+                    <td>ID</td>
+                    <td>{{ centre.id }}</td>
+                </tr>
+                <tr>
+                    <td>Centre name</td>
+                    <td><input type="text" name="centre_name" value="{{ centre.name }}"></td>
+                </tr>
+                <tr>
+                    <td>Admin user group</td>
+                    <td>
+                        <select name="admin_group">
+                            <option value="0">Select admin group</option>
+                            {% for admin_group in admin_groups %}
+                                <option value="{{ admin_group.id }}" {% if centre.admin_user_group_id == admin_group.id %} selected="true" {% endif %}>{{ admin_group.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+
+
+                    {% csrf_token %}
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button class="button" type="submit">Save</button>
+                            <input type="hidden" name="update_centre" value="{{ centre.id }}">
+                        </td>
+                    </tr>
+
+            </tbody>
+        </form>
+        </table>
+    </div>
+
+
+</div>
+
+
+{% endblock %}

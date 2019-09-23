@@ -1,10 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "btbadmin/admin-layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="span12">
+        <h1>Education centres</h1>
+    </div>
+</div>
+<div class="row results-bar">
+    <div class="span12">
+        <p>{{ centres.count }}<strong> centres</strong></i></p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <table class="table table-bordered table-striped table-status">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Centre name</th>
+                    <th>Admin Group</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for centre in centres %}
+                <tr>
+                    <td>{{ centre.id }}</td>
+                    <td><a href="/btbadmin/centre/{{ centre.id }}">{{ centre.name }}</a></td>
+                    <td>{{ centre.admin_user_group_id }}</td>
+                    <td>
+                        <form method="post" style="margin:0">
+                            {% csrf_token %}
+                            <button class="button" type="submit">Delete</button>
+                            <input type="hidden" name="delete_centre" value="{{ centre.id }}">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                <form method="post" style="margin:0">
+                    {% csrf_token %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><input type="text" style="width:100%" name="centre_name"></td>
+                        <td>
+                            <button class="button" type="submit">Add Centre</button>
+                            <input type="hidden" name="add_new_centre" value="{{ 'new_centre' }}">
+                        </td>
+                    </tr>
+                </form>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <h1>User Management</h1>
+    </div>
+</div>
+<div class="row results-bar">
+    <div class="span12">
+        <p>{{ all_users.count }}<strong> users</strong></i></p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <table class="table table-bordered table-striped table-status">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in all_users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td><a href="/btbadmin/user/{{ user.id }}">{{ user.get_full_name }}</a></td>
+                    <td>{{ user.username }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="span12">
+        <h1>Group Management</h1>
+    </div>
+</div>
+<div class="row results-bar">
+    <div class="span12">
+        <p>{{ all_groups.count }}<strong> groups</strong></i></p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <table class="table table-bordered table-striped table-status">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Group name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in all_groups %}
+                <tr>
+                    <td>{{ group.id }}</td>
+                    <td>{{ group.name }}</td>
+                    <td>
+                        <form method="post" style="margin:0">
+                            {% csrf_token %}
+                            <button class="button" type="submit">Delete</button>
+                            <input type="hidden" name="delete_group" value="{{ group.id }}">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                <form method="post" style="margin:0">
+                    {% csrf_token %}
+                    <tr>
+                        <td></td>
+                        <td><input type="text" style="width:100%" name="group_name"></td>
+                        <td>
+                            <button class="button" type="submit">Add Group</button>
+                            <input type="hidden" name="add_new_group" value="{{ 'new_group' }}">
+                        </td>
+                    </tr>
+                </form>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+

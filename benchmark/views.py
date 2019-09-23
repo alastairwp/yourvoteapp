@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from django.contrib.auth.models import User,auth
-from .models import Question, Vote, Hint, UserCourse
+from django.contrib.auth.models import User, auth
+from .models import Question, Vote, Hint
+from ptpadmin.models import UserCourse
 from django.utils.datastructures import MultiValueDictKeyError
 from datetime import datetime
 from django.utils import timezone
@@ -157,8 +158,9 @@ def benchmark(request):
 
             try:
                 usercourse = UserCourse.objects.get(user__exact=current_user.id)
+                course_id = usercourse.course_id
             except UserCourse.DoesNotExist:
-                usercourse = None
+                course_id = 0
 
         else:
             questiondata = None
@@ -176,7 +178,7 @@ def benchmark(request):
                 'left_hints':  left_hints,
                 'middle_hints': middle_hints,
                 'right_hints': right_hints,
-                'course_id': usercourse.course_id,
+                'course_id': course_id,
                 'vote_value': vote_value
             }
         )

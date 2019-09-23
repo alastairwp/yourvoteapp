@@ -1,7 +1,19 @@
 from django.shortcuts import render
-from benchmark.models import UserCourse
+from ptpadmin.models import UserCourse
+from django import template
+from django.contrib.auth.models import Group
+
+register = template.Library()
 
 
+@register.filter(name='has_group')
+def has_group(user, group_name):
+    group = Group.objects.get(name=group_name)
+    return True if group in user.groups.all() else False
+
+
+@login_required(login_url=settings.LOGIN_URL)
+@user_passes_test(lambda u: u.groups.filter(name='members').exists())
 def dashboard(request):
     current_user = request.user
     courses = UserCourse.objects.filter(user=current_user.id)

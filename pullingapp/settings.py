@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'btbadmin',
+    'ptpadmin',
+    'pullingapp'
 ]
 
 MIDDLEWARE = [
@@ -136,4 +139,5 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 LOGIN_REDIRECT_URL = '/benchmark'
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/login'
 
