@@ -32,6 +32,7 @@
                         {% if request.user|has_group:"btbadmins" %}
                             <li><a href="/btbadmin" class="btn btn-radius btn-brd">BtB Admin</a></li>
                         {% endif %}
+
                         {% if request.user|has_group:"ptpadmins" %}
                             <li><a href="/ptpadmin" class="btn btn-radius btn-brd">PtP Admin</a></li>
                         {% endif %}

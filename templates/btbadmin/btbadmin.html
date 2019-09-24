@@ -43,8 +43,8 @@
                     {% csrf_token %}
                     <tr>
                         <td></td>
-                        <td></td>
                         <td><input type="text" style="width:100%" name="centre_name"></td>
+                        <td></td>
                         <td>
                             <button class="button" type="submit">Add Centre</button>
                             <input type="hidden" name="add_new_centre" value="{{ 'new_centre' }}">
@@ -114,17 +114,21 @@
             </thead>
             <tbody>
                 {% for group in all_groups %}
+
                 <tr>
                     <td>{{ group.id }}</td>
                     <td>{{ group.name }}</td>
                     <td>
                         <form method="post" style="margin:0">
                             {% csrf_token %}
+                            {% if group.name != "btbadmins" and group.name != "ptpadmins" and group.name != "None" and group.name != "members" %}
                             <button class="button" type="submit">Delete</button>
                             <input type="hidden" name="delete_group" value="{{ group.id }}">
+                            {% endif %}
                         </form>
                     </td>
                 </tr>
+
                 {% endfor %}
                 <form method="post" style="margin:0">
                     {% csrf_token %}

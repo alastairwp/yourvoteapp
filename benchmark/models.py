@@ -1,5 +1,6 @@
 from django.db import models
 from ptpadmin.models import Course
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -24,13 +25,13 @@ class SubCategory(models.Model):
 
 
 class Question(models.Model):
-    name = models.TextField()
+    name = models.TextField("Question", null=False, blank=False)
     number = models.PositiveIntegerField("Question number", default=0)
     subcategory = models.ForeignKey(SubCategory, null=True, on_delete=models.SET_NULL)
 
 
 class Vote(models.Model):
-    user = models.IntegerField()
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     value = models.PositiveIntegerField(default=0, null=True, blank=True)
     question = models.ForeignKey(Question, null=False, blank=False, on_delete=models.SET(0))
     course = models.ForeignKey(Course, null=True, on_delete=models.SET_NULL)

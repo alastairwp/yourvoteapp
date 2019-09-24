@@ -17,7 +17,7 @@ def has_group(user, group_name):
 @login_required()
 def dashboard(request):
     current_user = request.user
-    courses = UserCourse.objects.filter(user=current_user.id)
+    courses = UserCourse.objects.filter(user_id=current_user.id)
     return render(
         request,
         'members/dashboard.html',

@@ -8,7 +8,6 @@ from datetime import datetime
 from django.utils import timezone
 from django.core import serializers
 from django.views.decorators.csrf import requires_csrf_token
-
 import json
 
 
@@ -30,7 +29,7 @@ def save_vote_data(request):
             checkvote.save()
             Vote.objects.filter(id=checkvote.id).update(comment_data=comment_data, value=value_data, course_id=course_id, updated_date=now)
         else:
-            savequestion = Vote(user=current_user.id, question_id=question_id, value=value_data, comment_data=comment_data, course_id=course_id, updated_date=now)
+            savequestion = Vote(user=current_user, question_id=question_id, value=value_data, comment_data=comment_data, course_id=course_id, updated_date=now)
             savequestion.save()
 
         return JsonResponse({'resultdata': 1})
@@ -48,16 +47,16 @@ def save_comment_data(request):
             course_id = None
         now = timezone.now()
         try:
-            checkvote = Vote.objects.filter(user__exact=current_user.id, question_id__exact=question_id, course_id=course_id).count()
+            checkvote = Vote.objects.filter(user_id=current_user.id, question_id__exact=question_id, course_id=course_id).count()
         except Question.DoesNotExist:
             checkvote = 0
 
         if checkvote != 0:
-            checkvote = Vote.objects.get(user__exact=current_user.id, question_id__exact=question_id, course_id=course_id)
+            checkvote = Vote.objects.get(user_id=current_user.id, question_id__exact=question_id, course_id=course_id)
             checkvote.save()
             Vote.objects.filter(id=checkvote.id).update(comment_data=comment_data, updated_date=now)
         else:
-            savequestion = Vote(user=current_user.id, question_id=question_id, comment_data=comment_data, updated_date=now)
+            savequestion = Vote(user_id=current_user.id, question_id=question_id, comment_data=comment_data, updated_date=now)
             savequestion.save()
 
         return JsonResponse({'resultdata': 1})
@@ -149,7 +148,7 @@ def benchmark(request):
                 right_hints = None
 
             try:
-                vote_value = Vote.objects.filter(question_id__exact=question_id).filter(user__exact=current_user.id).first()
+                vote_value = Vote.objects.filter(question_id__exact=question_id).filter(user_id=current_user.id).first()
             except Vote.DoesNotExist:
                 vote_value = None
 
