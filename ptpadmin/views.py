@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Course, UserCourse, UserCentre
+from btbadmin.models import Centre
 from django.http import HttpRequest, HttpResponseRedirect
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -41,6 +42,11 @@ def ptpadmin_home(request):
 @login_required(login_url=settings.LOGIN_URL)
 @user_passes_test(lambda u: u.groups.filter(name='ptpadmins').exists())
 def edit_course(request, course_id):
+    remove_course_user_id = request.POST.get('remove_user')
+    if remove_course_user_id:
+        course_user = UserCourse.objects.get(course_id=course_id, user_id=remove_course_user_id)
+        course_user.delete()
+
     new_course_user = request.POST.get('add_user_to_course')
     if new_course_user == 'add_new_course_user':
         course_user = request.POST.get('add_course_user')
@@ -48,12 +54,8 @@ def edit_course(request, course_id):
                                  updated_date=timezone.now)
         user_course.save()
 
-    # get current_user
-    current_user = request.user
-
     # get centre from user through UserCentre object
-    user_centre = UserCentre.objects.get(user_id=current_user.id)
-
+    user_centre = Centre.objects.get(course__id=course_id)
     # Get course object from parsed course_id
     course = Course.objects.get(id=course_id)
 
@@ -62,9 +64,13 @@ def edit_course(request, course_id):
     course_users_filter = UserCourse.objects.filter(course_id=course_id).values('user_id')
 
     # Get all centre users
-    all_centre_users = UserCentre.objects.filter(centre_id=user_centre.centre_id)
-    all_centre_users_filter = UserCentre.objects.filter(centre_id=user_centre.centre_id)
-    available_centre_users = all_centre_users.exclude(user_id__in=course_users_filter)
+    all_centre_users = UserCentre.objects.filter(centre_id=user_centre)
+    all_centre_users_filter = UserCentre.objects.filter(centre_id=user_centre)
+
+    try:
+        available_centre_users = all_centre_users.exclude(user_id__in=course_users_filter)
+    except ValueError:
+        available_centre_users = None
 
     return render(
         request,

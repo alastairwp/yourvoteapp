@@ -1,4 +1,4 @@
-{% extends "ptpadmin/admin-layout.html" %}
+{% extends "btbadmin/admin-layout.html" %}
 
 {% block content %}
 
@@ -72,10 +72,10 @@
                         <td>{{ course_user.user.is_active }}</td>
                         <td>
                             <form method="post" style="margin:0">
-                                {% csrf_token %}
-                                <button class="button" type="submit">Remove</button>
-                                <input type="hidden" name="remove_user" value="{{ course_user.user_id }}">
-                            </form>
+                            {% csrf_token %}
+                            <button class="button" type="submit">Remove</button>
+                            <input type="hidden" name="remove_user" value="{{ course_user.user_id }}">
+                        </form>
                         </td>
                     </tr>
                     {% endfor %}
@@ -97,9 +97,11 @@
             {% csrf_token %}
             <select name="add_course_user">
                 <option>Select user</option>
+                {% if available_centre_users %}
                 {% for centre_user in available_centre_users %}
                     <option value="{{ centre_user.user_id }}">{{ centre_user.user.get_full_name }}</option>
                 {% endfor %}
+                {% endif %}
             </select>
 
             <button class="button" type="submit">Add</button>

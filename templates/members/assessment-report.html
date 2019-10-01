@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+<header class="header header_style_01">
+    <nav class="megamenu navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><img width="150px" src="{% static "images/logos/bethebusiness-logo.png" %}" alt="image"></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/members/benchmark">Benchmark </a></li>
+                    <li><a class="active" href="/members/dashboard">Dashboard</a></li>
+                    <li><a href="contact">Contact</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                     {% if user.is_authenticated %}
+                        <li><a href="/logout" class="btn btn-radius btn-brd">Logout</a></li>
+                    {% else %}
+                        <li><a class="btn-light btn-radius btn-brd log" href="/login" data-toggle="modal" data-target="#login"><i class="flaticon-padlock"></i> Customer Login</a></li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div style="text-align:center">
+    <h1>Assessment Report</h1>
+</div>
+
+<div id="report-wrapper">
+    {% for cat, subcat in reportscores.items %}
+    <div class="theme-container">
+        <div class="score-box-title-container">
+            <div class="score-box-title right">Revised</div>
+            <div class="score-box-title right">Score</div>
+        </div>
+
+        <div class="theme-title-wrapper">
+            <div class="theme-title">{{ cat }}</div>
+            <div class="score-box score-0 right">
+                0
+            </div>
+
+                {% if cat == "Great Leadership" %}
+            <div class="score-box score-{{ cat1avg.value__avg }} right">{{ cat1avg.value__avg }}</div>
+                {% elif cat == "Enabling Culture" %}
+            <div class="score-box score-{{ cat2avg.value__avg }} right">{{ cat2avg.value__avg }}</div>
+                {% elif cat == "Customer Innovation" %}
+            <div class="score-box score-{{ cat3avg.value__avg }} right">{{ cat3avg.value__avg }}</div>
+                {% elif cat == "Best People" %}
+            <div class="score-box score-{{ cat4avg.value__avg }} right">{{ cat4avg.value__avg }}</div>
+                {% elif cat == "Recognising Performance" %}
+             <div class="score-box score-{{ cat5avg.value__avg }} right">{{ cat5avg.value__avg }}</div>
+                {% elif cat == "Effective Skill Utilisation" %}
+            <div class="score-box score-{{ cat6avg.value__avg }} right">{{ cat6avg.value__avg }}</div>
+                {% elif cat == "Aligned Organisation" %}
+            <div class="score-box score-{{ cat7avg.value__avg }} right">{{ cat7avg.value__avg }}</div>
+                {% endif %}
+
+        </div>
+        {% for key, averages in subcat.items %}
+        <div class="sub-theme-title-wrapper">
+            <div class="sub-theme-title">{{ key }}</div>
+            <div class="score-box score-{{ averages.revised }} right">{{ averages.revised }}</div>
+            <div class="score-box score-{{ averages.score }} right">{{ averages.score }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

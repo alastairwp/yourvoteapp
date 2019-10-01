@@ -32,11 +32,9 @@
                         {% if request.user|has_group:"btbadmins" %}
                             <li><a href="/btbadmin" class="btn btn-radius btn-brd">BtB Admin</a></li>
                         {% endif %}
-
                         {% if request.user|has_group:"ptpadmins" %}
                             <li><a href="/ptpadmin" class="btn btn-radius btn-brd">PtP Admin</a></li>
                         {% endif %}
-
                     </ul>
                 </div>
             </div>
@@ -48,7 +46,6 @@
 			<h1>Dashboard</h1>
 		</div>
 	</div>
-
 
     <div class="section lb">
         <div class="container">
@@ -68,10 +65,10 @@
 										Title
 									</th>
 									<th scope="col">
-										Location
+										Start date
 									</th>
 									<th scope="col">
-										Start date
+										Report
 									</th>
 								</tr>
 							</thead>
@@ -80,8 +77,8 @@
 								<tr>
                                     <td data-label="Course Code"><a href="/members/benchmark">{{ usercourse.course.code }}</a></td>
 									<td data-label="Title">{{ usercourse.course.title }}</td>
-									<td data-label="Location">{{ usercourse.course.location.name }}</td>
 									<td data-label="Start Date">{{ usercourse.course.start_date }}</td>
+                                    <td data-label="Report"><a href="/members/assessment-report"><img width="50px" src="{% static "images/report.png" %}"></a></td>
 								</tr>
                                 {% endfor %}
 							</tbody>

@@ -15,7 +15,7 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     name = models.CharField("Sub-Category Name", max_length=255, null=False, blank=False)
-    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey(Category, related_name="subcat_cat", null=True, on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name_plural = "Sub-categories"
@@ -27,13 +27,13 @@ class SubCategory(models.Model):
 class Question(models.Model):
     name = models.TextField("Question", null=False, blank=False)
     number = models.PositiveIntegerField("Question number", default=0)
-    subcategory = models.ForeignKey(SubCategory, null=True, on_delete=models.SET_NULL)
+    subcategory = models.ForeignKey(SubCategory, related_name="question_subcat", null=True, on_delete=models.SET_NULL)
 
 
 class Vote(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     value = models.PositiveIntegerField(default=0, null=True, blank=True)
-    question = models.ForeignKey(Question, null=False, blank=False, on_delete=models.SET(0))
+    question = models.ForeignKey(Question, related_name="vote_question", null=False, blank=False, on_delete=models.SET(0))
     course = models.ForeignKey(Course, null=True, on_delete=models.SET_NULL)
     comment_data = models.TextField(max_length=1000)
     created_date = models.DateTimeField(auto_now_add=True)

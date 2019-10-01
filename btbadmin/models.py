@@ -6,7 +6,3 @@ class Centre(models.Model):
     name = models.CharField("Centre name", max_length=100, null=False, blank=False)
     admin_user_group = models.ForeignKey(Group, null=True, blank=True, on_delete=models.SET_NULL)
 
-
-class Location(models.Model):
-    name = models.CharField("Course location", max_length=50, null=False, blank=False)
-

@@ -101,14 +101,14 @@ def benchmark(request):
     current_user = request.user
     if current_user.is_authenticated:
 
-        if getid==False:
+        if getid is False:
             try:
                 question = Question.objects.order_by('id').first()
 
             except Question.DoesNotExist:
                 question = None
 
-            if question!=None:
+            if question is not None:
                 question_id = question.id
             else:
                 question_id = ''

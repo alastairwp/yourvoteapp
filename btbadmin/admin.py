@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Location, Centre
+from .models import Centre
 from benchmark.models import Vote, Question, Hint, Category, SubCategory
 from ptpadmin.models import Course, UserCourse
 
@@ -30,13 +30,6 @@ class HintAdmin(admin.ModelAdmin):
 
     class Meta:
         Model = Hint
-
-
-class LocationAdmin(admin.ModelAdmin):
-    list_display = ["name"]
-
-    class Meta:
-        Model = Location
 
 
 class QuestionAdmin(admin.ModelAdmin):
@@ -71,7 +64,6 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Centre, CentreAdmin)
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Hint, HintAdmin)
-admin.site.register(Location, LocationAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(UserCourse, UserCourseAdmin)

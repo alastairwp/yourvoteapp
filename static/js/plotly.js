@@ -38,7 +38,7 @@ setInterval(function () {
                 y: y,
                 type: 'bar',
                 marker: {
-                    color: ['#2d86c8', '#51d761', '#fdc736', '#fb8d2c', '#cc22e3', '#4c4fd0', '#f93331', '#7fb9fc', '#6edb8b']
+                    color: ['#ff0000', '#f92d06', '#f35a0b', '#ed8711', '#e7b416', '#adc711', '#74da0b', '#3aec06', '#00ff00']
                 },
             };
            var layout = {
