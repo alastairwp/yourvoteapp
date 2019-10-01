@@ -3,11 +3,6 @@
 {% block head %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<style>
-
-
-
-</style>
 {% endblock %}
 
 {% block content %}
@@ -140,6 +135,7 @@
                                                 <div class="col-sm-12">
                                                     <textarea class="form-control" style="color:black" name="UserComment" id="UserComment" placeholder="Actions/Comment/Observations">{{  vote_value.comment_data }}</textarea>
                                                 </div>
+                                                <a name="graph" />
                                             </form>
 
                                         </div>

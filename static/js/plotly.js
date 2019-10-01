@@ -94,7 +94,7 @@ setInterval(function () {
                        console.log(result)
                        if(result.resultdata==1){
                            if(next_iddata!=''){
-                             window.location.href = 'benchmark?id_data='+question_id;
+                             window.location.href = 'benchmark?id_data=' + question_id + "#graph";
                           }
                        }
                    }

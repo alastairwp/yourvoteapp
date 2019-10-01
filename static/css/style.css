@@ -871,8 +871,10 @@ li.social-links a {
     display: block;
     position: relative;
     overflow: hidden;
-    padding: 120px 0;
+    padding: 80px 0;
 }
+
+
 
 .noover {
     overflow: visible;
@@ -895,7 +897,7 @@ li.social-links a {
 }
 
 .section.lb {
-    background-color: #f2f3f5;
+    background-color: #ffffff;
 }
 
 .section.db {
