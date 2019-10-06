@@ -121,7 +121,7 @@
                     <td>
                         <form method="post" style="margin:0">
                             {% csrf_token %}
-                            {% if group.name != "btbadmins" and group.name != "ptpadmins" and group.name != "None" and group.name != "members" %}
+                            {% if group.name != "btbadmins" and group.name != "domain_admins" and group.name != "None" and group.name != "members" %}
                             <button class="button" type="submit">Delete</button>
                             <input type="hidden" name="delete_group" value="{{ group.id }}">
                             {% endif %}

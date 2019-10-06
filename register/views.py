@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from ptpadmin.models import UserCentre
+from domain_admin.models import UserCentre
 from btbadmin.models import Centre
 from django.contrib import messages
 

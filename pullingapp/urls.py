@@ -5,10 +5,10 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 Examples:
 Function views
     1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.benchmark, name='benchmark')
+    2. Add a URL to urlpatterns:  path('', views.vote, name='vote')
 Class-based views
     1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='benchmark')
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='vote')
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
@@ -20,31 +20,31 @@ Including another URLconf
 #     path('admin/', admin.site.urls),
 # ]
 
-from django.conf.urls import url, include
+from django.urls import path, re_path
+from django.conf.urls import include, url
 from django.contrib import admin
 import django.contrib.auth.views as auth_views
-import benchmark.views as benchmark_views
+import vote.views as vote_views
 import login.views
-import members.views as members_views
-import ptpadmin.views as ptpadmin_views
+import domain_admin.views as domain_admin_views
 import btbadmin.views as btbadmin_views
+import send_email.views as send_email_views
 
 urlpatterns = [
-    url(r'^$', benchmark_views.homepage, name='homepage'),
-    url(r'^save_vote_data', benchmark_views.save_vote_data),
-    url(r'^save_comment_data', benchmark_views.save_comment_data),
-    url(r'^get_chart_data', benchmark_views.get_chart_data),
-    url('register', include('register.urls')),
-    url(r'^login$', login.views.login, name='login'),
-    url(r'^logout$', auth_views.LogoutView.as_view(), name='logout'),
-    url(r'^members/dashboard$', members_views.dashboard, name='dashboard'),
-    url(r'^members/benchmark$', benchmark_views.benchmark, name='benchmark'),
-    url(r'^members/assessment-report$', members_views.assessmentreport, name="course-report"),
-    url(r'^ptpadmin$', ptpadmin_views.ptpadmin_home, name='ptpadmin_home'),
-    url(r'^ptpadmin/course/(?P<course_id>\d+)$', ptpadmin_views.edit_course, name='centre_admin_edit_course'),
-    url(r'^btbadmin/centre/(?P<centre_id>\d+)$', btbadmin_views.edit_centre, name='edit_centre'),
-    url(r'^btbadmin/course/(?P<course_id>\d+)$', btbadmin_views.edit_course, name='admin_edit_course'),
-    url(r'^btbadmin/user/(?P<user_id>\d+)$', btbadmin_views.edit_user, name='edit_centre'),
-    url(r'^btbadmin$', btbadmin_views.btbadmin_home, name='btbadmin_home'),
-    url(r'^admin/', admin.site.urls),
+    path('', vote_views.homepage, name='homepage'),
+    path('sendmail/', send_email_views.send_email),
+    path('save_vote_data', vote_views.save_vote_data),
+    path('save_comment_data', vote_views.save_comment_data),
+    path('get_chart_data', vote_views.get_chart_data),
+    path('register', include('register.urls')),
+    path('login', login.views.login, name='login'),
+    path('logout', auth_views.LogoutView.as_view(), name='logout'),
+    path('members/', include('members.urls')),
+    path('domain_admin', domain_admin_views.domain_admin_home, name='domain_admin_home'),
+    re_path(r'^domain_admin/course/(?P<course_id>\d+)$', domain_admin_views.edit_course, name='centre_admin_edit_course'),
+    re_path(r'^btbadmin/centre/(?P<centre_id>\d+)$', btbadmin_views.edit_centre, name='edit_centre'),
+    re_path(r'^btbadmin/course/(?P<course_id>\d+)$', btbadmin_views.edit_course, name='admin_edit_course'),
+    re_path(r'^btbadmin/user/(?P<user_id>\d+)$', btbadmin_views.edit_user, name='edit_centre'),
+    path('btbadmin', btbadmin_views.btbadmin_home, name='btbadmin_home'),
+    path('admin/', admin.site.urls),
 ]

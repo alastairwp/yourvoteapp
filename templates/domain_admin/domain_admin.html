@@ -1,0 +1,70 @@
+{% extends "domain_admin/admin-layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="span12">
+        <h1>Courses</h1>
+    </div>
+</div>
+
+
+    <div class="row results-bar">
+        <div class="span12">
+
+                <p>{{ courses.count }}<strong> courses</strong></i></p>
+
+        </div>
+    </div>
+
+
+<div class="row">
+    <div class="span12">
+        <table class="table table-bordered table-striped table-status">
+            <thead>
+                <tr>
+                    <th>Course code</th>
+                    <th>Course name</th>
+                    <th>Start date</th>
+                    <th>Created</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <td>{{ course.code }}</td>
+                    <td><a href="/domain_admin/course/{{ course.id }}">{{ course.title }}</a></td>
+                    <td>{{ course.start_date }}</td>
+                    <td>{{ course.created_date }}</td>
+                    <td>
+                        <form method="post" style="margin:0">
+                            {% csrf_token %}
+                            <button class="button" type="submit">Delete</button>
+                            <input type="hidden" name="delete_course" value="{{ course.id }}">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                <form method="post" style="margin:0">
+                    {% csrf_token %}
+                    <tr>
+                        <td><input type="text" style="width:100%" name="course_code"></td>
+                        <td><input type="text" style="width:100%" name="course_title"></td>
+                        <td><input type="text" style="width:100%" name="course_start_date"></td>
+                        <td></td>
+                        <td>
+                            <button class="button" type="submit">Add</button>
+                            <input type="hidden" name="add_new_course" value="{{ 'new_course' }}">
+                        </td>
+                    </tr>
+                </form>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+{% endblock %}
+

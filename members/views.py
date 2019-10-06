@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from ptpadmin.models import UserCourse
-from benchmark.models import Category, SubCategory, Question, Vote
+from domain_admin.models import UserCourse
+from vote.models import Category, SubCategory, Question, Vote
 from django import template
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Avg, IntegerField
+from django.contrib.auth.views import PasswordResetView
 
 register = template.Library()
 

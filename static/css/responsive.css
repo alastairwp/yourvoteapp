@@ -63,9 +63,6 @@
     .first-section .lead {
         font-size: 18px;
     }
-    .navbar-default .btn-light {
-        display: none;
-    }
     body.app_version .app_iphone_01 {
         right: -5% !important;
     }

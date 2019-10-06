@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Centre
-from ptpadmin.models import Course, UserCourse, UserCentre
+from domain_admin.models import Course, UserCourse, UserCentre
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import login_required, user_passes_test

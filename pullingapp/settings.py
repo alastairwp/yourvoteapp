@@ -30,7 +30,7 @@ ALLOWED_HOSTS = os.environ.get('BTBPTP_DJANGO_ALLOWED_HOSTS').split(',')
 # Application definition
 
 INSTALLED_APPS = [
-    'benchmark.apps.BenchmarkConfig',
+    'vote.apps.VoteConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'btbadmin',
-    'ptpadmin',
-    'pullingapp'
+    'domain_admin.apps.DomainAdminConfig',
+    'pullingapp',
+    'send_email',
+    'members'
 ]
 
 MIDDLEWARE = [
@@ -137,7 +139,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
-LOGIN_REDIRECT_URL = '/benchmark'
+LOGIN_REDIRECT_URL = '/vote'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# EMAIL_HOST = os.environ.get('VOTE_EMAIL_HOST')
+# EMAIL_PORT = os.environ.get('VOTE_EMAIL_PORT')
+# EMAIL_HOST_USER = os.environ.get('VOTE_EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('VOTE_EMAIL_HOST_PASSWORD')
+# EMAIL_USE_TLS = False
+# EMAIL_USE_SSL = False
+# DEFAULT_FROM_EMAIL = os.environ.get('VOTE_DEFAULT_FROM_EMAIL')
