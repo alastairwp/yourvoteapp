@@ -7,6 +7,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from datetime import datetime
 from django.utils import timezone
 from django.core import serializers
+from django.conf import settings
 from django.views.decorators.csrf import requires_csrf_token
 import json
 
@@ -188,7 +189,8 @@ def vote(request):
         return redirect('/login')
 
 
-
+def acme_challenge(request):
+    return HttpResponse(settings.ACME_CHALLENGE_CONTENT)
 
 
 
