@@ -3,7 +3,7 @@
 {% block content %}
 {% load staticfiles %}
 
-<header class="header header_style_01">
+    <header class="header header_style_01">
         <nav class="megamenu navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
@@ -43,34 +43,19 @@
                 <div class="col-md-6">
                     <!-- Nav tabs -->
 
-{% if validlink %}
+                        <h1>Email verification</h1>
 
-<p>Please enter your new password twice so we can verify you typed it in correctly.</p>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Login">
+                            <h2>{{ message }}</h2>
+                            <div style="margin-top:50px;margin-bottom:50px">
+                                <a href="/login" data-scroll class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd">Log in</a>
+                            </div>
 
-<form method="post">
-    {% csrf_token %}
-<fieldset class="module aligned">
-    <div class="form-row field-password1">
-        {{ form.new_password1.errors }}
-        <label for="id_new_password1">New password:</label>
-        {{ form.new_password1 }}
-    </div>
-    <div class="form-row field-password2">
-        {{ form.new_password2.errors }}
-        <label for="id_new_password2">Confirm password:</label>
-        {{ form.new_password2 }}
-    </div>
-    <input type="submit" value="Change my password">
-</fieldset>
-</form>
-
-{% else %}
-
-<p>The password reset link was invalid, possibly because it has already been used.  Please request a new password reset.</p>
-
-{% endif %}
-
-                                    </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>

@@ -240,6 +240,7 @@
                     <div class="contact_form">
                         <div id="message"></div>
                         <form id="contactform" class="row" action="contact.php" name="contactform" method="post">
+                            {% csrf_token %}
                             <fieldset class="row-fluid">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name">
@@ -360,6 +361,7 @@
 
                 <div class="footer-right">
                     <form method="get" action="#">
+                        {% csrf_token %}
                         <input placeholder="Subscribe our newsletter.." name="search">
                         <i class="fa fa-envelope-o"></i>
                     </form>

@@ -5,6 +5,12 @@
     <title>Email Test Page</title>
 </head>
 <body>
-    <h1>{{ message1 }}</h1>
+    <form method="post">
+        {% csrf_token %}
+         <input type="button" value="Test email">
+
+    </form>
+
+    <h1>{{ result_message }}</h1>
 </body>
 </html>

@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('BTBPTP_SECRET_KEY')
+SECRET_KEY = os.environ.get('YOURVOTE_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get('BTBPTP_DJANGO_ALLOWED_HOSTS').split(',')
+ALLOWED_HOSTS = os.environ.get('YOURVOTE_DJANGO_ALLOWED_HOSTS').split(',')
 
 # Application definition
 
@@ -134,6 +134,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
@@ -143,12 +144,12 @@ LOGIN_REDIRECT_URL = '/vote'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# EMAIL_HOST = os.environ.get('VOTE_EMAIL_HOST')
-# EMAIL_PORT = os.environ.get('VOTE_EMAIL_PORT')
-# EMAIL_HOST_USER = os.environ.get('VOTE_EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.environ.get('VOTE_EMAIL_HOST_PASSWORD')
-# EMAIL_USE_TLS = False
-# EMAIL_USE_SSL = False
-# DEFAULT_FROM_EMAIL = os.environ.get('VOTE_DEFAULT_FROM_EMAIL')
+EMAIL_HOST = os.environ.get('YOURVOTE_EMAIL_HOST')
+EMAIL_PORT = os.environ.get('YOURVOTE_EMAIL_PORT')
+EMAIL_HOST_USER = os.environ.get('YOURVOTE_EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('YOURVOTE_EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL = os.environ.get('YOURVOTE_DEFAULT_FROM_EMAIL')

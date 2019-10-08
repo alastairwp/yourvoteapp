@@ -67,6 +67,7 @@
                                         <div id="container">
 
                                             <form action="" method="post">
+                                                {% csrf_token %}
                                                 <div style="max-width:500px; height: 480px; margin-left:auto; margin-right:auto; display:relative; background-color:white; ">
                                                     <div class="section-bar-blue; section-bar">
                                                     <div class="hint-box hint_left">
@@ -151,16 +152,17 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top:20px;">
 
                                         <div>
-                                            {#<button id="back" disabled>BACK</button>#}
+
                                          <input id="back_id" value="{{ back_id.id }}" type="hidden">
                                             {% if back_id.id != null  %}
-                                           <a href="vote?id_data={{ back_id.id }}" class="btn btn-info" id="backid" onclick="savecomment({{ back_id.id }})">Back</a>
+                                           <a href="vote?id_data={{ back_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" id="backid" onclick="savecomment({{ back_id.id }})">Back</a>
                                             {% endif %}
 
-                                        {#<button id="next" disabled>NEXT</button>#}
+
                                          <input id="next_id" value="{{ next_id.id }}" type="hidden">
                                             {% if next_id.id != null  %}
-                                            <a href="vote?id_data={{ next_id.id }}" class="btn btn-info" onclick="savecomment({{ next_id.id }})">Next</a>
+                                            <a href="vote?id_data={{ next_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" style="margin-left:10px;"  onclick="savecomment({{ next_id.id }})">Next</a>
+
                                             {% endif %}
                                         </div>
 

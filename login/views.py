@@ -9,11 +9,18 @@ def login(request):
         password = request.POST['password']
         user = auth.authenticate(username=username, password=password)
 
-        if user is not None:
-            auth.login(request, user)
-            return redirect('/members/dashboard')
+        if user:
+            if user.is_active:
+                auth.login(request, user)
+                return redirect('/members/dashboard')
+
+            else:
+                messages.warning(request,
+                                 "Your account is not active. If you've just registered check your inbox for an activation email. Alternatively contact support.")
+                return redirect('/login')
+
         else:
-            messages.error(request, 'Your username or password is incorrect')
+            messages.error(request, 'Invalid username/password')
             return redirect('/login')
     else:
         return render(request, 'login.html')

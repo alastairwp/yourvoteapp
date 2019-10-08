@@ -108,6 +108,7 @@
 
                     <div class="footer-right">
                         <form method="get" action="#">
+                            {% csrf_token %}
                             <input placeholder="Subscribe our newsletter.." name="search">
                             <i class="fa fa-envelope-o"></i>
                         </form>

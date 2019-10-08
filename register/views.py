@@ -1,8 +1,13 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from domain_admin.models import UserCentre
 from btbadmin.models import Centre
 from django.contrib import messages
+from django.contrib.sites.shortcuts import get_current_site
+from send_email.views import send_email
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from .tokens import account_activation_token
 
 
 def register(request):
@@ -23,11 +28,30 @@ def register(request):
                 messages.warning(request, 'Email already taken')
                 return redirect('/register')
             else:
-                user = User.objects.create_user(username=email, email=email, password=password1, first_name=first_name, last_name=last_name)
+                # Create new user
+                user = User.objects.create_user(username=email, email=email, password=password1, first_name=first_name, last_name=last_name, is_active=False)
                 user.save()
+                current_site = get_current_site(request)
+
+                ctx = {}
+                ctx["first_name"] = first_name
+                ctx["activation_uid"] = urlsafe_base64_encode(force_bytes(user.pk))
+                ctx["activation_token"] = account_activation_token.make_token(user)
+                ctx["domain"] = current_site.domain
+
+                emails = (email,)
+                send_email(request, "activation_email", ctx, emails)
+
+                # Add user to default groups
+                members_group = Group.objects.get(name='members')
+                none_group = Group.objects.get(name="none")
+                user.groups.add(members_group)
+                user.groups.add(none_group)
+
                 user_centre = UserCentre(user_id=user.id, centre_id=centre)
                 user_centre.save()
-                messages.success(request, 'Account created successfully. Please now log in.')
+
+                messages.success(request, "Account created successfully. Check your email inbox for a verification email.")
                 return redirect('/login')
         else:
             messages.warning(request, 'Passwords do not match')
@@ -43,3 +67,23 @@ def register(request):
     )
 
 
+def activate(request, uidb64, token):
+    message = ""
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        message = "Thank you for your email confirmation. Now you can login your account."
+    else:
+        message = "Activation link is invalid!"
+
+    return render(
+        request, 'email_activation.html',
+        {
+            'message': message
+        }
+    )

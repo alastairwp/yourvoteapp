@@ -3,7 +3,8 @@ from .models import EmailTemplate
 
 
 class EmailTemplateAdmin(admin.ModelAdmin):
-    list_display = ["name", "sender", "reply_to", "subject_line_template"]
+    list_display = ['template_key', 'subject', 'from_email', 'to_email']
+    save_as = True
 
     class Meta:
         Model = EmailTemplate

@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from .models import Course, UserCourse, UserCentre
 from btbadmin.models import Centre
-from django.http import HttpRequest, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required, user_passes_test
 from pullingapp import settings
+from send_email.views import send_email
+from django.urls import reverse
+from django.conf import settings
+from django.contrib.sites.shortcuts import get_current_site
 
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -44,6 +48,7 @@ def domain_admin_home(request):
 def edit_course(request, course_id):
     message = ""
     message_class = ""
+
     remove_course_user_id = request.POST.get('remove_user')
     if remove_course_user_id:
         course_user = UserCourse.objects.get(course_id=course_id, user_id=remove_course_user_id)
@@ -77,6 +82,21 @@ def edit_course(request, course_id):
     # Get all centre users
     all_centre_users = UserCentre.objects.filter(centre_id=user_centre)
     all_centre_users_filter = UserCentre.objects.filter(centre_id=user_centre)
+
+    invite_user_email = request.POST.get('invite_user_email')
+    invite_user_first_name = request.POST.get('invite_user_first_name')
+    current_site = get_current_site(request)
+    register_url = current_site.domain + reverse("register")
+
+    ctx = {}
+    ctx["first_name"] = invite_user_first_name
+    ctx["centre_name"] = user_centre.name
+    ctx["course_name"] = course.title
+    ctx["register_url"] = current_site.domain + reverse("register")
+
+    emails = (invite_user_email,)
+    if invite_user_email:
+        send_email(request, "course_invitation", ctx, emails)
 
     try:
         available_centre_users = all_centre_users.exclude(user_id__in=course_users_filter)

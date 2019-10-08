@@ -29,9 +29,11 @@ import login.views
 import domain_admin.views as domain_admin_views
 import btbadmin.views as btbadmin_views
 import send_email.views as send_email_views
+import register.views as register_views
 
 urlpatterns = [
     path('', vote_views.homepage, name='homepage'),
+    re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', register_views.activate, name='activate'),
     path('sendmail/', send_email_views.send_email),
     path('save_vote_data', vote_views.save_vote_data),
     path('save_comment_data', vote_views.save_comment_data),

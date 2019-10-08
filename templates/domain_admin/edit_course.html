@@ -107,6 +107,23 @@
         </form>
         <p class="{{ message_class }}">{{ message }}</p>
     </div>
+</div>
 
+<div class="row">
+    <div class="span12">
+        <h1>Invite new users</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <form method="post">
+            {% csrf_token %}
+            <input class="form-control" id="invite_user_first_name" name="invite_user_first_name" placeholder="First name" type="text">
+            <input class="form-control" id="invite_user_email" name="invite_user_email" placeholder="Email" type="email">
+            <button class="button" type="submit">Send</button>
+        </form>
+
+    </div>
 </div>
 {% endblock %}
