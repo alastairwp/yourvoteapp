@@ -159,6 +159,13 @@ def vote(request):
             except UserCourse.DoesNotExist:
                 course_id = 0
 
+            try:
+                votes = Vote.objects.filter(question_id=question_id, course_id=course_id)
+                vote_count = votes.count()
+            except Vote.DoesNotExist:
+                vote_count = 0
+
+
         else:
             questiondata = None
             next_issue = None
@@ -181,16 +188,14 @@ def vote(request):
                 'middle_hints': middle_hints,
                 'right_hints': right_hints,
                 'course_id': course_id,
-                'vote_value': vote_value
+                'vote_value': vote_value,
+                'vote_count': vote_count
             }
         )
 
     else:
         return redirect('/login')
 
-
-def acme_challenge(request):
-    return HttpResponse(settings.ACME_CHALLENGE_CONTENT)
 
 
 

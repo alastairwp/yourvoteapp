@@ -13,7 +13,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><img width="150px" src="{% static "images/logos/bethebusiness-logo.png" %}" alt="image"></a>
+                <a class="navbar-brand" href="/"><img width="150px" src="{% static "images/logos/bethebusiness-logo.png" %}" alt="image"></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -41,6 +41,60 @@
 </div>
 
 <div id="report-wrapper">
+    <div class="theme-container" style="display:block;float:none;background-color:#e6f9ff">
+        <div class="score-box-title-container">
+            <div class="score-box-title right">Revised</div>
+            <div class="score-box-title right">Score</div>
+        </div>
+
+        <div class="theme-title-wrapper">
+            <div class="theme-title">Course Average</div>
+            <div class="score-box score-0 right">
+                0
+            </div>
+            <div class="score-box score-{{ course_cohort_avg }} right">{{ course_cohort_avg }}</div>
+
+        </div>
+
+        <div class="sub-theme-title-wrapper">
+            <div class="sub-theme-title">Great Leadership</div>
+            <div class="score-box score-{{ gl_cohort_revised }} right">{{ gl_cohort_revised }}</div>
+            <div class="score-box score-{{ gl_cohort_score }} right">{{ gl_cohort_score }}</div>
+        </div>
+        <div class="sub-theme-title-wrapper">
+            <div class="sub-theme-title">Enabling Culture</div>
+            <div class="score-box score-{{ ec_cohort_revised }} right">{{ ec_cohort_revised }}</div>
+            <div class="score-box score-{{ ec_cohort_score }} right">{{ ec_cohort_score }}</div>
+        </div>
+        <div class="sub-theme-title-wrapper">
+            <div class="sub-theme-title">Customer Innovation</div>
+            <div class="score-box score-{{ ci_cohort_revised }} right">{{ ci_cohort_revised }}</div>
+            <div class="score-box score-{{ ci_cohort_score }} right">{{ ci_cohort_score }}</div>
+        </div>
+        <div class="sub-theme-title-wrapper">
+            <div class="sub-theme-title">Best People</div>
+            <div class="score-box score-{{ bp_cohort_revised }} right">{{ bp_cohort_revised }}</div>
+            <div class="score-box score-{{ bp_cohort_score }} right">{{ bp_cohort_score }}</div>
+
+        </div>
+        <div class="sub-theme-title-wrapper">
+            <div class="sub-theme-title">Recognising Performance</div>
+            <div class="score-box score-{{ rp_cohort_revised }} right">{{ rp_cohort_revised }}</div>
+            <div class="score-box score-{{ rp_cohort_score }} right">{{ rp_cohort_score }}</div>
+        </div>
+        <div class="sub-theme-title-wrapper">
+            <div class="sub-theme-title">Effective Skill Utilisation</div>
+            <div class="score-box score-{{ esu_cohort_revised }} right">{{ esu_cohort_revised }}</div>
+            <div class="score-box score-{{ esu_cohort_score }} right">{{ esu_cohort_score }}</div>
+        </div>
+        <div class="sub-theme-title-wrapper">
+            <div class="sub-theme-title">Aligned Organisation</div>
+            <div class="score-box score-{{ ao_cohort_revised }}< right">{{ ao_cohort_revised }}</div>
+            <div class="score-box score-{{ ao_cohort_score }} right">{{ ao_cohort_score }}</div>
+        </div>
+
+    </div>
+
     {% for cat, subcat in reportscores.items %}
     <div class="theme-container">
         <div class="score-box-title-container">

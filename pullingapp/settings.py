@@ -76,8 +76,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pullingapp.wsgi.application'
 
-ACME_CHALLENGE_CONTENT = os.environ['ACME_CHALLENGE_CONTENT']
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 

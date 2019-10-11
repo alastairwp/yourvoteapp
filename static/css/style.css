@@ -413,8 +413,8 @@ Assessment Report Page
 
 #report-wrapper .theme-container {
     padding: 10px;
-    max-width: 480px;
-    min-height: 450px;
+    max-width: 390px;
+    min-height: 360px;
     margin:10px;
     background-color: #F5F5F5;
     box-shadow: 10px 15px 10px #D3D3D3;
@@ -422,13 +422,13 @@ Assessment Report Page
 }
 
 #report-wrapper .score-box {
-    width:100px;
-    height: 70px;
-    font-size: 3em;
+    width:50px;
+    height: 50px;
+    font-size: 2em;
     color:black;
     text-align: center;
     valign: middle;
-    line-height:70px;
+    line-height:50px;
     margin-left:20px;
 }
 
@@ -437,7 +437,7 @@ Assessment Report Page
 }
 
 #report-wrapper .score-box-title {
-    width:100px;
+    width:50px;
     height: 20px;
     font-size: 0.9em;
     color:black;
@@ -448,15 +448,15 @@ Assessment Report Page
 }
 
 #report-wrapper .theme-title-wrapper {
-  height: 70px;
+  height: 50px;
   margin-bottom: 25px;
-  min-width: 440px;
-  max-width: 440px;
+  min-width: 380px;
+  max-width: 380px;
   background-color: #E5E5E5;
 }
 
 #report-wrapper .theme-title {
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: bold;
   white-space: pre-wrap;
   max-width: 190px;
@@ -464,10 +464,10 @@ Assessment Report Page
 }
 
 #report-wrapper .sub-theme-title-wrapper {
-  height: 70px;
+  height: 50px;
   margin-top: 3px;
-  min-width: 440px;
-  max-width: 440px;
+  min-width: 380px;
+  max-width: 380px;
 }
 
 #report-wrapper .sub-theme-title {

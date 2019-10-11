@@ -31,6 +31,7 @@ def register(request):
                 # Create new user
                 user = User.objects.create_user(username=email, email=email, password=password1, first_name=first_name, last_name=last_name, is_active=False)
                 user.save()
+
                 current_site = get_current_site(request)
 
                 ctx = {}
@@ -48,6 +49,7 @@ def register(request):
                 user.groups.add(members_group)
                 user.groups.add(none_group)
 
+                #  Assign user to a centre
                 user_centre = UserCentre(user_id=user.id, centre_id=centre)
                 user_centre.save()
 
@@ -78,6 +80,7 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         message = "Thank you for your email confirmation. Now you can login your account."
+
     else:
         message = "Activation link is invalid!"
 

@@ -31,33 +31,55 @@ def dashboard(request):
 
 
 @login_required()
-def assessmentreport(request):
+def assessmentreport(request, course_id):
     current_user = request.user
+    course_cohort_avg = Vote.objects.filter(course_id=course_id).aggregate(Avg('value', output_field=IntegerField()))
 
-    cat1avg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=1).aggregate(Avg('value', output_field=IntegerField()))
+    cat1_cohort_avg = Vote.objects.filter(question__subcategory__category=1).filter(course_id=course_id).aggregate(Avg('value', output_field=IntegerField()))
+    if cat1_cohort_avg['value__avg'] is None:
+        cat1_cohort_avg['value__avg'] = 0
+    cat1avg = Vote.objects.filter(user_id=current_user.id).filter(course_id=course_id).filter(question__subcategory__category=1).aggregate(Avg('value', output_field=IntegerField()))
     if cat1avg['value__avg'] is None:
         cat1avg['value__avg'] = 0
 
+    cat2_cohort_avg = Vote.objects.filter(question__subcategory__category=2).filter(course_id=course_id).aggregate(Avg('value', output_field=IntegerField()))
+    if cat2_cohort_avg['value__avg'] is None:
+        cat2_cohort_avg['value__avg'] = 0
     cat2avg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=2).aggregate(Avg('value', output_field=IntegerField()))
     if cat2avg['value__avg'] is None:
         cat2avg['value__avg'] = 0
 
+    cat3_cohort_avg = Vote.objects.filter(question__subcategory__category=3).filter(course_id=course_id).aggregate(Avg('value', output_field=IntegerField()))
+    if cat3_cohort_avg['value__avg'] is None:
+        cat3_cohort_avg['value__avg'] = 0
     cat3avg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=3).aggregate(Avg('value', output_field=IntegerField()))
     if cat3avg['value__avg'] is None:
         cat3avg['value__avg'] = 0
 
+    cat4_cohort_avg = Vote.objects.filter(question__subcategory__category=4).filter(course_id=course_id).aggregate(Avg('value', output_field=IntegerField()))
+    if cat4_cohort_avg['value__avg'] is None:
+        cat4_cohort_avg['value__avg'] = 0
     cat4avg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=4).aggregate(Avg('value', output_field=IntegerField()))
     if cat4avg['value__avg'] is None:
         cat4avg['value__avg'] = 0
 
+    cat5_cohort_avg = Vote.objects.filter(question__subcategory__category=5).filter(course_id=course_id).aggregate(Avg('value', output_field=IntegerField()))
+    if cat5_cohort_avg['value__avg'] is None:
+        cat5_cohort_avg['value__avg'] = 0
     cat5avg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=5).aggregate(Avg('value', output_field=IntegerField()))
     if cat5avg['value__avg'] is None:
         cat5avg['value__avg'] = 0
 
+    cat6_cohort_avg = Vote.objects.filter(question__subcategory__category=6).filter(course_id=course_id).aggregate(Avg('value', output_field=IntegerField()))
+    if cat6_cohort_avg['value__avg'] is None:
+        cat6_cohort_avg['value__avg'] = 0
     cat6avg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=6).aggregate(Avg('value', output_field=IntegerField()))
     if cat6avg['value__avg'] is None:
         cat6avg['value__avg'] = 0
 
+    cat7_cohort_avg = Vote.objects.filter(question__subcategory__category=7).filter(course_id=course_id).aggregate(Avg('value', output_field=IntegerField()))
+    if cat7_cohort_avg['value__avg'] is None:
+        cat7_cohort_avg['value__avg'] = 0
     cat7avg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=7).aggregate(Avg('value', output_field=IntegerField()))
     if cat7avg['value__avg'] is None:
         cat7avg['value__avg'] = 0
@@ -115,5 +137,13 @@ def assessmentreport(request):
             'cat5avg': cat5avg,
             'cat6avg': cat6avg,
             'cat7avg': cat7avg,
+            'gl_cohort_score': cat1_cohort_avg['value__avg'],
+            'ec_cohort_score': cat2_cohort_avg['value__avg'],
+            'ci_cohort_score': cat3_cohort_avg['value__avg'],
+            'bp_cohort_score': cat4_cohort_avg['value__avg'],
+            'rp_cohort_score': cat5_cohort_avg['value__avg'],
+            'esu_cohort_score': cat6_cohort_avg['value__avg'],
+            'ao_cohort_score': cat7_cohort_avg['value__avg'],
+            'course_cohort_avg': course_cohort_avg['value__avg']
         }
     )

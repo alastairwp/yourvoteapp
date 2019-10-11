@@ -13,7 +13,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img width="150px" src="{% static "images/logos/bethebusiness-logo.png" %}" alt="image"></a>
+                    <a class="navbar-brand" href="/"><img width="150px" src="{% static "images/logos/bethebusiness-logo.png" %}" alt="image"></a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -79,7 +79,7 @@
                                     <td data-label="Course Code"><a href="/members/vote">{{ usercourse.course.code }}</a></td>
 									<td data-label="Title">{{ usercourse.course.title }}</td>
 									<td data-label="Start Date">{{ usercourse.course.start_date }}</td>
-                                    <td data-label="Report"><a href="/members/assessment-report"><img width="50px" src="{% static "images/report.png" %}"></a></td>
+                                    <td data-label="Report"><a href="/members/assessment-report/{{ usercourse.course.id }}"><img width="50px" src="{% static "images/report.png" %}"></a></td>
 								</tr>
                                 {% endfor %}
 							</tbody>

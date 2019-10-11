@@ -34,7 +34,6 @@ import vote.views as vote_views
 
 urlpatterns = [
     path('', vote_views.homepage, name='homepage'),
-    re_path(r'^.well-known/acme-challenge/-2HCzvSJ-_aPSu1tt7ktUKcSHGw37YN8NRsMTUVJJyM$', vote_views.acme_challenge, name='acme-challenge'),
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', register_views.activate, name='activate'),
     path('sendmail/', send_email_views.send_email),
     path('save_vote_data', vote_views.save_vote_data),

@@ -8,6 +8,7 @@ class Course(models.Model):
     title = models.CharField("Course title", max_length=255, null=False, blank=False)
     centre = models.ForeignKey(Centre, null=True, on_delete=models.SET_NULL)
     start_date = models.DateField("Course start date", null=True, blank=True)
+    stage = models.PositiveIntegerField("Stage", null=True, blank=True, default=0)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
