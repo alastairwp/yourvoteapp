@@ -197,20 +197,17 @@ blockquote {
     padding: 30px;
 }
 
+.logout_button{
+  margin: 8px 50px 9px 0;
+  text-align: right;
+}
+
 /*------------------------------------------------------------------
-    MY CUSTOM CSS
+    VOTE CSS
 -------------------------------------------------------------------*/
 
 
-#container {
-	display: inline-block;
-	text-align: center;
-	font-size: 20px;
-	background: #ffffff;
-	height: 100%;
-	width: 100%;
-	padding-top:30px;
-}
+
 
 #wrapper {
 	width:100%;
@@ -221,11 +218,15 @@ blockquote {
 #chart {
 	width: 100%;
 	height:40vh;
+	display: block;
 }
 
 .graph {
 	margin:25px auto;
 	border: 1px solid #ebebeb;
+	display: block;
+	position: relative;
+	float:left
 }
 
 #question {
@@ -233,36 +234,99 @@ blockquote {
 	font-size: 2em;
 }
 
-#container .cell {
+#sub-container-portrait {
+    display:none
+}
+
+#comment-box {
+    margin-top: 20px;
+    display: block;
+    position: relative;
+    width= 100%
+}
+
+#container {
+	display: block;
+	text-align: center;
+	font-size: 20px;
+	height: 300px;
+	background: #ffffff;
+	padding-top:30px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#sub-container-landscape {
+  min-width:750px;
+  max-width:780px;
+  height: 250px;
+  margin-left:auto;
+  margin-right:auto;
+  display:relative;
+  background-color:white;
+}
+
+#sub-container-landscape .section-bar {
+    height: 200px;
+    width: 258px;
+    float:left;
+}
+
+#sub-container-landscape .vote-box {
+    display:block;
+    width: 278px;
+    position:relative;
+    float:left;
+    height:30px;
+}
+
+#sub-container-landscape .number-box {
+    display:block;
+    width: 278px;
+    position:relative;
+    float:left;
+    height:30px;
+}
+
+#sub-container-landscape .vote-container {
+  width: 80px;
+  position: relative;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-family: Arial, Verdana, Helvetica;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  float:left;
+}
+
+.cell {
 	display: inline-block;
 	width: 50px;
 	height: 50px;
 	margin: 0 10px;
 }
 
-#container .checkbox {
-	border: 1px solid black;
-	background: #FFFFFF;
-	cursor: pointer;
-}
-
-#container .checkbox:hover {
-	background: #d0cece;
-}
-
-.logout_button{
-  margin: 8px 50px 9px 0;
-  text-align: right;
-}
-
-.all_data{
-    justify-content: center;
+#sub-container-landscape .hint-box {
+    position:relative;
+    width: 250px;
+    float: left;
+    height: 110px;
+    margin-top: 30px;
+    background-color: white;
+    font-family: Arial, Helvetica, Verdana;
+    font-size: 0.8em;
+    font-weight: bold;
+    font-style: italic;
+    line-height:1.0em;
 }
 
 .hint {
     font-size: 0.8em;
     font-style: italic;
-    font-weight: bold;
+
     }
 
 .hint_left {
@@ -277,22 +341,6 @@ blockquote {
     text-align: right;
     }
 
-.vote-container {
-  display: block;
-  position: relative;
-  padding-left: 65px;
-  margin-bottom: 20px;
-  margin-top: 11px;
-  cursor: pointer;
-  font-size: 1.1em;
-  font-family: Arial, Verdana, Helvetica;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-}
-
 /* Hide the browser's default radio button */
 .vote-container input {
   position: absolute;
@@ -300,11 +348,25 @@ blockquote {
   cursor: pointer;
 }
 
+#container .checkbox {
+	border: 1px solid black;
+	background: #FFFFFF;
+	cursor: pointer;
+}
+
+#container .checkbox:hover {
+	background: #d0cece;
+}
+
+.all_data{
+    justify-content: center;
+}
+
 /* Create a custom radio button */
 .checkmark {
   position: absolute;
   top: 0;
-  left: 30px;
+  left: 35px;
   height: 25px;
   width: 25px;
   background-color: #eee;
@@ -342,38 +404,12 @@ blockquote {
     border-radius: 50%;
     background: white;
 }
-.section-bar-blue {
-    background-color: blue
-}
 
-.section-bar-pink {
-    background-color: pink
-}
 
-.section-bar {
-    solid blue;
-    height: 140px;
-    width: 360px;
-    display: block;
-}
 
-.hint-box {
-    width: 250px;
-    float: left;
-    height: 140px;
-    background-color: white;
-    font-family: Arial, Helvetica, Verdana;
-    font-size: 0.8em;
-    font-weight: bold;
-    font-style: italic;
-    padding-left:5px;
-    padding-top:20px;
-}
-
-.vote-box {
-    width: 100px;
-    float: left;
-}
+/*--------------------
+  end of vote CSS
+  --------------------*/
 
 .info, .success, .warning, .error {
 margin: 10px 0px;

@@ -3,6 +3,7 @@
 /****************************************** */
 
 @media (max-width: 1310px) {
+
     .macbookright {
         right: -25%;
     }
@@ -90,62 +91,9 @@
     }
 }
 
-@media (max-width: 992px) {
-    body.clinic_version .service-widget {
-        margin: 15px 0;
-    }
-    .m40 {
-        margin-top: 40px;
-    }
-    body.host_version .stat-wrap {
-        text-align: center;
-    }
-    body.host_version .stat-wrap .alignleft {
-        float: none;
-        margin: 0 auto;
-    }
-    .apple-button i {
-        font-size: 32px;
-        margin: 0px 20px 0 0;
-        vertical-align: middle;
-    }
-    body.clinic_version .affix,
-    body.clinic_version .header_style_01,
-    body.app_version .header_style_01 {
-        width: 100% !important;
-        padding: 20px 0 !important;
-    }
-    .apple-button strong {
-        font-size: 24px;
-    }
-    body.app_version .header_style_01 {
-        top: 0 !important;
-    }
-    .pricing-table {
-        margin: 15px 0 !important;
-    }
-    hr.hr2 {
-        display: none;
-    }
-    .stat-wrap .col-md-3,
-    .icon-wrapper,
-    .message-box {
-        margin-bottom: 30px;
-    }
-    .owl-prev i {
-        left: 0;
-        border-radius: 0;
-    }
-    .owl-next i {
-        right: 0;
-        border-radius: 0;
-    }
-    body.clinic_version .how-its-work .hc {
-        width: 100% !important;
-    }
-}
-
 @media (max-width: 1000px) {
+
+
     body.politics_version .header_style_01 {
         position: relative;
         top: 0;
@@ -293,7 +241,136 @@
 	}
 }
 
+
+@media (max-width: 992px) {
+
+#container {
+    height: 520px;
+}
+
+#sub-container-landscape {
+    display:none;
+}
+#sub-container-portrait {
+    display:block;
+}
+
+#sub-container-portrait {
+    max-width:500px;
+    height: 480px;
+    margin-left:auto;
+    margin-right:auto;
+    display:relative;
+    background-color:white;
+}
+
+#sub-container-portrait .section-bar {
+    height: 140px;
+    width: 360px;
+    display: block;
+}
+
+#sub-container-portrait .vote-box {
+    width: 100px;
+    float: left;
+}
+
+#sub-container-portrait .vote-container {
+  display: block;
+  position: relative;
+  padding-left: 65px;
+  margin-bottom: 20px;
+  margin-top: 11px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-family: Arial, Verdana, Helvetica;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#sub-container-portrait .hint-box {
+    width: 250px;
+    float: left;
+    height: 140px;
+    background-color: white;
+    font-family: Arial, Helvetica, Verdana;
+    font-size: 0.8em;
+    font-weight: bold;
+    font-style: italic;
+    padding-left:5px;
+    padding-top:10px;
+    line-height:1.0em;
+}
+
+.all_data{
+    justify-content: center;
+}
+
+
+    body.clinic_version .service-widget {
+        margin: 15px 0;
+    }
+    .m40 {
+        margin-top: 40px;
+    }
+    body.host_version .stat-wrap {
+        text-align: center;
+    }
+    body.host_version .stat-wrap .alignleft {
+        float: none;
+        margin: 0 auto;
+    }
+    .apple-button i {
+        font-size: 32px;
+        margin: 0px 20px 0 0;
+        vertical-align: middle;
+    }
+    body.clinic_version .affix,
+    body.clinic_version .header_style_01,
+    body.app_version .header_style_01 {
+        width: 100% !important;
+        padding: 20px 0 !important;
+    }
+    .apple-button strong {
+        font-size: 24px;
+    }
+    body.app_version .header_style_01 {
+        top: 0 !important;
+    }
+    .pricing-table {
+        margin: 15px 0 !important;
+    }
+    hr.hr2 {
+        display: none;
+    }
+    .stat-wrap .col-md-3,
+    .icon-wrapper,
+    .message-box {
+        margin-bottom: 30px;
+    }
+    .owl-prev i {
+        left: 0;
+        border-radius: 0;
+    }
+    .owl-next i {
+        right: 0;
+        border-radius: 0;
+    }
+    body.clinic_version .how-its-work .hc {
+        width: 100% !important;
+    }
+}
+
 @media (max-width: 768px) {
+    .hint {
+        font-size: 0.7em;
+    }
+
+    #container {
+        height: 520px;
+    }
     body.building_version .first-section h2 {
         font-size: 34px;
     }
@@ -394,12 +471,13 @@
         min-width: 100%
     }
     .container {
-        min-width: 100%
+        margin:0px;
+        padding:0px;
+        min-width: 400px;
     }
     .hint-box {
-        max-width: 200px;
+        max-width: 240px;
 
-    }
    /* end of my changes */
 
     body.app_version .btn-light i {
