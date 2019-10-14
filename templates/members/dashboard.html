@@ -40,7 +40,7 @@
 							<tbody>
                                 {% for usercourse in courses %}
 								<tr>
-                                    <td data-label="Course Code"><a href="/members/vote/">{{ usercourse.course.code }}</a></td>
+                                    <td data-label="Course Code"><a href="/members/course/{{ usercourse.course.code }}/">{{ usercourse.course.code }}</a></td>
 									<td data-label="Title">{{ usercourse.course.title }}</td>
 									<td data-label="Start Date">{{ usercourse.course.start_date }}</td>
                                     <td data-label="Report"><a href="/members/assessment-report/{{ usercourse.course.id }}"><img width="50px" src="{% static "images/report.png" %}"></a></td>

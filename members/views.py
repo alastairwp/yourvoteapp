@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response
-from domain_admin.models import UserCourse
+from domain_admin.models import UserCourse, Course
 from vote.models import Category, SubCategory, Question, Vote
 from django import template
 from django.contrib.auth.models import Group
@@ -37,7 +37,7 @@ def dashboard(request):
         request,
         'members/dashboard.html',
         {
-            'title': 'PtP Dashboard',
+            'title': 'Dashboard',
             'courses': courses,
             'active_tab': "dashboard"
         }
@@ -175,3 +175,20 @@ def test(request):
 
         }
     )
+
+
+@login_required()
+def course_home(request, course_code):
+    current_user = request.user
+    course = Course.objects.get(code=course_code)
+
+    return render(
+        request,
+        'members/course_home_page.html',
+        {
+            'title': 'Course Home',
+            'course': course
+
+        }
+    )
+

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<div class="all-title-box">
+		<div class="container text-center">
+			<h1>Course Home Page</h1>
+		</div>
+	</div>
+    <div class="section lb">
+
+         <div class="container">
+                <section>
+                    <div class="modal-body customer-box row center" style="text-align:center">
+                        <div class="col-md-6">
+                            <p style="text-align:left;font-family:'PT Sans';font-size:1.3em">The purpose of this workbook and workshop is to help you construct a view of the status of your company benchmarked against best-in-class.</p>
+                            <p style="text-align:left;font-family:'PT Sans';font-size:1.3em">There are seven criteria against which there is a series of questions. Great Leadership, Enabling Culture, Customer Innovation, Best People, Recognising Performance, Effective Skill Utilisation and Aligned Organisation.</p>
+                            <p style="text-align:left;font-family:'PT Sans';font-size:1.3em">In each case you are asked to score yourself on a scale of 1 – 9. To help you be as objective as possible the workshop will articulate what each question is looking for and there are guidance illustrations of what low, medium and high looks like.</p>
+                            <p style="text-align:left;font-family:'PT Sans';font-size:1.3em">You will work through this book with fellow delegates with support from facilitators from the University. You will be expected to share your results with other delegates during the course of the day. The University will translate your results into a radar graph showing your results and the average result for the whole group.</p>
+                            <p style="text-align:left;font-family:'PT Sans';font-size:1.3em">We will also ask you to send a link to an on-line version of this to all of your staff who can anonymously respond. This process will be repeated at the end of the programme.</p>
+                        </div>
+                        <div class="col-md-6">
+
+                            <h1>Course Details</h1>
+
+
+                            <table style="margin-bottom:50px">
+                                <tr>
+                                    <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Course code:</td><td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ course.code }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Title:</td><td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ course.title }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Start date:</td><td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ course.start_date }}</td>
+                                </tr>
+
+                            </table>
+                        </div>
+                        <div>
+                            <a href="/members/vote/" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd">Start course</a>
+
+                        </div>
+                    </div>
+                </section>
+         </div>
+    </div>
+
+{% endblock %}

@@ -89,7 +89,7 @@ def homepage(request):
         request,
         'index.html',
         {
-            'title': 'PtP homepage',
+            'title': 'Homepage',
         }
     )
 
