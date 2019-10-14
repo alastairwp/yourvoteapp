@@ -373,8 +373,22 @@ blockquote {
   border-radius: 50%;
 }
 
+.checkmark-revised {
+  position: absolute;
+  top: 0;
+  left: 35px;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
 /* On mouse-over, add a grey background color */
 .vote-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+/* On mouse-over, add a grey background color */
+.vote-container:hover input ~ .checkmark-revised {
   background-color: #ccc;
 }
 
@@ -383,8 +397,18 @@ blockquote {
   background-color: #2196F3;
 }
 
+.vote-container input:checked ~ .checkmark-revised {
+  background-color: #ff7373;
+}
+
 /* Create the indicator (the dot/circle - hidden when not checked) */
 .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkmark-revised:after {
   content: "";
   position: absolute;
   display: none;
@@ -395,8 +419,21 @@ blockquote {
   display: block;
 }
 
+.vote-container input:checked ~ .checkmark-revised:after {
+  display: block;
+}
+
 /* Style the indicator (dot/circle) */
 .vote-container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+.vote-container .checkmark-revised:after {
     top: 9px;
     left: 9px;
     width: 8px;

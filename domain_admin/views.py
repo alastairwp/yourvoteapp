@@ -28,7 +28,7 @@ def domain_admin_home(request):
         course_code = request.POST.get('course_code')
         course_title = request.POST.get('course_title')
         course_start_date = request.POST.get('course_start_date')
-        course = Course(code=course_code, title=course_title, start_date=course_start_date, centre_id=user_centre.centre_id, created_date=timezone.now, updated_date=timezone.now)
+        course = Course(code=course_code, title=course_title, start_date=course_start_date, status=0, centre_id=user_centre.centre_id, created_date=timezone.now, updated_date=timezone.now)
         course.save()
         return HttpResponseRedirect(reverse('domain_admin_home'))
 
@@ -48,6 +48,22 @@ def domain_admin_home(request):
 def edit_course(request, course_id):
     message = ""
     message_class = ""
+    course_message = ""
+
+    update_course = request.POST.get('update_course')
+    course_title = request.POST.get('course_title')
+    course_status = request.POST.get('course_status')
+    if update_course:
+        course = Course.objects.get(id=update_course)
+        course.title = course_title
+        course.status = course_status
+        try:
+            course.save()
+            message_class = "success"
+            course_message = "Course updated successfully!"
+        except Exception:
+            message_class = "error"
+            course_message = "There was an error when updating the course."
 
     remove_course_user_id = request.POST.get('remove_user')
     if remove_course_user_id:
@@ -58,7 +74,6 @@ def edit_course(request, course_id):
     if new_course_user == 'add_new_course_user':
         course_user = request.POST.get('add_course_user')
         # check if user is already on a course
-        print(course_user)
         user_on_course = UserCourse.objects.filter(user_id=course_user)
         print(user_on_course.count())
         if user_on_course.count() > 0:
@@ -118,6 +133,7 @@ def edit_course(request, course_id):
             'centre': user_centre,
             'available_centre_users': available_centre_users,
             'message': message,
+            'course_message': course_message,
             'message_class': message_class
         }
     )

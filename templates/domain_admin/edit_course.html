@@ -21,7 +21,7 @@
                     </tr>
                     <tr>
                         <td>Course title</td>
-                        <td><input type="text" style="width:100%" name="centre_name" value="{{ course.title }}"></td>
+                        <td><input type="text" style="width:100%" name="course_title" value="{{ course.title }}"></td>
                     </tr>
                     <tr>
                         <td>Start date</td>
@@ -31,15 +31,26 @@
                         <td>Created on</td>
                         <td>{{ course.created_date }}</td>
                     </tr>
-
+                     <tr>
+                        <td>Status</td>
+                         <td>
+                             <select name="course_status">
+                                 <option value="0" {% if course.status == 0 %} selected="true"{% endif %}>Stage 1</option>
+                                 <option value="1" {% if course.status == 1 %} selected="true"{% endif %}>Stage 2</option>
+                                 <option value="2" {% if course.status == 2 %} selected="true"{% endif %}>Closed</option>
+                            </select>
+                         </td>
+                    </tr>
                     <tr>
                         <td></td>
                         <td>
                             <button class="button" type="submit">Save</button>
-                            <input type="hidden" name="update_centre" value="{{ centre.id }}">
+                            <input type="hidden" name="update_course" value="{{ course.id }}">
+                            <p class="{{ message_class }}">{{ course_message }}</p>
                         </td>
                     </tr>
                 </tbody>
+
             </form>
         </table>
     </div>

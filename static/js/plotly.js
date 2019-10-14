@@ -2,6 +2,7 @@ setInterval(function () {
                var url = '/get_chart_data';
                var question_id = $('#question_id').val();
                var course_id = $('#course_id').val();
+               var course_status = $('#course_status').val();
                $.ajax({
                    url: url,
                    type: "POST",
@@ -10,7 +11,12 @@ setInterval(function () {
                        var xvalue = new Array();
                        var votes = [1,2,3,4,5,6,7,8,9];
                        result.alldata.forEach(function (item,key) {
-                            var x = item.fields.value
+                            if(course_status==0){
+                                var x = item.fields.value;
+                            } else {
+                                var x = item.fields.revised_value;
+                            }
+
                            xvalue.push(x);
                            // console.log(x);
                        });

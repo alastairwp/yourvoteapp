@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User, auth
 from .models import Question, Vote, Hint
-from domain_admin.models import UserCourse
+from domain_admin.models import UserCourse, Course
 from django.utils.datastructures import MultiValueDictKeyError
 from datetime import datetime
 from django.utils import timezone
@@ -21,21 +21,33 @@ def save_vote_data(request):
         comment_data = request.POST['question_comment']
         course_id = request.POST['course_id']
         now = timezone.now()
+
+        #  Is the course at 1st or 2nd stage? If 2nd Stage then the vote-value is the revised-value
+        course = Course.objects.get(id=course_id)
+
         try:
-            checkvote = Vote.objects.filter(user__exact=current_user.id, question_id__exact=question_id, course_id=course_id).count()
+            checkvote = Vote.objects.filter(user__exact=current_user.id, question_id__exact=question_id,
+                                            course_id=course_id).count()
         except Question.DoesNotExist:
             checkvote = 0
 
         if checkvote != 0:
-            checkvote = Vote.objects.get(user__exact=current_user.id, question_id__exact=question_id, course_id=course_id)
+            checkvote = Vote.objects.get(user__exact=current_user.id, question_id__exact=question_id,
+                                         course_id=course_id)
             checkvote.save()
-            Vote.objects.filter(id=checkvote.id).update(comment_data=comment_data, value=value_data, course_id=course_id, updated_date=now)
+            if course.status == 0:
+                Vote.objects.filter(id=checkvote.id).update(comment_data=comment_data, value=value_data,
+                                                            course_id=course_id, updated_date=now)
+            elif course.status == 1:
+                Vote.objects.filter(id=checkvote.id).update(comment_data=comment_data, revised_value=value_data,
+                                                            course_id=course_id, updated_date=now)
+
         else:
-            savequestion = Vote(user=current_user, question_id=question_id, value=value_data, comment_data=comment_data, course_id=course_id, updated_date=now)
+            savequestion = Vote(user=current_user, question_id=question_id, value=value_data,
+                                comment_data=comment_data, course_id=course_id, updated_date=now)
             savequestion.save()
 
         return JsonResponse({'resultdata': 1})
-        # var question = Question('')
 
 
 def save_comment_data(request):
@@ -150,13 +162,15 @@ def vote(request):
                 right_hints = None
 
             try:
-                vote_value = Vote.objects.filter(question_id__exact=question_id).filter(user_id=current_user.id).first()
+                vote_values = Vote.objects.filter(question_id__exact=question_id).filter(user_id=current_user.id).first()
+                vote_comment = vote_values.comment_data
             except Vote.DoesNotExist:
                 vote_value = None
 
             try:
                 usercourse = UserCourse.objects.get(user__exact=current_user.id)
                 course_id = usercourse.course_id
+                course = Course.objects.get(id=course_id)
             except UserCourse.DoesNotExist:
                 course_id = 0
 
@@ -166,6 +180,11 @@ def vote(request):
             except Vote.DoesNotExist:
                 vote_count = 0
 
+            if course.status is not None:
+                if course.status == 0:
+                    vote_value = vote_values.value
+                elif course.status == 1:
+                    vote_value = vote_values.revised_value
 
         else:
             questiondata = None
@@ -190,7 +209,9 @@ def vote(request):
                 'right_hints': right_hints,
                 'course_id': course_id,
                 'vote_value': vote_value,
-                'vote_count': vote_count
+                'vote_count': vote_count,
+                'course_status': course.status,
+                'vote_comment': vote_comment
             }
         )
 

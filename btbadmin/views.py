@@ -85,7 +85,7 @@ def edit_centre(request, centre_id):
         course_title = request.POST.get('course_title')
         course_start_date = request.POST.get('course_start_date')
         course = Course(code=course_code, title=course_title, start_date=course_start_date,
-                        centre_id=centre_id, created_date=timezone.now, updated_date=timezone.now)
+                        centre_id=centre_id, status=0, created_date=timezone.now, updated_date=timezone.now)
         course.save()
         return HttpResponseRedirect(reverse('edit_centre') + centre_id)
 

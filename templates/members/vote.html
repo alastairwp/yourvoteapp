@@ -18,6 +18,7 @@
 						<p class="lead">
 							<input id="question_id" value="{{ question_id }}" type="hidden">
 							<input id="course_id" value="{{ course_id }}" type="hidden">
+                            <input id="course_status" value="{{ course_status }}" type="hidden">
 						    <div id="question">Question {{ question.number }}. {{ question.name }}</div>
 						</p>
 					</div>
@@ -30,20 +31,19 @@
 					                <form action="" method="post">
 					                {% csrf_token %}
 					                    <div id="sub-container-landscape">
-
 					                        <div class="section-bar">
 					                            <div class="vote-box">
                                                     <label class="vote-container">
-                                                        <input type="radio" {% if vote_value.value == 1 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="1">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 1 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="1">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                     <label class="vote-container">
-                                                        <input type="radio" {% if vote_value.value == 2 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="2">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 2 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="2">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                     <label class="vote-container">
-                                                        <input type="radio" {% if vote_value.value == 3 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="3">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 3 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="3">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                 </div>
 					                            <div class="number-box">
@@ -63,16 +63,16 @@
 					                        <div class="section-bar">
 					                            <div class="vote-box">
 					                                <label class="vote-container">
-					                                    <input type="radio" {% if vote_value.value == 4 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="4">
-					                                    <span class="checkmark"></span>
+					                                    <input type="radio" {% if vote_value == 4 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="4">
+					                                    <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
 					                                </label>
 					                                <label class="vote-container">
-					                                    <input type="radio" {% if vote_value.value == 5 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="5">
-                                                        <span class="checkmark"></span>
+					                                    <input type="radio" {% if vote_value == 5 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="5">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
 					                                </label>
 					                                <label class="vote-container">
-                                                        <input type="radio" {% if vote_value.value == 6 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="6">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 6 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="6">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
 					                            </div>
                                                 <div class="number-box">
@@ -92,16 +92,16 @@
                                             <div class="section-bar">
                                                 <div class="vote-box">
                                                     <label class="vote-container">
-                                                        <input type="radio" {% if vote_value.value == 7 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="7">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 7 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="7">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                     <label class="vote-container">
-                                                        <input type="radio" {% if vote_value.value == 8 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="8">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 8 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="8">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                     <label class="vote-container">
-                                                        <input type="radio" {% if vote_value.value == 9 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="9">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 9 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="9">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                 </div>
                                                 <div class="number-box">
@@ -130,16 +130,16 @@
                                                 </div>
                                                 <div class="vote-box">
                                                     <label class="vote-container">1
-                                                        <input type="radio" {% if vote_value.value == 1 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="1">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 1 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="1">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                     <label class="vote-container">2
-                                                        <input type="radio" {% if vote_value.value == 2 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="2">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 2 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="2">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                     <label class="vote-container">3
-                                                        <input type="radio" {% if vote_value.value == 3 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="3">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 3 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="3">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                 </div>
                                             </div>
@@ -154,16 +154,16 @@
                                                 </div>
                                                 <div class="vote-box">
                                                     <label class="vote-container">4
-                                                        <input type="radio" {% if vote_value.value == 4 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="4">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 4 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="4">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                     <label class="vote-container">5
-                                                        <input type="radio" {% if vote_value.value == 5 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="5">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 5 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="5">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                     <label class="vote-container">6
-                                                        <input type="radio" {% if vote_value.value == 6 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="6">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 6 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="6">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                 </div>
                                             </div>
@@ -178,16 +178,16 @@
                                                 </div>
                                                 <div class="vote-box">
                                                     <label class="vote-container">7
-                                                        <input type="radio" {% if vote_value.value == 7 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="7">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 7 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="7">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                     <label class="vote-container">8
-                                                        <input type="radio" {% if vote_value.value == 8 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="8">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 8 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="8">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                     <label class="vote-container">9
-                                                        <input type="radio" {% if vote_value.value == 9 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="9">
-                                                        <span class="checkmark"></span>
+                                                        <input type="radio" {% if vote_value == 9 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="9">
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}" style="background-color:#026816"></span>
                                                     </label>
                                                 </div>
                                             </div>
@@ -196,7 +196,7 @@
                                     </form>
                                 </div>
                                 <div id="comment-box">
-                                    <textarea class="form-control" style="color:black" name="UserComment" id="UserComment" placeholder="Actions/Comment/Observations">{{  vote_value.comment_data }}</textarea>
+                                    <textarea class="form-control" style="color:black" name="UserComment" id="UserComment" placeholder="Actions/Comment/Observations">{{  vote_comment }}</textarea>
                                 </div>
                                 <a name="graph" />
                                 <!--{#<iframe ></iframe>#}
