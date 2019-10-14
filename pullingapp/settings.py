@@ -24,6 +24,7 @@ SECRET_KEY = os.environ.get('YOURVOTE_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = os.environ.get('YOURVOTE_DJANGO_ALLOWED_HOSTS').split(',')
 
@@ -139,16 +140,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
-LOGIN_REDIRECT_URL = '/vote'
+LOGIN_REDIRECT_URL = '/vote/'
 LOGOUT_REDIRECT_URL = '/'
-LOGIN_URL = '/login'
+LOGIN_URL = '/login/'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#  EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_HOST = os.environ.get('YOURVOTE_EMAIL_HOST')
 EMAIL_PORT = os.environ.get('YOURVOTE_EMAIL_PORT')
 EMAIL_HOST_USER = os.environ.get('YOURVOTE_EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('YOURVOTE_EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = os.environ.get('YOURVOTE_EMAIL_USE_TLS')
-EMAIL_USE_SSL = os.environ.get('YOURVOTE_EMAIL_USE_SSL')
+EMAIL_USE_SSL = False
 DEFAULT_FROM_EMAIL = os.environ.get('YOURVOTE_DEFAULT_FROM_EMAIL')

@@ -85,7 +85,7 @@ setInterval(function () {
                var back_iddata  = $('#back_id').val();
                var question_comment = $('#UserComment').val();
                var course_id = $('#course_id').val();
-               var url = '/save_vote_data';
+               var url = '/save_vote_data/';
                $.ajax({
                    url: url,
                    type: "POST",
@@ -94,7 +94,7 @@ setInterval(function () {
                        console.log(result)
                        if(result.resultdata==1){
                            if(next_iddata!=''){
-                             window.location.href = 'vote?id_data=' + question_id + "#graph";
+                             window.location.href = '?id_data=' + question_id + "#graph";
                           }
                        }
                    }
@@ -109,7 +109,7 @@ setInterval(function () {
             var back_iddata  = $('#back_id').val();
             var question_comment = $('#UserComment').val();
             var course_id = $('#course_id').val();
-            var url = '/save_comment_data';
+            var url = '/save_comment_data/';
                $.ajax({
                    url: url,
                    type: "POST",
@@ -118,7 +118,7 @@ setInterval(function () {
                        console.log(result)
                        if(result.resultdata==1){
                            if(next_iddata!=''){
-                             window.location.href = 'vote?id_data='+id;
+                             window.location.href = '?id_data='+id;
                           }
                        }
                    }

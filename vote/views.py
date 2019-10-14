@@ -10,6 +10,7 @@ from django.core import serializers
 from django.conf import settings
 from django.views.decorators.csrf import requires_csrf_token
 import json
+from django.urls import reverse
 
 
 def save_vote_data(request):
@@ -194,7 +195,7 @@ def vote(request):
         )
 
     else:
-        return redirect('/login')
+        return redirect(reverse('login'))
 
 
 

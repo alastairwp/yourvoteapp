@@ -35,6 +35,51 @@
 
     <body class="host_version">
 
+        <header class="header header_style_01">
+            <nav class="megamenu navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/"><img width="150px" src="{% static "images/logos/bethebusiness-logo.png" %}" alt="image"></a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            {% if active_tab == "home" %}
+                                <li><a class="active" href="/">Home</a></li>
+                            {% else %}
+                                <li><a href="/">Home</a></li>
+                            {% endif %}
+                            {% if active_tab == "dashboard" %}
+                                <li><a class="active" href="/members/dashboard">Dashboard</a></li>
+                            {% else %}
+                                <li><a href="/members/dashboard">Dashboard</a></li>
+                            {% endif %}
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                             {% if user.is_authenticated %}
+                                <li><a href="/logout/" class="btn btn-radius btn-brd">Logout</a></li>
+                            {% else %}
+                                <li><a class="btn-light btn-radius btn-brd log" href="/login/" data-toggle="modal" data-target="#login"><i class="flaticon-padlock"></i> Customer Login</a></li>
+                            {% endif %}
+                            {% load auth_extras %}
+                            {% if request.user|has_group:"btbadmins" %}
+                                <li><a href="/btbadmin" class="btn btn-radius btn-brd">Chief Admin</a></li>
+                            {% endif %}
+                            {% if request.user|has_group:"domain_admins" %}
+                                <li><a href="/domain_admin" class="btn btn-radius btn-brd">Domain Admin</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
 	    {% block content %}{% endblock %}
 
         <footer class="footer">

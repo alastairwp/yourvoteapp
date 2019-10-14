@@ -2,44 +2,8 @@
 
 {% block content %}
 {% load staticfiles %}
-{% load auth_extras %}
-    <header class="header header_style_01">
-        <nav class="megamenu navbar navbar-default">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/"><img width="150px" src="{% static "images/logos/bethebusiness-logo.png" %}" alt="image"></a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/members/vote">Vote </a></li>
-                        <li><a class="active" href="#">Dashboard</a></li>
-                        <li><a href="contact">Contact</a></li>
-                    </ul>
 
-                    <ul class="nav navbar-nav navbar-right">
-                         {% if user.is_authenticated %}
-                            <li><a href="/logout" class="btn btn-radius btn-brd">Logout</a></li>
-                        {% else %}
-                            <li><a class="btn-light btn-radius btn-brd log" href="/login" data-toggle="modal" data-target="#login"><i class="flaticon-padlock"></i> Customer Login</a></li>
-                        {% endif %}
-                        {% if request.user|has_group:"btbadmins" %}
-                            <li><a href="/btbadmin" class="btn btn-radius btn-brd">Chief Admin</a></li>
-                        {% endif %}
-                        {% if request.user|has_group:"domain_admins" %}
-                            <li><a href="/domain_admin" class="btn btn-radius btn-brd">Domain Admin</a></li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+
 
 	<div class="all-title-box">
 		<div class="container text-center">
@@ -76,7 +40,7 @@
 							<tbody>
                                 {% for usercourse in courses %}
 								<tr>
-                                    <td data-label="Course Code"><a href="/members/vote">{{ usercourse.course.code }}</a></td>
+                                    <td data-label="Course Code"><a href="/members/vote/">{{ usercourse.course.code }}</a></td>
 									<td data-label="Title">{{ usercourse.course.title }}</td>
 									<td data-label="Start Date">{{ usercourse.course.start_date }}</td>
                                     <td data-label="Report"><a href="/members/assessment-report/{{ usercourse.course.id }}"><img width="50px" src="{% static "images/report.png" %}"></a></td>

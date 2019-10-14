@@ -6,10 +6,6 @@ from django.template import Context
 
 
 class EmailTemplate(models.Model):
-    """
-    Email templates get stored in database so that admins can
-    change emails on the fly
-    """
     subject = models.CharField(max_length=255, blank=True, null=True)
     to_email = models.CharField(max_length=255, blank=True, null=True)
     from_email = models.CharField(max_length=255, blank=True, null=True)

@@ -11,7 +11,7 @@ def send_email(request, template, ctx, to_emails):
 
     return render(
         request,
-        'email_test.html',
+        'test1.html',
         {
             'result_message': send_email_result
         }

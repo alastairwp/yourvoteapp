@@ -21,7 +21,7 @@ def domain_admin_home(request):
     if delete_course:
         course = Course.objects.get(id=delete_course)
         course.delete()
-        return HttpResponseRedirect('/domain_admin')
+        return HttpResponseRedirect(reverse('domain_admin_home'))
 
     add_new_course = request.POST.get('add_new_course')
     if add_new_course == "new_course":
@@ -30,7 +30,7 @@ def domain_admin_home(request):
         course_start_date = request.POST.get('course_start_date')
         course = Course(code=course_code, title=course_title, start_date=course_start_date, centre_id=user_centre.centre_id, created_date=timezone.now, updated_date=timezone.now)
         course.save()
-        return HttpResponseRedirect('/domain_admin')
+        return HttpResponseRedirect(reverse('domain_admin_home'))
 
     courses = Course.objects.filter(centre_id=user_centre.centre_id)
     return render(
@@ -88,11 +88,16 @@ def edit_course(request, course_id):
     current_site = get_current_site(request)
     register_url = current_site.domain + reverse("register")
 
+    if settings.EMAIL_USE_SSL is True:
+        hypertext = "https://"
+    else:
+        hypertext = "http://"
+
     ctx = {}
     ctx["first_name"] = invite_user_first_name
     ctx["centre_name"] = user_centre.name
     ctx["course_name"] = course.title
-    ctx["register_url"] = current_site.domain + reverse("register")
+    ctx["register_url"] = hypertext + current_site.domain + reverse("register")
 
     emails = (invite_user_email,)
     if invite_user_email:

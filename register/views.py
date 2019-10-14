@@ -8,6 +8,8 @@ from send_email.views import send_email
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .tokens import account_activation_token
+from django.urls import reverse
+from pullingapp import settings
 
 
 def register(request):
@@ -23,10 +25,10 @@ def register(request):
         if password1 == password2:
             if User.objects.filter(email=email).exists():
                 messages.warning(request, 'Username already taken')
-                return redirect('/register')
+                return redirect(reverse('register'))
             elif User.objects.filter(email=email).exists():
                 messages.warning(request, 'Email already taken')
-                return redirect('/register')
+                return redirect(reverse('register'))
             else:
                 # Create new user
                 user = User.objects.create_user(username=email, email=email, password=password1, first_name=first_name, last_name=last_name, is_active=False)
@@ -34,11 +36,16 @@ def register(request):
 
                 current_site = get_current_site(request)
 
+                if settings.EMAIL_USE_SSL is True:
+                    hypertext = "https://"
+                else:
+                    hypertext = "http://"
+
                 ctx = {}
                 ctx["first_name"] = first_name
                 ctx["activation_uid"] = urlsafe_base64_encode(force_bytes(user.pk))
                 ctx["activation_token"] = account_activation_token.make_token(user)
-                ctx["domain"] = current_site.domain
+                ctx["domain"] = hypertext + current_site.domain
 
                 emails = (email,)
                 send_email(request, "activation_email", ctx, emails)
@@ -54,10 +61,10 @@ def register(request):
                 user_centre.save()
 
                 messages.success(request, "Account created successfully. Check your email inbox for a verification email.")
-                return redirect('/login')
+                return redirect(reverse('login'))
         else:
             messages.warning(request, 'Passwords do not match')
-            return redirect('/register')
+            return redirect(reverse('register'))
 
     centres = Centre.objects.all()
 
@@ -76,6 +83,7 @@ def activate(request, uidb64, token):
         user = User.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
+
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()

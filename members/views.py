@@ -1,11 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from domain_admin.models import UserCourse
 from vote.models import Category, SubCategory, Question, Vote
 from django import template
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Avg, IntegerField
-from django.contrib.auth.views import PasswordResetView
+from django.template import RequestContext
+
+
+def handler404(request, *args, **argv):
+    response = render_to_response("errors/404.html", {})
+    response.status_code = 404
+    return response
+
+
+def handler500(request, *args, **argv):
+    response = render_to_response("errors/500.html", {})
+    response.status_code = 500
+    return response
+
 
 register = template.Library()
 
@@ -25,7 +38,8 @@ def dashboard(request):
         'members/dashboard.html',
         {
             'title': 'PtP Dashboard',
-            'courses': courses
+            'courses': courses,
+            'active_tab': "dashboard"
         }
     )
 
@@ -35,9 +49,11 @@ def assessmentreport(request, course_id):
     current_user = request.user
     course_cohort_avg = Vote.objects.filter(course_id=course_id).aggregate(Avg('value', output_field=IntegerField()))
 
+    #  Get average for all users in whole category
     cat1_cohort_avg = Vote.objects.filter(question__subcategory__category=1).filter(course_id=course_id).aggregate(Avg('value', output_field=IntegerField()))
     if cat1_cohort_avg['value__avg'] is None:
         cat1_cohort_avg['value__avg'] = 0
+    #  Get average for specific user in a category
     cat1avg = Vote.objects.filter(user_id=current_user.id).filter(course_id=course_id).filter(question__subcategory__category=1).aggregate(Avg('value', output_field=IntegerField()))
     if cat1avg['value__avg'] is None:
         cat1avg['value__avg'] = 0
@@ -145,5 +161,17 @@ def assessmentreport(request, course_id):
             'esu_cohort_score': cat6_cohort_avg['value__avg'],
             'ao_cohort_score': cat7_cohort_avg['value__avg'],
             'course_cohort_avg': course_cohort_avg['value__avg']
+        }
+    )
+
+
+def test(request):
+
+    return render(
+        request,
+        'test1.html',
+        {
+            'title': 'Test',
+
         }
     )
