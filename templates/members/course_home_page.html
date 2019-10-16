@@ -33,11 +33,15 @@
                                 <tr>
                                     <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Start date:</td><td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ course.start_date }}</td>
                                 </tr>
-
+                                <tr>
+                                    <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Course stage:</td><td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{% if course.status == 0 %}Stage 1{% elif course.status == 1 %}Stage 2{% elif course.status == 2 %}Closed{% endif %}</td>
+                                </tr>
                             </table>
                         </div>
                         <div>
+                            {% if course.status < 2 %}
                             <a href="/members/vote/" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd">Start course</a>
+                            {% endif %}
 
                         </div>
                     </div>

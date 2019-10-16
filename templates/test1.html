@@ -13,23 +13,16 @@
 
 <script>
 var marksCanvas = document.getElementById('radarChart').getContext('2d');
-
-var marksData = {
-  labels: ["Great Leadership", "Enabling Culture", "Customer Innovation", "Best People", "Recognising Performance", "Effective Skill Utilisation", "Aligned Organisation"],
-  datasets: [{
-    label: "Student A",
-    backgroundColor: "rgba(200,0,0,0.2)",
-    data: [5, 5, 7, 8, 6, 8, 3]
-  }, {
-    label: "Student B",
-    backgroundColor: "rgba(0,0,200,0.2)",
-    data: [5, 6, 6, 7, 7, 7, 9]
-  }]
-};
-
 var radarChart = new Chart(marksCanvas, {
   type: 'radar',
-  data: marksData
+  data: {
+    labels: ["Great Leadership", "Enabling Culture", "Customer Innovation", "Best People", "Recognising Performance", "Effective Skill Utilisation", "Aligned Organisation"],
+    datasets: [{
+        label: "Student A",
+        backgroundColor: "rgba(200,0,0,0.2)",
+        data: [{% for item in radarData %}{{ item }},{% endfor %}]
+                }]
+        }
 });
 
 </script>

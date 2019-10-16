@@ -244,6 +244,10 @@
 
 @media (max-width: 992px) {
 
+.radar-chart-container {
+    margin-left: 10%; margin-right: 10%;
+}
+
 #container {
     height: 520px;
 }
@@ -364,6 +368,11 @@
 }
 
 @media (max-width: 768px) {
+
+    .radar-chart-container {
+        margin-left: 0px; margin-right: 0px;
+    }
+
     .hint {
         font-size: 0.7em;
     }

@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'domain_admin.apps.DomainAdminConfig',
     'pullingapp',
     'send_email',
-    'members'
+    'members',
+    'chartjs'
 ]
 
 MIDDLEWARE = [

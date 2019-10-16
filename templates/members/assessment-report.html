@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+{% load staticfiles %}
 
 <div style="text-align:center">
     <h1>Assessment Report</h1>
@@ -99,6 +100,104 @@
     </div>
     {% endfor %}
 </div>
+
+<div class="radar-chart-container">
+    <h1>Personal Performance</h1>
+    <canvas id="radarChart" width="400px" height="400px"></canvas>
+</div>
+<div class="radar-chart-container">
+    <h1>Cohort Performance</h1>
+    <canvas id="radarChart2" width="400px" height="400px"></canvas>
+</div>
+
+<script>
+var chartOptions = {
+  scale: {
+    ticks: {
+      beginAtZero: true,
+      min: 0,
+      max: 9,
+      stepSize: 1
+    },
+    pointLabels: {
+      fontSize: 18
+    },
+  },
+
+};
+
+var radarCanvas = document.getElementById("radarChart").getContext('2d');
+var radarChart = new Chart(radarCanvas, {
+    type: 'radar',
+    data: {
+        labels: ["Great Leadership", "Enabling Culture", "Customer Innovation", "Best People", "Recognising Performance", "Effective Skill Utilisation", "Aligned Organisation"],
+        datasets: [{
+            label: "Original",
+            backgroundColor: "transparent",
+            borderColor: "rgba(0,0,200,0.6)",
+            fill: false,
+            radius: 6,
+            pointRadius: 6,
+            pointBorderWidth: 3,
+            pointBackgroundColor: "cornflowerblue",
+            pointBorderColor: "rgba(0,0,200,0.6)",
+            pointHoverRadius: 10,
+            data: [{% for original_item in originalData %}{{ original_item }},{% endfor %}]
+                    }, {
+            label: "Revised",
+            backgroundColor: "transparent",
+            borderColor: "rgba(200,0,0,0.6)",
+            fill: false,
+            radius: 6,
+            pointRadius: 6,
+            pointBorderWidth: 3,
+            pointBackgroundColor: "red",
+            pointBorderColor: "rgba(200,0,0,0.6)",
+            pointHoverRadius: 10,
+            data: [{% for revised_item in revisedData %}{{ revised_item }},{% endfor %}]
+            }]
+        },
+        options: chartOptions
+});
+
+
+var radarCanvas2 = document.getElementById("radarChart2").getContext('2d');
+var radarChart2 = new Chart(radarCanvas2, {
+    type: 'radar',
+    data: {
+        labels: ["Great Leadership", "Enabling Culture", "Customer Innovation", "Best People", "Recognising Performance", "Effective Skill Utilisation", "Aligned Organisation"],
+        datasets: [{
+            label: "Original",
+            backgroundColor: "transparent",
+            borderColor: "rgba(0,0,200,0.6)",
+            fill: false,
+            radius: 6,
+            pointRadius: 6,
+            pointBorderWidth: 3,
+            pointBackgroundColor: "cornflowerblue",
+            pointBorderColor: "rgba(0,0,200,0.6)",
+            pointHoverRadius: 10,
+            data: [{% for original_item in originalCohortData %}{{ original_item }},{% endfor %}]
+                    }, {
+            label: "Revised",
+            backgroundColor: "transparent",
+            borderColor: "rgba(200,0,0,0.6)",
+            fill: false,
+            radius: 6,
+            pointRadius: 6,
+            pointBorderWidth: 3,
+            pointBackgroundColor: "red",
+            pointBorderColor: "rgba(200,0,0,0.6)",
+            pointHoverRadius: 10,
+            data: [{% for revised_item in revisedCohortData %}{{ revised_item }},{% endfor %}]
+            }]
+        },
+        options: chartOptions
+});
+
+
+
+</script>
 
 
 {% endblock %}

@@ -5,7 +5,6 @@ from django import template
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Avg, IntegerField
-from django.template import RequestContext
 
 
 def handler404(request, *args, **argv):
@@ -204,6 +203,22 @@ def assessmentreport(request, course_id):
         newsubcat = True
     newcat = True
 
+    originalData = [cat1avg['value__avg'], cat2avg['value__avg'], cat3avg['value__avg'], cat4avg['value__avg'],
+                    cat5avg['value__avg'], cat6avg['value__avg'], cat7avg['value__avg']]
+
+    revisedData = [cat1revisedavg['revised_value__avg'], cat2revisedavg['revised_value__avg'],
+                   cat3revisedavg['revised_value__avg'], cat4revisedavg['revised_value__avg'],
+                   cat5revisedavg['revised_value__avg'], cat6revisedavg['revised_value__avg'],
+                   cat7revisedavg['revised_value__avg']]
+
+    originalCohortData = [cat1_cohort_avg['value__avg'], cat2_cohort_avg['value__avg'], cat3_cohort_avg['value__avg'], cat4_cohort_avg['value__avg'],
+                    cat5_cohort_avg['value__avg'], cat6_cohort_avg['value__avg'], cat7_cohort_avg['value__avg']]
+
+    revisedCohortData = [cat1_cohort_revised_avg['revised_value__avg'], cat2_cohort_revised_avg['revised_value__avg'],
+                   cat3_cohort_revised_avg['revised_value__avg'], cat4_cohort_revised_avg['revised_value__avg'],
+                   cat5_cohort_revised_avg['revised_value__avg'], cat6_cohort_revised_avg['revised_value__avg'],
+                   cat7_cohort_revised_avg['revised_value__avg']]
+
     return render(
         request,
         'members/assessment-report.html',
@@ -239,18 +254,24 @@ def assessmentreport(request, course_id):
             'ao_cohort_score': cat7_cohort_avg['value__avg'],
             'ao_cohort_revised_score': cat7_cohort_revised_avg['revised_value__avg'],
             'course_cohort_avg': course_cohort_avg['value__avg'],
-            'course_cohort_revised_avg': course_cohort_revised_avg['revised_value__avg']
+            'course_cohort_revised_avg': course_cohort_revised_avg['revised_value__avg'],
+            'originalData': originalData,
+            'revisedData': revisedData,
+            'originalCohortData': originalCohortData,
+            'revisedCohortData': revisedCohortData
         }
     )
 
 
 def test(request):
+    radarData = [5, 5, 7, 8, 6, 8, 3]
 
     return render(
         request,
         'test1.html',
         {
             'title': 'Test',
+            'radarData': radarData
 
         }
     )
@@ -267,7 +288,8 @@ def course_home(request, course_code):
         {
             'title': 'Course Home',
             'course': course
-
         }
     )
+
+
 
