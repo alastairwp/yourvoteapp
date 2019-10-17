@@ -20,6 +20,7 @@
 							<input id="question_id" value="{{ question_id }}" type="hidden">
 							<input id="course_id" value="{{ course_id }}" type="hidden">
                             <input id="course_status" value="{{ course_status }}" type="hidden">
+                            <input id="original_vote_value" value="{{ original_vote_value }}" type="hidden">
 						    <div id="question">Question {{ question.number }}. {{ question.name }}</div>
 						</p>
 					</div>
@@ -192,7 +193,7 @@
                                                     </label>
                                                     <label class="vote-container">9
                                                         <input type="radio" {% if vote_value == 9 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="9">
-                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}" style="background-color:#026816"></span>
+                                                        <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
                                                     </label>
                                                 </div>
 
@@ -201,6 +202,13 @@
 					                    </div>
 
                                     </form>
+                                    {% if course_status > 0 %}
+                                        <div><input type="button" value="Reveal previous vote" onClick="window.location.reload();"></div>
+
+                                    {% if vote_value %}
+                                        <div style="float:left;vertical-align:middle;display:flex;align-items:center;justify-content: center;text-align:center;background-color:#ff7373;color:white;width:100%">PREVIOUS VOTE = {{ original_vote_value }}</div>
+                                    {% endif %}
+                                    {% endif %}
                                 </div>
                                 <div id="comment-box">
                                     <textarea class="form-control" style="color:black" name="UserComment" id="UserComment" placeholder="Actions/Comment/Observations">{{  vote_comment }}</textarea>
@@ -217,11 +225,11 @@
                                 <div>
                                     <input id="back_id" value="{{ back_id.id }}" type="hidden">
                                     {% if back_id.id != null  %}
-                                    <a href="vote?id_data={{ back_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" id="backid" onclick="savecomment({{ back_id.id }})">Back</a>
+                                    <a href="/members/vote?id_data={{ back_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" id="backid" onclick="savecomment({{ back_id.id }})">Back</a>
                                     {% endif %}
                                     <input id="next_id" value="{{ next_id.id }}" type="hidden">
                                     {% if next_id.id != null  %}
-                                    <a href="vote?id_data={{ next_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" style="margin-left:10px;"  onclick="savecomment({{ next_id.id }})">Next</a>
+                                    <a href="/members/vote?id_data={{ next_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" style="margin-left:10px;"  onclick="savecomment({{ next_id.id }})">Next</a>
                                     {% endif %}
                                 </div>
                             </div>

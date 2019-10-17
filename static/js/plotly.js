@@ -91,15 +91,17 @@ setInterval(function () {
                var back_iddata  = $('#back_id').val();
                var question_comment = $('#UserComment').val();
                var course_id = $('#course_id').val();
+               var original_vote_value = $('#original_vote_value').val();
                var url = '/save_vote_data/';
                $.ajax({
                    url: url,
                    type: "POST",
-                   data: {question_id:question_id,value:valueget,question_comment:question_comment,course_id:course_id,csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()},
+                   data: {question_id:question_id,value:valueget,question_comment:question_comment,course_id:course_id,original_vote_value:original_vote_value,csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()},
                    success: function (result) {
                        console.log(result)
                        if(result.resultdata==1){
                            if(next_iddata!=''){
+
                              window.location.href = '?id_data=' + question_id + "#graph";
                           }
                        }

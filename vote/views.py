@@ -211,7 +211,8 @@ def vote(request):
                 'vote_value': vote_value,
                 'vote_count': vote_count,
                 'course_status': course.status,
-                'vote_comment': vote_comment
+                'vote_comment': vote_comment,
+                'original_vote_value': vote_values.value
             }
         )
 
