@@ -203,8 +203,9 @@
 
                                     </form>
                                     {% if course_status > 0 %}
+                                    <div style="text-align:center;width:100%;position:relative;float:left">
                                         <div><input type="button" value="Reveal previous vote" onClick="window.location.reload();"></div>
-
+                                    </div>
                                     {% if vote_value %}
                                         <div style="float:left;vertical-align:middle;display:flex;align-items:center;justify-content: center;text-align:center;background-color:#ff7373;color:white;width:100%">PREVIOUS VOTE = {{ original_vote_value }}</div>
                                     {% endif %}
