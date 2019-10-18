@@ -36,7 +36,7 @@ def register(request):
 
                 current_site = get_current_site(request)
 
-                if settings.EMAIL_USE_SSL is True:
+                if settings.EMAIL_USE_TLS is True:
                     hypertext = "https://"
                 else:
                     hypertext = "http://"

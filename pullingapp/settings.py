@@ -152,9 +152,9 @@ LOGIN_URL = '/login/'
 
 #  EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-EMAIL_HOST = os.environ.get('YOURVOTE_EMAIL_HOST')
+EMAIL_HOST = "os.environ.get('YOURVOTE_EMAIL_HOST')"
 EMAIL_PORT = os.environ.get('YOURVOTE_EMAIL_PORT')
 EMAIL_HOST_USER = os.environ.get('YOURVOTE_EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('YOURVOTE_EMAIL_HOST_PASSWORD')
-EMAIL_USE_SSL = False
+EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = os.environ.get('YOURVOTE_DEFAULT_FROM_EMAIL')
