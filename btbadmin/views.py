@@ -71,13 +71,13 @@ def edit_centre(request, centre_id):
         else:
             centre.admin_user_group_id = 0
         centre.save()
-        return HttpResponseRedirect(reverse('edit_centre') + centre_id)
+        return HttpResponseRedirect(reverse('edit_centre', args=[centre_id]))
 
     delete_course = request.POST.get('delete_course')
     if delete_course:
         course = Course.objects.get(id=delete_course)
         course.delete()
-        return HttpResponseRedirect(reverse('edit_centre') + centre_id)
+        return HttpResponseRedirect(reverse('edit_centre', args=[centre_id]))
 
     add_new_course = request.POST.get('add_new_course')
     if add_new_course == "new_course":

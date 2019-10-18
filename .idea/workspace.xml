@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="936d9c73-59ae-44bd-a027-3356d22b3598" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/domain_admin/migrations/0003_auto_20191018_1230.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sqlite3.db" beforeDir="false" afterPath="$PROJECT_DIR$/sqlite3.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/members/vote.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/members/vote.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/btbadmin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/btbadmin/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain_admin/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain_admin/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain_admin/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pullingapp/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/pullingapp/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pullingapp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/pullingapp/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

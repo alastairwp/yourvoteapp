@@ -22,5 +22,5 @@ class UserCourse(models.Model):
 
 
 class UserCentre(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     centre = models.ForeignKey(Centre, null=False, blank=False, on_delete=models.CASCADE)

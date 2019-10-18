@@ -28,7 +28,7 @@ urlpatterns = [
     re_path(r'^domain_admin/course/(?P<course_id>\d+)/$', domain_admin_views.edit_course, name='centre_admin_edit_course'),
     re_path(r'^btbadmin/centre/(?P<centre_id>\d+)/$', btbadmin_views.edit_centre, name='edit_centre'),
     re_path(r'^btbadmin/course/(?P<course_id>\d+)/$', btbadmin_views.edit_course, name='admin_edit_course'),
-    re_path(r'^btbadmin/user/(?P<user_id>\d+)/$', btbadmin_views.edit_user, name='edit_centre'),
+    re_path(r'^btbadmin/user/(?P<user_id>\d+)/$', btbadmin_views.edit_user, name='edit_user'),
     path('btbadmin/', btbadmin_views.btbadmin_home, name='btbadmin_home'),
     path('test/', members_views.test, name='test'),
     path('admin/', admin.site.urls),

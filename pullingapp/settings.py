@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('YOURVOTE_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = os.environ.get('YOURVOTE_DJANGO_ALLOWED_HOSTS').split(',')
@@ -81,17 +81,22 @@ WSGI_APPLICATION = 'pullingapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-"""
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pullapp',
-        'USER' : 'postgres',
-        'PASSWORD' : '12345678',
-        'HOST' : 'localhost',
-        'PORT' : '5432'
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
+
 """
 DATABASES = {
     'default': {
@@ -99,7 +104,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'sqlite3.db'),
     }
 }
-
+"""
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

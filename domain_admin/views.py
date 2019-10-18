@@ -15,7 +15,8 @@ from django.contrib.sites.shortcuts import get_current_site
 @user_passes_test(lambda u: u.groups.filter(name='domain_admins').exists())
 def domain_admin_home(request):
     current_user = request.user
-    user_centre = UserCentre.objects.get(user_id=current_user.id)
+    current_user_id = current_user.id
+    user_centre = UserCentre.objects.get(user_id=current_user_id)
 
     delete_course = request.POST.get('delete_course')
     if delete_course:
