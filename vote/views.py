@@ -194,6 +194,7 @@ def vote(request):
             middle_hints = None
             right_hints = None
             vote_count = None
+            course = None
             vote_value = None
             course_id = None
 
