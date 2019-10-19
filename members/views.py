@@ -206,6 +206,7 @@ def assessmentreport(request, course_id):
             newsubcat = False
 
         newsubcat = True
+
     newcat = True
 
     originalData = [cat1avg['value__avg'], cat2avg['value__avg'], cat3avg['value__avg'], cat4avg['value__avg'],

@@ -31,7 +31,7 @@ class Question(models.Model):
 
 
 class Vote(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     value = models.PositiveIntegerField(default=0, null=True, blank=True)
     revised_value = models.PositiveIntegerField(default=0, null=True, blank=True)
     question = models.ForeignKey(Question, null=False, blank=False, on_delete=models.SET(0))

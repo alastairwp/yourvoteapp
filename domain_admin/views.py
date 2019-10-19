@@ -76,7 +76,6 @@ def edit_course(request, course_id):
         course_user = request.POST.get('add_course_user')
         # check if user is already on a course
         user_on_course = UserCourse.objects.filter(user_id=course_user)
-        print(user_on_course.count())
         if user_on_course.count() > 0:
             message = "User is already enrolled on a course"
             message_class = "error-message"
