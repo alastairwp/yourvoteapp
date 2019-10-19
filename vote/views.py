@@ -1,14 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
-from django.contrib.auth.models import User, auth
+from django.http import JsonResponse
 from .models import Question, Vote, Hint
 from domain_admin.models import UserCourse, Course
+from btbadmin.models import Centre
 from django.utils.datastructures import MultiValueDictKeyError
-from datetime import datetime
 from django.utils import timezone
 from django.core import serializers
-from django.conf import settings
-from django.views.decorators.csrf import requires_csrf_token
 import json
 from django.urls import reverse
 
@@ -98,11 +95,13 @@ def get_chart_data(request):
 
 
 def homepage(request):
+    centres = Centre.objects.all()
     return render(
         request,
         'index.html',
         {
             'title': 'Homepage',
+            'centres': centres
         }
     )
 
