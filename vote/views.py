@@ -190,6 +190,12 @@ def vote(request):
                 elif course.status == 1:
                     vote_value = vote_values.revised_value
 
+            if votes is None:
+                original_vote_value = 0
+            else:
+                original_vote_value = vote_values.value
+
+
         else:
             questiondata = None
             next_issue = None
@@ -217,7 +223,7 @@ def vote(request):
                 'vote_count': vote_count,
                 'course_status': course.status,
                 'vote_comment': vote_comment,
-                'original_vote_value': vote_values.value
+                'original_vote_value': original_vote_value
             }
         )
 
