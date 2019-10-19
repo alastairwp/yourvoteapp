@@ -47,7 +47,12 @@ def dashboard(request):
 def assessmentreport(request, course_id):
     current_user = request.user
     course_cohort_avg = Vote.objects.filter(course_id=course_id).aggregate(Avg('value', output_field=IntegerField()))
+    if course_cohort_avg['value__avg'] is None:
+        course_cohort_avg['value__avg'] = 0
     course_cohort_revised_avg = Vote.objects.filter(course_id=course_id).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
+    if course_cohort_revised_avg['revised_value__avg'] is None:
+        course_cohort_revised_avg['revised_value__avg'] = 0
+
 
     #  Get average for all users in whole category
     cat1_cohort_avg = Vote.objects.filter(question__subcategory__category=1).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
