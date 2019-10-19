@@ -188,9 +188,13 @@ def vote(request):
                 if course.status == 0:
                     if vote_values:
                         vote_value = vote_values.value
+                    else:
+                        vote_value = 0
                 elif course.status == 1:
                     if vote_values:
                         vote_value = vote_values.revised_value
+                    else:
+                        vote_value = 0
 
             if vote_values is None:
                 original_vote_value = 0
