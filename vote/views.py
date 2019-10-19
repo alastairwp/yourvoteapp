@@ -163,7 +163,11 @@ def vote(request):
 
             try:
                 vote_values = Vote.objects.filter(question_id__exact=question_id).filter(user_id=current_user.id).first()
-                vote_comment = vote_values.comment_data
+                if vote_values is None:
+                    vote_comment = ""
+                else:
+                    vote_comment = vote_values.comment_data
+
             except Vote.DoesNotExist:
                 vote_value = None
 
@@ -194,7 +198,6 @@ def vote(request):
             middle_hints = None
             right_hints = None
             vote_count = None
-            course = None
             vote_value = None
             course_id = None
 
