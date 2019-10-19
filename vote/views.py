@@ -55,6 +55,7 @@ def save_comment_data(request):
         current_user = request.user
         question_id = request.POST['question_id']
         comment_data = request.POST['question_comment']
+        comment_data = comment_data.replace("'", "''")
         try:
             course_id = request.POST['course_id']
         except MultiValueDictKeyError:
