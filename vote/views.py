@@ -168,7 +168,7 @@ def vote(request):
                     vote_comment = ""
                 else:
                     vote_comment = vote_values.comment_data
-
+                    vote_comment = vote_comment.replace("''", "'")
             except Vote.DoesNotExist:
                 vote_value = None
 
