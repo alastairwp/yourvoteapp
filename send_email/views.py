@@ -9,11 +9,4 @@ from django.shortcuts import redirect
 def send_email(request, template, ctx, to_emails):
     send_email_result = EmailTemplate.send(template, ctx, emails=to_emails)
 
-    return render(
-        request,
-        'test1.html',
-        {
-            'result_message': send_email_result
-        }
-    )
 

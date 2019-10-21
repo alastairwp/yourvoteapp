@@ -269,20 +269,6 @@ def assessmentreport(request, course_id):
     )
 
 
-def test(request):
-    radarData = [5, 5, 7, 8, 6, 8, 3]
-
-    return render(
-        request,
-        'test1.html',
-        {
-            'title': 'Test',
-            'radarData': radarData
-
-        }
-    )
-
-
 @login_required()
 def course_home(request, course_code):
     current_user = request.user
