@@ -53,12 +53,13 @@ setInterval(function () {
                    tickangle: 0,
                    showticklabels: true,
                    type: 'category',
-                   title: 'Vote score'
+                   title: 'Vote'
                },
                yaxis: {
                    tickangle: 0,
                    showticklabels: true,
                    title: 'Count',
+                   dtick: 1,
                },
                margin: {
                    l: 75,

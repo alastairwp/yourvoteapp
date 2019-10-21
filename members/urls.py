@@ -13,7 +13,6 @@ from django.contrib.auth.views import (
 urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     re_path(r'^course/(?P<course_code>\w+)/$', views.course_home, name='course_home'),
-    #  path('course/', views.course_home2, name='course_home'),
     path('vote/', vote_views.vote, name='vote'),
     re_path(r'^assessment-report/(?P<course_id>\d+)/$', views.assessmentreport, name='course-report'),
     path('password_change/', PasswordChangeView.as_view(template_name='members/password_change_form.html')),

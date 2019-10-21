@@ -2,9 +2,157 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="936d9c73-59ae-44bd-a027-3356d22b3598" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/members/tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/autocomplete.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/base.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/changelists.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/dashboard.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/fonts.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/forms.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/responsive.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/responsive_rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/vendor/select2/LICENSE-SELECT2.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/vendor/select2/select2.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/vendor/select2/select2.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/css/widgets.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/fonts/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/fonts/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/fonts/Roboto-Bold-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/fonts/Roboto-Light-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/fonts/Roboto-Regular-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/calendar-icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/gis/move_vertex_off.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/gis/move_vertex_on.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/icon-addlink.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/icon-alert.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/icon-calendar.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/icon-changelink.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/icon-clock.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/icon-deletelink.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/icon-no.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/icon-unknown-alt.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/icon-unknown.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/icon-viewlink.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/icon-yes.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/inline-delete.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/search.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/selector-icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/sorting-icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/tooltag-add.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/img/tooltag-arrowright.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/SelectBox.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/SelectFilter2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/actions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/actions.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/admin/DateTimeShortcuts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/admin/RelatedObjectLookups.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/autocomplete.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/calendar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/cancel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/change_form.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/collapse.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/collapse.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/inlines.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/inlines.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/jquery.init.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/popup_response.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/prepopulate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/prepopulate.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/prepopulate_init.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/timeparse.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/urlify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/jquery/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/jquery/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/jquery/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/LICENSE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/ar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/az.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/bg.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/ca.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/cs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/da.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/de.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/el.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/en.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/es.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/et.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/eu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/fa.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/fi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/fr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/gl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/he.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/hi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/hr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/hu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/id.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/is.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/it.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/ja.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/km.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/ko.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/lt.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/lv.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/mk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/ms.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/nb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/nl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/pl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/pt-BR.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/pt.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/ro.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/ru.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/sk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/sr-Cyrl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/sr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/sv.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/th.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/tr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/uk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/vi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/zh-CN.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/i18n/zh-TW.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/select2.full.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/select2/select2.full.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/xregexp/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/xregexp/xregexp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/js/vendor/xregexp/xregexp.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/animate-custom.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/demo.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/fonts/BebasNeue-webfont.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/fonts/BebasNeue-webfont.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/fonts/BebasNeue-webfont.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/fonts/BebasNeue-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/fonts/Dharma Type Font License.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/fonts/fontomas-webfont.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/fonts/fontomas-webfont.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/fonts/fontomas-webfont.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/fonts/fontomas-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/fonts/franchise-bold-webfont.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/fonts/franchise-bold-webfont.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/fonts/franchise-bold-webfont.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/fonts/franchise-bold-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/style2.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/style3.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/ImageAttribution.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/btbadmin/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/btbadmin/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/members/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/members/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/plotly.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/plotly.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/members/course_home_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/members/course_home_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/members/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/members/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/members/vote.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/members/vote.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/test1.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vote/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/vote/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,8 +186,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>

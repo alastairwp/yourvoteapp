@@ -8,20 +8,23 @@
 
 <div id="support" class="wb">
 	<div class="container">
-		<h1>{{ question.subcategory.category.category_name }}</h1>
-		<h2>{{ question.subcategory.subcategory_name }} </h2>
+
 		<div class="row">
+
 			<div class="col-md-12">
-<div style="text-align:center;color:{% if course_status == 0 %}#2196F3{% elif course_status == 1 %}#ff7373{% endif %};font-size:1.2em;background-color:#f2f3f5;width:100%;height:22px">STAGE {% if course_status == 0 %}1{% elif course_status == 1 %}2{% elif course_status == 2 %} - CLOSED{% endif %}</div>
+
+                <div style="text-align:center;color:{% if course_status == 0 %}#2196F3{% elif course_status == 1 %}#ff7373{% endif %};font-size:1.2em;background-color:#f2f3f5;width:100%;height:22px">STAGE {% if course_status == 0 %}1{% elif course_status == 1 %}2{% elif course_status == 2 %} - CLOSED{% endif %}</div>
 				{% if course_id != 0 %}
 				<div class="contact_form">
-					<div class="section-title text-center">
+                    <h1 style="margin-bottom:10px">{{ question.subcategory.category.name }}</h1><div><span style="font-size:1.9em;font-weight:bold">{{ question.subcategory.name }}</span></div>
+                    <br /><br />
+					<div class="section-title text-left">
 						<p class="lead">
 							<input id="question_id" value="{{ question_id }}" type="hidden">
 							<input id="course_id" value="{{ course_id }}" type="hidden">
                             <input id="course_status" value="{{ course_status }}" type="hidden">
                             <input id="original_vote_value" value="{{ original_vote_value }}" type="hidden">
-						    <div id="question">Question {{ question.number }}. {{ question.name }}</div>
+						    <div id="question">Q{{ question.number }}. {{ question.name }}</div>
 						</p>
 					</div>
 					<!-- end title -->
@@ -31,9 +34,7 @@
 						<fieldset class="row-fluid">
 
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
 								<div id="container">
-
 					                <form action="" method="post">
 					                {% csrf_token %}
 					                    <div id="sub-container-landscape">
@@ -53,9 +54,9 @@
                                                     </label>
                                                 </div>
 					                            <div class="number-box">
-					                                <label class="vote-container">1</label>
-					                                <label class="vote-container">2</label>
-					                                <label class="vote-container">3</label>
+					                                <label class="vote-container">&nbsp;&nbsp;1</label>
+					                                <label class="vote-container">&nbsp;&nbsp;2</label>
+					                                <label class="vote-container">&nbsp;&nbsp;3</label>
 					                            </div>
 					                            <div class="hint-box hint_left">
                                                     <ul>
@@ -82,9 +83,9 @@
                                                     </label>
 					                            </div>
                                                 <div class="number-box">
-                                                    <label class="vote-container">4</label>
-                                                    <label class="vote-container">5</label>
-                                                    <label class="vote-container">6</label>
+                                                    <label class="vote-container">&nbsp;&nbsp;4</label>
+                                                    <label class="vote-container">&nbsp;&nbsp;5</label>
+                                                    <label class="vote-container">&nbsp;&nbsp;6</label>
                                                 </div>
                                                 <div class="hint-box hint_left">
                                                     <ul>
@@ -111,9 +112,9 @@
                                                     </label>
                                                 </div>
                                                 <div class="number-box">
-                                                    <label class="vote-container">7</label>
-                                                    <label class="vote-container">8</label>
-                                                    <label class="vote-container">9</label>
+                                                    <label class="vote-container">&nbsp;&nbsp;7</label>
+                                                    <label class="vote-container">&nbsp;&nbsp;8</label>
+                                                    <label class="vote-container">&nbsp;&nbsp;9</label>
                                                 </div>
                                                 <div class="hint-box hint_left">
                                                     <ul>
@@ -202,35 +203,46 @@
 					                    </div>
 
                                     </form>
+
+                                </div>
+                                <div id="comment-box">
+                                    <h2>My comments</h2>
+                                    <a name="graph" />
+                                    <textarea class="form-control" style="color:#333;" name="UserComment" id="UserComment" placeholder="Actions/Comment/Observations">{{  vote_comment }}</textarea>
+
+                                </div>
+
+                                <div style="margin-top:100px"></div>
+
+                                <h2 style="margin-bottom:0px;color:#333">Cohort responses</h2>
+
+                                <!--{#<iframe ></iframe>#}
+                                    {#<iframe src="chart.php?id=<?php echo $id; ?>"></iframe>#}-->
+                                <div id="wrapper">
                                     {% if course_status > 0 %}
                                     <div style="text-align:center;width:100%;position:relative;float:left">
                                         <div><input type="button" value="Reveal previous vote" onClick="window.location.reload();"></div>
                                     </div>
                                     {% if vote_value %}
-                                        <div style="float:left;vertical-align:middle;display:flex;align-items:center;justify-content: center;text-align:center;background-color:#ff7373;color:white;width:100%">PREVIOUS VOTE = {{ original_vote_value }}</div>
+                                        <div style="float:right;vertical-align:middle;display:flex;align-items:center;justify-content: center;text-align:center;background-color:#ff7373;color:white;width:20%">PREVIOUS VOTE = {{ original_vote_value }}</div>
                                     {% endif %}
                                     {% endif %}
-                                </div>
-                                <div id="comment-box">
-                                    <textarea class="form-control" style="color:black" name="UserComment" id="UserComment" placeholder="Actions/Comment/Observations">{{  vote_comment }}</textarea>
-                                </div>
-                                <a name="graph" />
-                                <!--{#<iframe ></iframe>#}
-                                    {#<iframe src="chart.php?id=<?php echo $id; ?>"></iframe>#}-->
-                                <div id="wrapper">
                                     <div id="chart" class="graph"></div>
                                 </div>
-                                <p>showing {{ vote_count }} votes</p>
+                                <div><p>showing {{ vote_count }} votes</p></div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top:20px;">
                                 <div>
                                     <input id="back_id" value="{{ back_id.id }}" type="hidden">
                                     {% if back_id.id != null  %}
-                                    <a href="/members/vote?id_data={{ back_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" id="backid" onclick="savecomment({{ back_id.id }})">Back</a>
+                                        <a href="/members/vote?id_data={{ back_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" id="backid" onclick="savecomment({{ back_id.id }})">Back</a>
                                     {% endif %}
                                     <input id="next_id" value="{{ next_id.id }}" type="hidden">
                                     {% if next_id.id != null  %}
-                                    <a href="/members/vote?id_data={{ next_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" style="margin-left:10px;"  onclick="savecomment({{ next_id.id }})">Next</a>
+                                        <a href="/members/vote?id_data={{ next_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" style="margin-left:10px;"  onclick="savecomment({{ next_id.id }})">Next</a>
+                                    {% endif %}
+                                    {% if question.number == 54 %}
+                                        <a href="/members/assessment-report/{{ course_id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" style="margin-left:10px;"  onclick="savecomment({{ next_id.id }})">Finish</a>
                                     {% endif %}
                                 </div>
                             </div>

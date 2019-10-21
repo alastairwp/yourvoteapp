@@ -179,9 +179,17 @@ def vote(request):
                 course_id = 0
 
             try:
-                votes = Vote.objects.filter(question_id=question_id, course_id=course_id)
-                vote_count = votes.count()
+                if course.status == 0:
+                    votes = Vote.objects.filter(question_id=question_id, course_id=course_id, value__gt=0)
+                    vote_count = votes.count()
             except Vote.DoesNotExist:
+                vote_count = 0
+
+            try:
+                if course.status > 0:
+                    revised_votes = Vote.objects.filter(question_id=question_id, course_id=course_id, revised_value__gt=0)
+                    vote_count = revised_votes.count()
+            except:
                 vote_count = 0
 
             if course.status is not None:

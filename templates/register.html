@@ -40,7 +40,9 @@
                                         <select  name="centre" class="form-control">
                                             <option value="0">Select education centre</option>
                                             {% for centre in centres %}
-                                            <option value="{{ centre.id }}">{{ centre.name }}</option>
+                                                {% if centre.id != 1 %}
+                                                    <option value="{{ centre.id }}">{{ centre.name }}</option>
+                                                {% endif %}
                                             {% endfor %}
                                         </select>
                                     </div>

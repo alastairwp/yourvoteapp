@@ -249,7 +249,9 @@
                                     <select name="select_centre" id="select_centre" class="selectpicker form-control" data-style="btn-white">
                                         <option value="0">Select Centre</option>
                                         {% for centre in centres %}
-                                            <option value="{{ centre.id }}">{{ centre.name }}</option>
+                                            {% if centre.id != 1 %}
+                                                <option value="{{ centre.id }}">{{ centre.name }}</option>
+                                            {% endif %}
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -330,7 +332,7 @@
         <div class="container">
             <div class="footer-distributed">
                 <div class="footer-left">
-                    <p class="footer-company-name">All Rights Reserved. &copy; 2019 <a href="#">Productivity Through People</a> Design By : <a href="https://html.design/">Yugen Digital Limited</a></p>
+                    <p class="footer-company-name">All Rights Reserved. &copy; 2019 <a href="#">Productivity Through People</a> Design By : <a href="http://www.yugendigital.com">Yugen Digital Limited</a></p>
                 </div>
 
 
