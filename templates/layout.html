@@ -65,7 +65,7 @@
                              {% if user.is_authenticated %}
                                 <li><a href="/logout/" class="btn btn-radius btn-brd">Logout</a></li>
                             {% else %}
-                                <li><a class="btn-light btn-radius btn-brd log" href="/login/" data-toggle="modal" data-target="#login"><i class="flaticon-padlock"></i> Customer Login</a></li>
+                                <li><a class="btn-light btn-radius btn-brd log" href="/login/"><i class="flaticon-padlock"></i> Customer Login</a></li>
                             {% endif %}
                             {% load auth_extras %}
                             {% if request.user|has_group:"btbadmins" %}
