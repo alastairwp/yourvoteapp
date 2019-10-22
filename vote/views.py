@@ -7,7 +7,17 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.utils import timezone
 from django.core import serializers
 import json
+from django import template
 from django.urls import reverse
+
+
+register = template.Library()
+
+
+@register.filter(name='has_group')
+def has_group(user, group_name):
+    group = Group.objects.get(name=group_name)
+    return True if group in user.groups.all() else False
 
 
 def save_vote_data(request):
@@ -76,6 +86,7 @@ def save_comment_data(request):
 
 
 def get_chart_data(request):
+
     try:
         question_id = request.POST['question_id']
     except MultiValueDictKeyError:
@@ -86,12 +97,30 @@ def get_chart_data(request):
     except MultiValueDictKeyError:
         course_id = None
 
-    allVote = Vote.objects.filter(question_id__exact=question_id, course_id=course_id)
+    try:
+        course_status = request.POST['course_status']
+    except MultiValueDictKeyError:
+        course_status = 0
 
+    try:
+        if int(course_status) == 0:
+            votes = Vote.objects.filter(question_id=question_id, course_id=course_id, value__gt=0)
+            vote_count = votes.count()
+    except Vote.DoesNotExist:
+        vote_count = 0
+
+    try:
+        if int(course_status) > 0:
+            revised_votes = Vote.objects.filter(question_id=question_id, course_id=course_id, revised_value__gt=0)
+            vote_count = revised_votes.count()
+    except Vote.DoesNotExist:
+        vote_count = 0
+
+    allVote = Vote.objects.filter(question_id__exact=question_id, course_id=course_id)
     tmpJson = serializers.serialize("json", allVote)
     tmpObj = json.loads(tmpJson)
 
-    return JsonResponse({'alldata': tmpObj})
+    return JsonResponse({'alldata': tmpObj, 'vote_count': vote_count})
 
 
 def homepage(request):

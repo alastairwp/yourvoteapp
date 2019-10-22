@@ -1,10 +1,27 @@
 {% extends "layout.html" %}
 {% block content %}
 {% load staticfiles %}
+{% load auth_extras %}
 
 <div style="text-align:center">
     <h1>Assessment Report</h1>
 </div>
+
+{% if request.user|has_group:"domain_admins" %}
+    <form method="post">
+        <div style="width:300px;margin-left:10px;position:relative;float:left">
+
+            {% csrf_token %}
+            <select name="participants" class="form-control">
+                <option value="0">Select Participant</option>
+                {% for participant in participants %}
+                    <option value="{{ participant.user.id }}" {% if current_user == participant.user.id %}selected="selected"{% endif %}>{{ participant.user.get_full_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button style="float:left; margin-left:15px" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" type="submit">View report</button>
+     </form>
+{% endif %}
 
 <div id="report-wrapper">
     <div class="theme-container" style="display:block;float:none;background-color:#e6f9ff">

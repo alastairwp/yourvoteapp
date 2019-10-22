@@ -45,7 +45,12 @@ def dashboard(request):
 
 @login_required()
 def assessmentreport(request, course_id):
-    current_user = request.user
+
+    if lambda u: u.groups.filter(name='domain_admins').exists():
+        current_user = request.POST.get("participants")
+    else:
+        current_user = request.user.id
+
     course_cohort_avg = Vote.objects.filter(course_id=course_id).aggregate(Avg('value', output_field=IntegerField()))
     if course_cohort_avg['value__avg'] is None:
         course_cohort_avg['value__avg'] = 0
@@ -53,13 +58,12 @@ def assessmentreport(request, course_id):
     if course_cohort_revised_avg['revised_value__avg'] is None:
         course_cohort_revised_avg['revised_value__avg'] = 0
 
-
     #  Get average for all users in whole category
     cat1_cohort_avg = Vote.objects.filter(question__subcategory__category=1).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat1_cohort_avg['value__avg'] is None:
         cat1_cohort_avg['value__avg'] = 0
     #  Get average for specific user in a category
-    cat1avg = Vote.objects.filter(user_id=current_user.id).filter(course_id=course_id).filter(question__subcategory__category=1).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
+    cat1avg = Vote.objects.filter(user_id=current_user).filter(course_id=course_id).filter(question__subcategory__category=1).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat1avg['value__avg'] is None:
         cat1avg['value__avg'] = 0
     #  Get revised average for all users in whole category
@@ -68,88 +72,86 @@ def assessmentreport(request, course_id):
     if cat1_cohort_revised_avg['revised_value__avg'] is None:
         cat1_cohort_revised_avg['revised_value__avg'] = 0
     #  Get revised average for specific user in a category
-    cat1revisedavg = Vote.objects.filter(user_id=current_user.id).filter(course_id=course_id).filter(
+    cat1revisedavg = Vote.objects.filter(user_id=current_user).filter(course_id=course_id).filter(
         question__subcategory__category=1).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
     if cat1revisedavg['revised_value__avg'] is None:
         cat1revisedavg['revised_value__avg'] = 0
 
-
     cat2_cohort_avg = Vote.objects.filter(question__subcategory__category=2).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat2_cohort_avg['value__avg'] is None:
         cat2_cohort_avg['value__avg'] = 0
-    cat2avg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=2).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
+    cat2avg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=2).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat2avg['value__avg'] is None:
         cat2avg['value__avg'] = 0
     cat2_cohort_revised_avg = Vote.objects.filter(question__subcategory__category=2).filter(course_id=course_id).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
     if cat2_cohort_revised_avg['revised_value__avg'] is None:
         cat2_cohort_revised_avg['revised_value__avg'] = 0
-    cat2revisedavg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=2).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
+    cat2revisedavg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=2).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
     if cat2revisedavg['revised_value__avg'] is None:
         cat2revisedavg['revised_value__avg'] = 0
-
 
     cat3_cohort_avg = Vote.objects.filter(question__subcategory__category=3).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat3_cohort_avg['value__avg'] is None:
         cat3_cohort_avg['value__avg'] = 0
-    cat3avg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=3).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
+    cat3avg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=3).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat3avg['value__avg'] is None:
         cat3avg['value__avg'] = 0
     cat3_cohort_revised_avg = Vote.objects.filter(question__subcategory__category=3).filter(course_id=course_id).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
     if cat3_cohort_revised_avg['revised_value__avg'] is None:
         cat3_cohort_revised_avg['revised_value__avg'] = 0
-    cat3revisedavg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=3).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
+    cat3revisedavg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=3).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
     if cat3revisedavg['revised_value__avg'] is None:
         cat3revisedavg['revised_value__avg'] = 0
 
     cat4_cohort_avg = Vote.objects.filter(question__subcategory__category=4).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat4_cohort_avg['value__avg'] is None:
         cat4_cohort_avg['value__avg'] = 0
-    cat4avg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=4).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
+    cat4avg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=4).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat4avg['value__avg'] is None:
         cat4avg['value__avg'] = 0
     cat4_cohort_revised_avg = Vote.objects.filter(question__subcategory__category=4).filter(course_id=course_id).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
     if cat4_cohort_revised_avg['revised_value__avg'] is None:
         cat4_cohort_revised_avg['revised_value__avg'] = 0
-    cat4revisedavg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=4).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
+    cat4revisedavg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=4).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
     if cat4revisedavg['revised_value__avg'] is None:
         cat4revisedavg['revised_value__avg'] = 0
 
     cat5_cohort_avg = Vote.objects.filter(question__subcategory__category=5).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat5_cohort_avg['value__avg'] is None:
         cat5_cohort_avg['value__avg'] = 0
-    cat5avg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=5).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
+    cat5avg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=5).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat5avg['value__avg'] is None:
         cat5avg['value__avg'] = 0
     cat5_cohort_revised_avg = Vote.objects.filter(question__subcategory__category=5).filter(course_id=course_id).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
     if cat5_cohort_revised_avg['revised_value__avg'] is None:
         cat5_cohort_revised_avg['revised_value__avg'] = 0
-    cat5revisedavg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=5).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
+    cat5revisedavg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=5).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
     if cat5revisedavg['revised_value__avg'] is None:
         cat5revisedavg['revised_value__avg'] = 0
 
     cat6_cohort_avg = Vote.objects.filter(question__subcategory__category=6).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat6_cohort_avg['value__avg'] is None:
         cat6_cohort_avg['value__avg'] = 0
-    cat6avg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=6).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
+    cat6avg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=6).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat6avg['value__avg'] is None:
         cat6avg['value__avg'] = 0
     cat6_cohort_revised_avg = Vote.objects.filter(question__subcategory__category=6).filter(course_id=course_id).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
     if cat6_cohort_revised_avg['revised_value__avg'] is None:
         cat6_cohort_revised_avg['revised_value__avg'] = 0
-    cat6revisedavg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=6).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
+    cat6revisedavg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=6).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
     if cat6revisedavg['revised_value__avg'] is None:
         cat6revisedavg['revised_value__avg'] = 0
 
     cat7_cohort_avg = Vote.objects.filter(question__subcategory__category=7).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat7_cohort_avg['value__avg'] is None:
         cat7_cohort_avg['value__avg'] = 0
-    cat7avg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=7).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
+    cat7avg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=7).filter(value__gt=0).aggregate(Avg('value', output_field=IntegerField()))
     if cat7avg['value__avg'] is None:
         cat7avg['value__avg'] = 0
     cat7_cohort_revised_avg = Vote.objects.filter(question__subcategory__category=7).filter(course_id=course_id).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
     if cat7_cohort_revised_avg['revised_value__avg'] is None:
         cat7_cohort_revised_avg['revised_value__avg'] = 0
-    cat7revisedavg = Vote.objects.filter(user_id=current_user.id).filter(question__subcategory__category=7).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
+    cat7revisedavg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=7).filter(revised_value__gt=0).aggregate(Avg('revised_value', output_field=IntegerField()))
     if cat7revisedavg['revised_value__avg'] is None:
         cat7revisedavg['revised_value__avg'] = 0
 
@@ -173,8 +175,8 @@ def assessmentreport(request, course_id):
                 reportscores[category.name][subcategory.name] = 0
 
             questions = Question.objects.filter(subcategory_id=subcategory.id)
-            totalvotescore = Vote.objects.filter(user_id=current_user.id).filter(question_id__in=questions).aggregate(Sum('value'))
-            totalvoterevisedscore = Vote.objects.filter(user_id=current_user.id).filter(question_id__in=questions).aggregate(
+            totalvotescore = Vote.objects.filter(user_id=current_user).filter(question_id__in=questions).aggregate(Sum('value'))
+            totalvoterevisedscore = Vote.objects.filter(user_id=current_user).filter(question_id__in=questions).aggregate(
                 Sum('revised_value'))
 
             try:
@@ -225,6 +227,7 @@ def assessmentreport(request, course_id):
                    cat5_cohort_revised_avg['revised_value__avg'], cat6_cohort_revised_avg['revised_value__avg'],
                    cat7_cohort_revised_avg['revised_value__avg']]
 
+    participants = UserCourse.objects.filter(course_id=course_id)
     return render(
         request,
         'members/assessment-report.html',
@@ -264,7 +267,10 @@ def assessmentreport(request, course_id):
             'originalData': originalData,
             'revisedData': revisedData,
             'originalCohortData': originalCohortData,
-            'revisedCohortData': revisedCohortData
+            'revisedCohortData': revisedCohortData,
+            'participants': participants,
+            'course_id': course_id,
+            'current_user': int(current_user)
         }
     )
 
