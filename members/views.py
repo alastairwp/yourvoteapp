@@ -291,9 +291,10 @@ def assessmentreport(request, course_id):
 def course_home(request, course_code):
     #  get current user object
     current_user = User.objects.get(email=request.user)
+    # get course object from code in the URL
     course_from_url = Course.objects.get(code=course_code)
     user_course = UserCourse.objects.get(user_id=current_user.id)
-    course_from_user = Course.objects.get(id=user_course.id)
+    course_from_user = Course.objects.get(id=user_course.course_id)
 
     #  check is user belongs to the course
     if str(course_from_user.code) != str(course_from_url.code):
