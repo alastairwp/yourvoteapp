@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Avg, IntegerField
 from django.urls import reverse
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 
 def handler404(request, *args, **argv):
@@ -281,15 +282,22 @@ def assessmentreport(request, course_id):
 
 @login_required()
 def course_home(request, course_code):
-    current_user = request.user
-    course = Course.objects.get(code=course_code)
+    #  get current user object
+    current_user = User.objects.get(email=request.user)
+    course_from_url = Course.objects.get(code=course_code)
+    user_course = UserCourse.objects.get(user_id=current_user.id)
+    course_from_user = Course.objects.get(id=user_course.id)
+
+    #  check is user belongs to the course
+    if str(course_from_user.code) != str(course_from_url.code):
+        return HttpResponseRedirect('/404')
 
     return render(
         request,
         'members/course_home_page.html',
         {
             'title': 'Course Home',
-            'course': course
+            'course': course_from_url
         }
     )
 
@@ -297,29 +305,32 @@ def course_home(request, course_code):
 @login_required()
 def account_profile(request, user_id):
     profile_user = User.objects.get(pk=user_id)
-    if request.method == 'POST':
-        first_name = request.POST.get('firstname')
-        last_name = request.POST.get('lastname')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
-        if password1:
-            if password1 == password2:
-                profile_user.set_password(password1)
-                profile_user.save()
-                User.objects.filter(pk=user_id).update(first_name=first_name, last_name=last_name)
-                profile_user = User.objects.get(pk=user_id)
-                messages.success(request, 'Password reset successfully')
+    if str(profile_user.email) == str(request.user):
+        if request.method == 'POST':
+            first_name = request.POST.get('firstname')
+            last_name = request.POST.get('lastname')
+            password1 = request.POST.get('password1')
+            password2 = request.POST.get('password2')
+            if password1:
+                if password1 == password2:
+                    profile_user.set_password(password1)
+                    profile_user.save()
+                    User.objects.filter(pk=user_id).update(first_name=first_name, last_name=last_name)
+                    profile_user = User.objects.get(pk=user_id)
+                    messages.success(request, 'Password reset successfully')
+
+                else:
+                    messages.warning(request, 'Passwords do not match')
 
             else:
-                messages.warning(request, 'Passwords do not match')
+                User.objects.filter(pk=user_id).update(first_name=first_name, last_name=last_name)
+                profile_user = User.objects.get(pk=user_id)
+                messages.success(request, 'Profile updated successfully')
 
-        else:
-            User.objects.filter(pk=user_id).update(first_name=first_name, last_name=last_name)
-            profile_user = User.objects.get(pk=user_id)
-            messages.success(request, 'Profile updated successfully')
-
-    user_centre = UserCentre.objects.get(user_id=user_id)
-    centre = Centre.objects.get(id=user_centre.centre_id)
+        user_centre = UserCentre.objects.get(user_id=user_id)
+        centre = Centre.objects.get(id=user_centre.centre_id)
+    else:
+        return HttpResponseRedirect('/404')
 
     return render(
         request,

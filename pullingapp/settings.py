@@ -150,8 +150,9 @@ LOGIN_REDIRECT_URL = '/vote/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
-#  EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ENCRYPT_KEY = os.environ.get('YOURVOTE_ENCRYPT_KEY')
 
+#  EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = os.environ.get('YOURVOTE_EMAIL_HOST')
 EMAIL_PORT = os.environ.get('YOURVOTE_EMAIL_PORT')
 EMAIL_HOST_USER = os.environ.get('YOURVOTE_EMAIL_HOST_USER')

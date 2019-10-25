@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from django.conf.urls import include, url
+from django.conf.urls import include
 from django.contrib import admin
 import django.contrib.auth.views as auth_views
 import login.views
@@ -10,10 +10,12 @@ import register.views as register_views
 import vote.views as vote_views
 import members.views as members_views
 
+
 handler404 = 'members.views.handler404'
 handler500 = 'members.views.handler500'
 
 urlpatterns = [
+    path('404', members_views.handler404, name='404'),
     path('', vote_views.homepage, name='homepage'),
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', register_views.activate, name='activate'),
     path('sendmail/', send_email_views.send_email),
