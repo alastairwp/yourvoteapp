@@ -74,6 +74,7 @@
                             {% if request.user|has_group:"domain_admins" %}
                                 <li><a href="/domain_admin" class="btn btn-radius btn-brd">Domain Admin</a></li>
                             {% endif %}
+                            <li><a href="/members/account/{{ user.id }}/"><img width="30px" src="{% static "images/profile-icon.png" %}"></a></li>
                         </ul>
                     </div>
                 </div>

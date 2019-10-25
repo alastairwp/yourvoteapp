@@ -1,10 +1,14 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, redirect
 from domain_admin.models import UserCourse, Course
 from vote.models import Category, SubCategory, Question, Vote
 from django import template
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
+from domain_admin.models import UserCentre
+from btbadmin.models import Centre
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Avg, IntegerField
+from django.urls import reverse
+from django.contrib import messages
 
 
 def handler404(request, *args, **argv):
@@ -286,6 +290,45 @@ def course_home(request, course_code):
         {
             'title': 'Course Home',
             'course': course
+        }
+    )
+
+
+@login_required()
+def account_profile(request, user_id):
+    profile_user = User.objects.get(pk=user_id)
+    if request.method == 'POST':
+        first_name = request.POST.get('firstname')
+        last_name = request.POST.get('lastname')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        if password1:
+            if password1 == password2:
+                profile_user.set_password(password1)
+                profile_user.save()
+                User.objects.filter(pk=user_id).update(first_name=first_name, last_name=last_name)
+                profile_user = User.objects.get(pk=user_id)
+                messages.success(request, 'Password reset successfully')
+
+            else:
+                messages.warning(request, 'Passwords do not match')
+
+        else:
+            User.objects.filter(pk=user_id).update(first_name=first_name, last_name=last_name)
+            profile_user = User.objects.get(pk=user_id)
+            messages.success(request, 'Profile updated successfully')
+
+    user_centre = UserCentre.objects.get(user_id=user_id)
+    centre = Centre.objects.get(id=user_centre.centre_id)
+
+    return render(
+        request,
+        'members/account-profile.html',
+        {
+            'title': 'Course Home',
+            'user_id': user_id,
+            'profile_user': profile_user,
+            'centre': centre,
         }
     )
 

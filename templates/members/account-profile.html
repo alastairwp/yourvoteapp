@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% load static %}
+
+
+    <div class="container">
+        <section>
+            <div class="modal-body customer-box row left" style="text-align:left">
+                <div class="col-md-6">
+
+                    <h1>Profile</h1>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Register">
+                            <form action="/members/account/{{ user_id }}/" autocomplete="off" method="post" class="form-horizontal">
+
+                                {% csrf_token %}
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        First name:
+                                        <input class="form-control" name="firstname" required="required" id="firstname" type="text" value="{{ profile_user.first_name }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        Last name:
+                                        <input class="form-control" name="lastname" required="required" id="lastname" type="text" value="{{ profile_user.last_name }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        Email:
+                                        <input class="form-control" name="email" required="required" id="email" type="email" value="{{ profile_user.email }}" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <span><strong>Education Centre:</strong></span>&nbsp;&nbsp;<span>{{ centre.name }}</span>
+                                    </div>
+                                </div>
+                                <br><br>
+                               <h2>Change Password</h2>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input class="form-control" name="password1" id="password1" type="password">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input class="form-control" name="password2" id="password2" type="password">
+                                    </div>
+                                </div>
+
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div {% if message.tags %}class="{{ message.tags }}"{% endif %}>
+                                            {% if message.tags == "success" %}
+                                                <i class="fa fa-check"></i>
+                                                {% elif message.tags == "warning" %}
+                                                <i class="fa fa-warning"></i>
+                                                {% elif message.tags == "error" %}
+                                                <i class="fa fa-times-circle"></i>
+                                                {% elif message.tags == "info" %}
+                                                <i class="fa fa-info-circle"></i>
+                                            {% endif %}
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+
+                                <p class="signin button">
+                                    <input type="submit" class="btn btn-light btn-radius btn-brd grd1" value="Update"/>
+                                </p>
+
+                            </form>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+{% endblock %}
