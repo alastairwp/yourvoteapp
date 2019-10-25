@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, render_to_response
 from domain_admin.models import UserCourse, Course
 from vote.models import Category, SubCategory, Question, Vote
 from django import template
@@ -7,7 +7,6 @@ from domain_admin.models import UserCentre
 from btbadmin.models import Centre
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Avg, IntegerField
-from django.urls import reverse
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
@@ -50,11 +49,19 @@ def dashboard(request):
 
 @login_required()
 def assessmentreport(request, course_id):
+    #  check user is registered to this course
+    currentuser = User.objects.get(email=request.user)
+    if not UserCourse.objects.filter(user_id=currentuser.id, course_id=course_id).exists():
+        return HttpResponseRedirect("/404/")
 
     if lambda u: u.groups.filter(name='domain_admins').exists():
-        current_user = request.POST.get("participants")
+        participant = request.POST.get("participants")
+        if participant:
+            current_user = participant
+        else:
+            current_user = currentuser.id
     else:
-        current_user = request.user.id
+        current_user = currentuser.id
 
     course_cohort_avg = Vote.objects.filter(course_id=course_id).aggregate(Avg('value', output_field=IntegerField()))
     if course_cohort_avg['value__avg'] is None:
@@ -290,7 +297,7 @@ def course_home(request, course_code):
 
     #  check is user belongs to the course
     if str(course_from_user.code) != str(course_from_url.code):
-        return HttpResponseRedirect('/404')
+        return HttpResponseRedirect('/404/')
 
     return render(
         request,
@@ -330,7 +337,7 @@ def account_profile(request, user_id):
         user_centre = UserCentre.objects.get(user_id=user_id)
         centre = Centre.objects.get(id=user_centre.centre_id)
     else:
-        return HttpResponseRedirect('/404')
+        return HttpResponseRedirect('/404/')
 
     return render(
         request,
