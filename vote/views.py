@@ -106,6 +106,9 @@ def get_chart_data(request):
         if int(course_status) == 0:
             votes = Vote.objects.filter(question_id=question_id, course_id=course_id, value__gt=0)
             vote_count = votes.count()
+            voted_users = []
+            for uvote in votes:
+                voted_users.append("<Li>" + uvote.user.first_name + ' ' + uvote.user.last_name + "</li>")
     except Vote.DoesNotExist:
         vote_count = 0
 
@@ -113,6 +116,9 @@ def get_chart_data(request):
         if int(course_status) > 0:
             revised_votes = Vote.objects.filter(question_id=question_id, course_id=course_id, revised_value__gt=0)
             vote_count = revised_votes.count()
+            voted_users = []
+            for uvote in revised_votes:
+                voted_users.append("<Li>" + uvote.user.first_name + ' ' + uvote.user.last_name + "</li>")
     except Vote.DoesNotExist:
         vote_count = 0
 
@@ -120,7 +126,7 @@ def get_chart_data(request):
     tmpJson = serializers.serialize("json", allVote)
     tmpObj = json.loads(tmpJson)
 
-    return JsonResponse({'alldata': tmpObj, 'vote_count': vote_count})
+    return JsonResponse({'alldata': tmpObj, 'vote_count': vote_count, 'voted_users': voted_users})
 
 
 def homepage(request):
@@ -218,7 +224,7 @@ def vote(request):
                 if course.status > 0:
                     revised_votes = Vote.objects.filter(question_id=question_id, course_id=course_id, revised_value__gt=0)
                     vote_count = revised_votes.count()
-            except:
+            except Vote.DoesNotExist:
                 vote_count = 0
 
             if course.status is not None:
@@ -237,7 +243,6 @@ def vote(request):
                 original_vote_value = 0
             else:
                 original_vote_value = vote_values.value
-
 
         else:
             questiondata = None

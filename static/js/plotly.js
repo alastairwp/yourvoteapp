@@ -4,6 +4,7 @@ setInterval(function () {
            var course_id = $('#course_id').val();
            var course_status = $('#course_status').val();
            var vote_count = $('#vote_count').val();
+
            votelabel =
            $.ajax({
                url: url,
@@ -34,8 +35,10 @@ setInterval(function () {
 
                        cheknewarray.push(i);
                    })
-                    document.getElementById("vote_label").innerHTML = "Showing " + result.vote_count + " votes"
-                    drawChart(votes,cheknewarray)
+                    voted_users_list = result.voted_users.toString();
+                    document.getElementById("vote_label").innerHTML = "Showing " + result.vote_count + " votes";
+                    document.getElementById("voted_users").innerHTML = voted_users_list.replace(/,/g, '');
+                    drawChart(votes,cheknewarray);
                    }
                });
         },500);

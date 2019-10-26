@@ -32,43 +32,43 @@
 
         <div class="theme-title-wrapper">
             <div class="theme-title">Course Average</div>
-            <div class="score-box score-{{ course_cohort_revised_avg }} right">{{ course_cohort_revised_avg }}</div>
-            <div class="score-box score-{{ course_cohort_avg }} right">{{ course_cohort_avg }}</div>
+            <div class="score-box score-{{ course_cohort_revised_avg|floatformat:"0" }} right">{{ course_cohort_revised_avg|floatformat:"0" }}</div>
+            <div class="score-box score-{{ course_cohort_avg|floatformat:"0" }} right">{{ course_cohort_avg|floatformat:"0" }}</div>
         </div>
         <div class="sub-theme-title-wrapper">
             <div class="sub-theme-title">Great Leadership</div>
-            <div class="score-box score-{{ gl_cohort_revised_score }} right">{{ gl_cohort_revised_score }}</div>
-            <div class="score-box score-{{ gl_cohort_score }} right">{{ gl_cohort_score }}</div>
+            <div class="score-box score-{{ gl_cohort_revised_score|floatformat:"0" }} right">{{ gl_cohort_revised_score|floatformat:"0" }}</div>
+            <div class="score-box score-{{ gl_cohort_score|floatformat:"0" }} right">{{ gl_cohort_score|floatformat:"0" }}</div>
         </div>
         <div class="sub-theme-title-wrapper">
             <div class="sub-theme-title">Enabling Culture</div>
-            <div class="score-box score-{{ ec_cohort_revised_score }} right">{{ ec_cohort_revised_score }}</div>
-            <div class="score-box score-{{ ec_cohort_score }} right">{{ ec_cohort_score }}</div>
+            <div class="score-box score-{{ ec_cohort_revised_score|floatformat:"0" }} right">{{ ec_cohort_revised_score|floatformat:"0" }}</div>
+            <div class="score-box score-{{ ec_cohort_score|floatformat:"0" }} right">{{ ec_cohort_score|floatformat:"0" }}</div>
         </div>
         <div class="sub-theme-title-wrapper">
             <div class="sub-theme-title">Customer Innovation</div>
-            <div class="score-box score-{{ ci_cohort_revised_score }} right">{{ ci_cohort_revised_score }}</div>
-            <div class="score-box score-{{ ci_cohort_score }} right">{{ ci_cohort_score }}</div>
+            <div class="score-box score-{{ ci_cohort_revised_score|floatformat:"0" }} right">{{ ci_cohort_revised_score|floatformat:"0" }}</div>
+            <div class="score-box score-{{ ci_cohort_score|floatformat:"0" }} right">{{ ci_cohort_score|floatformat:"0" }}</div>
         </div>
         <div class="sub-theme-title-wrapper">
             <div class="sub-theme-title">Best People</div>
-            <div class="score-box score-{{ bp_cohort_revised_score }} right">{{ bp_cohort_revised_score }}</div>
-            <div class="score-box score-{{ bp_cohort_score }} right">{{ bp_cohort_score }}</div>
+            <div class="score-box score-{{ bp_cohort_revised_score|floatformat:"0" }} right">{{ bp_cohort_revised_score|floatformat:"0" }}</div>
+            <div class="score-box score-{{ bp_cohort_score|floatformat:"0" }} right">{{ bp_cohort_score|floatformat:"0" }}</div>
         </div>
         <div class="sub-theme-title-wrapper">
             <div class="sub-theme-title">Recognising Performance</div>
-            <div class="score-box score-{{ rp_cohort_revised_score }} right">{{ rp_cohort_revised_score }}</div>
-            <div class="score-box score-{{ rp_cohort_score }} right">{{ rp_cohort_score }}</div>
+            <div class="score-box score-{{ rp_cohort_revised_score|floatformat:"0" }} right">{{ rp_cohort_revised_score|floatformat:"0" }}</div>
+            <div class="score-box score-{{ rp_cohort_score|floatformat:"0" }} right">{{ rp_cohort_score|floatformat:"0" }}</div>
         </div>
         <div class="sub-theme-title-wrapper">
             <div class="sub-theme-title">Effective Skill Utilisation</div>
-            <div class="score-box score-{{ esu_cohort_revised_score }} right">{{ esu_cohort_revised_score }}</div>
-            <div class="score-box score-{{ esu_cohort_score }} right">{{ esu_cohort_score }}</div>
+            <div class="score-box score-{{ esu_cohort_revised_score|floatformat:"0" }} right">{{ esu_cohort_revised_score|floatformat:"0" }}</div>
+            <div class="score-box score-{{ esu_cohort_score|floatformat:"0" }} right">{{ esu_cohort_score|floatformat:"0" }}</div>
         </div>
         <div class="sub-theme-title-wrapper">
             <div class="sub-theme-title">Aligned Organisation</div>
-            <div class="score-box score-{{ ao_cohort_revised_score }} right">{{ ao_cohort_revised_score }}</div>
-            <div class="score-box score-{{ ao_cohort_score }} right">{{ ao_cohort_score }}</div>
+            <div class="score-box score-{{ ao_cohort_revised_score|floatformat:"0" }} right">{{ ao_cohort_revised_score|floatformat:"0" }}</div>
+            <div class="score-box score-{{ ao_cohort_score|floatformat:"0" }} right">{{ ao_cohort_score|floatformat:"0" }}</div>
         </div>
 
     </div>
@@ -84,39 +84,54 @@
             <div class="theme-title">{{ cat }}</div>
 
                 {% if cat == "Great Leadership" %}
-            <div class="score-box score-{{ cat1revisedavg.revised_value__avg }} right">{{ cat1revisedavg.revised_value__avg }}</div>
-            <div class="score-box score-{{ cat1avg.value__avg }} right">{{ cat1avg.value__avg }}</div>
+            <div class="score-box score-{{ cat1revisedavg.revised_value__avg|floatformat:"0" }} right">{{ cat1revisedavg.revised_value__avg|floatformat:"0" }}</div>
+            <div class="score-box score-{{ cat1avg.value__avg|floatformat:"0" }} right">{{ cat1avg.value__avg|floatformat:"0" }}</div>
                 {% elif cat == "Enabling Culture" %}
-            <div class="score-box score-{{ cat2revisedavg.revised_value__avg }} right">{{ cat2revisedavg.revised_value__avg }}</div>
-            <div class="score-box score-{{ cat2avg.value__avg }} right">{{ cat2avg.value__avg }}</div>
+            <div class="score-box score-{{ cat2revisedavg.revised_value__avg|floatformat:"0" }} right">{{ cat2revisedavg.revised_value__avg|floatformat:"0" }}</div>
+            <div class="score-box score-{{ cat2avg.value__avg|floatformat:"0" }} right">{{ cat2avg.value__avg|floatformat:"0" }}</div>
                 {% elif cat == "Customer Innovation" %}
-            <div class="score-box score-{{ cat3revisedavg.revised_value__avg }} right">{{ cat3revisedavg.revised_value__avg }}</div>
-            <div class="score-box score-{{ cat3avg.value__avg }} right">{{ cat3avg.value__avg }}</div>
+            <div class="score-box score-{{ cat3revisedavg.revised_value__avg|floatformat:"0" }} right">{{ cat3revisedavg.revised_value__avg|floatformat:"0" }}</div>
+            <div class="score-box score-{{ cat3avg.value__avg|floatformat:"0" }} right">{{ cat3avg.value__avg|floatformat:"0" }}</div>
                 {% elif cat == "Best People" %}
-            <div class="score-box score-{{ cat4revisedavg.revised_value__avg }} right">{{ cat4revisedavg.revised_value__avg }}</div>
-            <div class="score-box score-{{ cat4avg.value__avg }} right">{{ cat4avg.value__avg }}</div>
+            <div class="score-box score-{{ cat4revisedavg.revised_value__avg|floatformat:"0" }} right">{{ cat4revisedavg.revised_value__avg|floatformat:"0" }}</div>
+            <div class="score-box score-{{ cat4avg.value__avg|floatformat:"0" }} right">{{ cat4avg.value__avg|floatformat:"0" }}</div>
                 {% elif cat == "Recognising Performance" %}
-            <div class="score-box score-{{ cat5revisedavg.revised_value__avg }} right">{{ cat5revisedavg.revised_value__avg }}</div>
-             <div class="score-box score-{{ cat5avg.value__avg }} right">{{ cat5avg.value__avg }}</div>
+            <div class="score-box score-{{ cat5revisedavg.revised_value__avg|floatformat:"0" }} right">{{ cat5revisedavg.revised_value__avg|floatformat:"0" }}</div>
+             <div class="score-box score-{{ cat5avg.value__avg|floatformat:"0" }} right">{{ cat5avg.value__avg|floatformat:"0" }}</div>
                 {% elif cat == "Effective Skill Utilisation" %}
-            <div class="score-box score-{{ cat6revisedavg.revised_value__avg }} right">{{ cat6revisedavg.revised_value__avg }}</div>
-            <div class="score-box score-{{ cat6avg.value__avg }} right">{{ cat6avg.value__avg }}</div>
+            <div class="score-box score-{{ cat6revisedavg.revised_value__avg|floatformat:"0" }} right">{{ cat6revisedavg.revised_value__avg|floatformat:"0" }}</div>
+            <div class="score-box score-{{ cat6avg.value__avg|floatformat:"0" }} right">{{ cat6avg.value__avg|floatformat:"0" }}</div>
                 {% elif cat == "Aligned Organisation" %}
-            <div class="score-box score-{{ cat7revisedavg.revised_value__avg }} right">{{ cat7revisedavg.revised_value__avg }}</div>
-            <div class="score-box score-{{ cat7avg.value__avg }} right">{{ cat7avg.value__avg }}</div>
+            <div class="score-box score-{{ cat7revisedavg.revised_value__avg|floatformat:"0" }} right">{{ cat7revisedavg.revised_value__avg|floatformat:"0" }}</div>
+            <div class="score-box score-{{ cat7avg.value__avg|floatformat:"0" }} right">{{ cat7avg.value__avg|floatformat:"0" }}</div>
                 {% endif %}
 
         </div>
         {% for key, averages in subcat.items %}
         <div class="sub-theme-title-wrapper">
             <div class="sub-theme-title">{{ key }}</div>
-            <div class="score-box score-{{ averages.revised }} right">{{ averages.revised }}</div>
-            <div class="score-box score-{{ averages.score }} right">{{ averages.score }}</div>
+            <div class="score-box score-{{ averages.revised|floatformat:"0" }} right">{{ averages.revised|floatformat:"0" }}</div>
+            <div class="score-box score-{{ averages.score|floatformat:"0" }} right">{{ averages.score|floatformat:"0" }}</div>
         </div>
         {% endfor %}
     </div>
     {% endfor %}
 </div>
+
+<div>
+    <h1>Question Summary</h1>
+    <table style="margin-bottom:50px">
+        <tr>
+            <th style="text-align:left;padding:10px;border-bottom:1px solid lightblue">#</th><th style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Question</th><th style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Score</th><th style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Revised</th>
+        </tr>
+        {% for question in questions %}
+        <tr>
+            <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ question.question.number }}</td><td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ question.question.name }}</td><td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ question.value }}</td><td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ question.revised_value }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
 
 <div class="radar-chart-container">
     <h1>Personal Performance</h1>
