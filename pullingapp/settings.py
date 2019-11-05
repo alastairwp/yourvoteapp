@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('YOURVOTE_SECRET_KEY')
 DEBUG = os.environ.get('YOURVOTE_DEBUG_MODE') == 'True'
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = os.environ.get('YOURVOTE_DJANGO_ALLOWED_HOSTS').split(',')
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 

@@ -34,6 +34,16 @@ def register(request):
                 user = User.objects.create_user(username=email, email=email, password=password1, first_name=first_name, last_name=last_name, is_active=False)
                 user.save()
 
+                #  Assign user to a centre
+                user_centre = UserCentre(user_id=user.id, centre_id=centre)
+                user_centre.save()
+
+                # Add user to default groups
+                members_group = Group.objects.get(name='members')
+                none_group = Group.objects.get(name="none")
+                user.groups.add(members_group)
+                user.groups.add(none_group)
+
                 current_site = get_current_site(request)
 
                 if settings.EMAIL_USE_TLS is True:
@@ -49,16 +59,6 @@ def register(request):
 
                 emails = (email,)
                 send_email(request, "activation_email", ctx, emails)
-
-                # Add user to default groups
-                members_group = Group.objects.get(name='members')
-                none_group = Group.objects.get(name="none")
-                user.groups.add(members_group)
-                user.groups.add(none_group)
-
-                #  Assign user to a centre
-                user_centre = UserCentre(user_id=user.id, centre_id=centre)
-                user_centre.save()
 
                 messages.success(request, "Account created successfully. Check your email inbox for a verification email.")
                 return redirect(reverse('login'))
