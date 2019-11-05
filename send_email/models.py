@@ -59,7 +59,7 @@ class EmailTemplate(models.Model):
         if attachments:
             for name, content, mimetype in attachments:
                 msg.attach(name, content, mimetype)
-        return msg.send(fail_silently=not (settings.DEBUG or settings.TEST))
+        return msg.send(fail_silently=not settings.DEBUG)
 
     def _get_body(self):
         if self.is_text:

@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('YOURVOTE_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('YOURVOTE_DEBUG_MODE') == 'True'
+DEBUG = False  # os.environ.get('YOURVOTE_DEBUG_MODE') == 'True'
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
@@ -159,3 +159,37 @@ EMAIL_HOST_USER = os.environ.get('YOURVOTE_EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('YOURVOTE_EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.environ.get('YOURVOTE_DEFAULT_FROM_EMAIL')
+
+# settings.py
+"""LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'mysite.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'pullingapp': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    }
+}"""

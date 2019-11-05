@@ -71,7 +71,8 @@ def register(request):
     return render(
         request, 'register.html',
         {
-            'centres': centres
+            'centres': centres,
+            'active_tab': "home"
         }
     )
 
