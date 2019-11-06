@@ -151,6 +151,26 @@ def cookiepolicy(request):
     )
 
 
+def website_terms(request):
+    return render(
+        request,
+        'website-terms.html',
+        {
+            'title': 'Terms & Conditions'
+        }
+    )
+
+
+def privacy_policy(request):
+    return render(
+        request,
+        'privacy-policy.html',
+        {
+            'title': 'Privacy Policy'
+        }
+    )
+
+
 def vote(request):
     try:
         getid = request.GET['id_data']
