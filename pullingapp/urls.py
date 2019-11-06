@@ -26,6 +26,7 @@ urlpatterns = [
     path('login/', login.views.login, name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('members/', include('members.urls')),
+    path('cookiepolicy', vote_views.cookiepolicy, name='cookiepolicy'),
     path('domain_admin/', domain_admin_views.domain_admin_home, name='domain_admin_home'),
     re_path(r'^domain_admin/course/(?P<course_id>\d+)/$', domain_admin_views.edit_course, name='centre_admin_edit_course'),
     re_path(r'^btbadmin/centre/(?P<centre_id>\d+)/$', btbadmin_views.edit_centre, name='edit_centre'),

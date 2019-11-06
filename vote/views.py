@@ -141,6 +141,16 @@ def homepage(request):
     )
 
 
+def cookiepolicy(request):
+    return render(
+        request,
+        'cookiepolicy.html',
+        {
+            'title': 'Cookie Policy'
+        }
+    )
+
+
 def vote(request):
     try:
         getid = request.GET['id_data']
