@@ -36,8 +36,14 @@ setInterval(function () {
                        cheknewarray.push(i);
                    })
                     voted_users_list = result.voted_users.toString();
+                    not_voted_users_list = result.not_voted_users.toString();
                     document.getElementById("vote_label").innerHTML = "Showing " + result.vote_count + " votes";
-                    document.getElementById("voted_users").innerHTML = voted_users_list.replace(/,/g, '');
+                    if (document.getElementById("voted_users")) {
+                        document.getElementById("voted_users").innerHTML = voted_users_list.replace(/,/g, '');
+                        }
+                    if (document.getElementById("not_voted_users")) {
+                        document.getElementById("not_voted_users").innerHTML = not_voted_users_list.replace(/,/g, '');
+                        }
                     drawChart(votes,cheknewarray);
                    }
                });
@@ -137,9 +143,19 @@ function savecomment(id) {
                }
            }
        });
-
-
    }
+
+
+function revealchart() {
+    var reveal_chart = document.getElementById('cohort_votes').style.display;
+    chart_object = document.getElementById('cohort_votes');
+    if (reveal_chart == 'none') {
+        chart_object.style.display = 'block';
+      } else {
+        chart_object.style.display = 'none';
+    }
+}
+
 
      // using jQuery
 function getCookie(name) {

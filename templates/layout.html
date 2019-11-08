@@ -8,7 +8,7 @@
         <meta name="robots" content="noindex, nofollow">
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800&display=swap" rel="stylesheet">
          <!-- Site Metas -->
         <title>{% block title %}PtP Home{% endblock %}</title>
         <meta name="keywords" content="">
@@ -168,5 +168,15 @@
         <script src="{% static "js/all.js" %}"></script>
         <script src="{% static "js/custom.js" %}"></script>
         <script src="{% static "js/plotly.js" %}"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151823854-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-151823854-1');
+        </script>
+
     </body>
 </html>

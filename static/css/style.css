@@ -27,6 +27,7 @@
 -------------------------------------------------------------------*/
 
 @import url('https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i');
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800&display=swap');
 
 /*------------------------------------------------------------------
     IMPORT FILES
@@ -46,9 +47,9 @@
 -------------------------------------------------------------------*/
 
 body {
-    color: #999;
+    color: #ff0000;
     font-size: 15px;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
     line-height: 1.80857;
 }
 
@@ -96,11 +97,11 @@ h3,
 h4,
 h5,
 h6 {
+    font-family: 'Raleway', sans-serif;
     letter-spacing: 0;
-    font-weight: normal;
+    font-weight: 700;
     position: relative;
     padding: 0 0 10px 0;
-    font-weight: normal;
     line-height: 120% !important;
     color: #1f1f1f;
     margin: 0
@@ -244,8 +245,8 @@ blockquote {
     margin-top: 80px;
     display: block;
     position: relative;
-    width: 100%;
-    height:170px;
+    width: 90%;
+    height:200px;
 }
 
 #container {
@@ -2246,7 +2247,7 @@ select.mobile-device {
 .contact_form {
     border: 1px solid #ededed;
     box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
-    background-color: #f2f3f5;
+    background-color: #FFFAF0;
     padding: 40px 30px;
 }
 

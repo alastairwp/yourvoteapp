@@ -11,7 +11,6 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 
 
-
 def handler404(request, *args, **argv):
     response = render_to_response("errors/404.html", {})
     response.status_code = 404

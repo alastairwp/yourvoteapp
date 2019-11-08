@@ -6,267 +6,282 @@
 {% block content %}
 {% load staticfiles %}
 {% load auth_extras %}
-<div id="support" class="wb">
-	<div class="container">
+<div style="text-align:center;color:{% if course_status == 0 %}#2196F3{% elif course_status == 1 %}#ff7373{% endif %};font-size:1.2em;background-color:#f2f3f5;width:100%;height:22px">STAGE {% if course_status == 0 %}1{% elif course_status == 1 %}2{% elif course_status == 2 %} - CLOSED{% endif %}</div>
+{% if course_id != 0 %}
 
-		<div class="row">
+<div class="contact_form">
+    <h1 style="margin-bottom:10px">{{ question.subcategory.category.name }}</h1>
+    <div><span style="font-size:1.9em;font-weight:bold">{{ question.subcategory.name }}</span></div>
+    <div class="text-left">
+        <p class="lead">
+            <input id="question_id" value="{{ question_id }}" type="hidden">
+            <input id="course_id" value="{{ course_id }}" type="hidden">
+            <input id="course_status" value="{{ course_status }}" type="hidden">
+            <input id="original_vote_value" value="{{ original_vote_value }}" type="hidden">
+            <input id="vote_count" value="{{ vote_count }}" type="hidden">
+            <input id="reveal_chart" type="hidden">
+            <div id="question">Q{{ question.number }}. {{ question.name }}</div>
+        </p>
+    </div>
 
-			<div class="col-md-12">
+    <form id="contactform" class="row" action="contact.php" name="contactform" method="post">
 
-                <div style="text-align:center;color:{% if course_status == 0 %}#2196F3{% elif course_status == 1 %}#ff7373{% endif %};font-size:1.2em;background-color:#f2f3f5;width:100%;height:22px">STAGE {% if course_status == 0 %}1{% elif course_status == 1 %}2{% elif course_status == 2 %} - CLOSED{% endif %}</div>
-				{% if course_id != 0 %}
-				<div class="contact_form">
-                    <h1 style="margin-bottom:10px">{{ question.subcategory.category.name }}</h1><div><span style="font-size:1.9em;font-weight:bold">{{ question.subcategory.name }}</span></div>
-                    <br /><br />
-					<div class="section-title text-left">
-						<p class="lead">
-							<input id="question_id" value="{{ question_id }}" type="hidden">
-							<input id="course_id" value="{{ course_id }}" type="hidden">
-                            <input id="course_status" value="{{ course_status }}" type="hidden">
-                            <input id="original_vote_value" value="{{ original_vote_value }}" type="hidden">
-                            <input id="vote_count" value="{{ vote_count }}" type="hidden">
-						    <div id="question">Q{{ question.number }}. {{ question.name }}</div>
-						</p>
-					</div>
-					<!-- end title -->
-					<form id="contactform" class="row" action="contact.php" name="contactform" method="post">
+        {% csrf_token %}
+        <fieldset class="row-fluid">
 
-						{% csrf_token %}
-						<fieldset class="row-fluid">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                {% if not request.user|has_group:"presenters" %}
-								<div id="container">
-					                <form action="" method="post">
-					                {% csrf_token %}
+                {% if not request.user|has_group:"presenters" %}
+                <div style="box-shadow:5px 10px 10px #D3D3D3;background-color:white;text-align:left;margin-top:30px;border:3px solid #efdcc3;min-height:250px;float:left;width:100%;border-radius:12px;">
+                    <div style="background-color:#efdcc3;text-align:center;font-weight:bold">My Vote</div>
+                    <div id="container" >
+                        <form action="" method="post">
+                        {% csrf_token %}
 
-                                            <div id="sub-container-landscape">
-                                                <div class="section-bar">
-                                                    <div class="vote-box">
-                                                        <label class="vote-container">
-                                                            <input type="radio" {% if vote_value == 1 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="1">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                        <label class="vote-container">
-                                                            <input type="radio" {% if vote_value == 2 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="2">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                        <label class="vote-container">
-                                                            <input type="radio" {% if vote_value == 3 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="3">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="number-box">
-                                                        <label class="vote-container">&nbsp;&nbsp;1</label>
-                                                        <label class="vote-container">&nbsp;&nbsp;2</label>
-                                                        <label class="vote-container">&nbsp;&nbsp;3</label>
-                                                    </div>
-                                                    <div class="hint-box hint_left">
-                                                        <ul>
-                                                        {% for left_hint in left_hints %}
-                                                        <li><span class="hint">{{ left_hint.text }}</span></li>
-                                                        {% endfor %}
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
-                                                <div class="section-bar">
-                                                    <div class="vote-box">
-                                                        <label class="vote-container">
-                                                            <input type="radio" {% if vote_value == 4 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="4">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                        <label class="vote-container">
-                                                            <input type="radio" {% if vote_value == 5 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="5">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                        <label class="vote-container">
-                                                            <input type="radio" {% if vote_value == 6 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="6">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="number-box">
-                                                        <label class="vote-container">&nbsp;&nbsp;4</label>
-                                                        <label class="vote-container">&nbsp;&nbsp;5</label>
-                                                        <label class="vote-container">&nbsp;&nbsp;6</label>
-                                                    </div>
-                                                    <div class="hint-box hint_left">
-                                                        <ul>
-                                                        {% for middle_hint in middle_hints %}
-                                                        <li><span class="hint">{{ middle_hint.text }}</span></li>
-                                                        {% endfor %}
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
-                                                <div class="section-bar">
-                                                    <div class="vote-box">
-                                                        <label class="vote-container">
-                                                            <input type="radio" {% if vote_value == 7 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="7">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                        <label class="vote-container">
-                                                            <input type="radio" {% if vote_value == 8 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="8">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                        <label class="vote-container">
-                                                            <input type="radio" {% if vote_value == 9 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="9">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="number-box">
-                                                        <label class="vote-container">&nbsp;&nbsp;7</label>
-                                                        <label class="vote-container">&nbsp;&nbsp;8</label>
-                                                        <label class="vote-container">&nbsp;&nbsp;9</label>
-                                                    </div>
-                                                    <div class="hint-box hint_left">
-                                                        <ul>
-                                                        {% for right_hint in right_hints %}
-                                                        <li><span class="hint">{{ right_hint.text }}</span></li>
-                                                        {% endfor %}
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div id="sub-container-portrait">
-                                                <div class="section-bar">
-                                                    <div class="hint-box hint_left">
-                                                        <ul>
-                                                            {% for left_hint in left_hints %}
-                                                                <li><span class="hint">{{ left_hint.text }}</span></li>
-                                                            {% endfor %}
-                                                        </ul>
-                                                    </div>
-                                                    <div class="vote-box">
-                                                        <label class="vote-container">1
-                                                            <input type="radio" {% if vote_value == 1 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="1">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                        <label class="vote-container">2
-                                                            <input type="radio" {% if vote_value == 2 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="2">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                        <label class="vote-container">3
-                                                            <input type="radio" {% if vote_value == 3 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="3">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="section-bar">
-                                                    <div class="hint-box hint_left">
-                                                        <ul>
-                                                            {% for middle_hint in middle_hints %}
-                                                                <li><span class="hint">{{ middle_hint.text }}</span></li>
-                                                            {% endfor %}
-                                                        </ul>
-                                                    </div>
-                                                    <div class="vote-box">
-                                                        <label class="vote-container">4
-                                                            <input type="radio" {% if vote_value == 4 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="4">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                        <label class="vote-container">5
-                                                            <input type="radio" {% if vote_value == 5 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="5">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                        <label class="vote-container">6
-                                                            <input type="radio" {% if vote_value == 6 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="6">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="section-bar">
-                                                    <div class="hint-box hint_left">
-                                                        <ul>
-                                                            {% for right_hint in right_hints %}
-                                                                <li><span class="hint">{{ right_hint.text }}</span></li>
-                                                            {% endfor %}
-                                                        </ul>
-                                                    </div>
-                                                    <div class="vote-box">
-                                                        <label class="vote-container">7
-                                                            <input type="radio" {% if vote_value == 7 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="7">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                        <label class="vote-container">8
-                                                            <input type="radio" {% if vote_value == 8 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="8">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                        <label class="vote-container">9
-                                                            <input type="radio" {% if vote_value == 9 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="9">
-                                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
-                                                        </label>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                    </form>
-
-                                </div>
-                                {% endif %}
-                                 <a name="graph" />
-
-                                {% if not request.user|has_group:"presenters" %}
-
-                                    <div id="comment-box">
-                                        <h2>My comments</h2>
-                                        <textarea class="form-control" style="color:#333;" name="UserComment" id="UserComment" placeholder="Actions/Comment/Observations">{{ vote_comment }}</textarea>
+                            <div id="sub-container-landscape">
+                                <div class="section-bar">
+                                    <div class="vote-box">
+                                        <label class="vote-container">
+                                            <input type="radio" {% if vote_value == 1 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="1">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                        <label class="vote-container">
+                                            <input type="radio" {% if vote_value == 2 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="2">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                        <label class="vote-container">
+                                            <input type="radio" {% if vote_value == 3 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="3">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
                                     </div>
-                                    <div style="margin-top:100px"></div>
-                                {% endif %}
-
-
-                                <h2 style="margin-bottom:0px;color:#333">Cohort responses</h2>
-
-                                <!--{#<iframe ></iframe>#}
-                                    {#<iframe src="chart.php?id=<?php echo $id; ?>"></iframe>#}-->
-                                <div id="wrapper">
-                                    {% if course_status > 0 %}
-                                    <div style="text-align:center;width:100%;position:relative;float:left">
-                                        <div><input type="button" value="Reveal previous vote" onClick="window.location.reload();"></div>
+                                    <div class="number-box">
+                                        <label class="vote-container">&nbsp;&nbsp;1</label>
+                                        <label class="vote-container">&nbsp;&nbsp;2</label>
+                                        <label class="vote-container">&nbsp;&nbsp;3</label>
                                     </div>
-                                    {% if vote_value %}
-                                        <div style="float:right;vertical-align:middle;display:flex;align-items:center;justify-content: center;text-align:center;background-color:#ff7373;color:white;width:20%">PREVIOUS VOTE = {{ original_vote_value }}</div>
-                                    {% endif %}
-                                    {% endif %}
-                                    <div id="chart" class="graph"></div>
-
+                                    <div class="hint-box hint_left">
+                                        <ul>
+                                        {% for left_hint in left_hints %}
+                                        <li><span class="hint">{{ left_hint.text }}</span></li>
+                                        {% endfor %}
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div><p id="vote_label">showing {{ vote_count }} votes</p></div>
-                                <div><ul id="voted_users" style="text-align:left"></ul></div>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top:20px;">
-                                <div>
-                                    <input id="back_id" value="{{ back_id.id }}" type="hidden">
-                                    {% if back_id.id != null  %}
-                                        <a href="/members/vote?id_data={{ back_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" id="backid" onclick="savecomment({{ back_id.id }})">Back</a>
-                                    {% endif %}
-                                    <input id="next_id" value="{{ next_id.id }}" type="hidden">
-                                    {% if next_id.id != null  %}
-                                        <a href="/members/vote?id_data={{ next_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" style="margin-left:10px;"  onclick="savecomment({{ next_id.id }})">Next</a>
-                                    {% endif %}
-                                    {% if question.number == 54 %}
-                                        <a href="/members/assessment-report/{{ course_id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" style="margin-left:10px;"  onclick="savecomment({{ next_id.id }})">Finish</a>
-                                    {% endif %}
+
+                                <div class="section-bar">
+                                    <div class="vote-box">
+                                        <label class="vote-container">
+                                            <input type="radio" {% if vote_value == 4 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="4">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                        <label class="vote-container">
+                                            <input type="radio" {% if vote_value == 5 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="5">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                        <label class="vote-container">
+                                            <input type="radio" {% if vote_value == 6 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="6">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                    </div>
+                                    <div class="number-box">
+                                        <label class="vote-container">&nbsp;&nbsp;4</label>
+                                        <label class="vote-container">&nbsp;&nbsp;5</label>
+                                        <label class="vote-container">&nbsp;&nbsp;6</label>
+                                    </div>
+                                    <div class="hint-box hint_left">
+                                        <ul>
+                                        {% for middle_hint in middle_hints %}
+                                        <li><span class="hint">{{ middle_hint.text }}</span></li>
+                                        {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="section-bar">
+                                    <div class="vote-box">
+                                        <label class="vote-container">
+                                            <input type="radio" {% if vote_value == 7 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="7">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                        <label class="vote-container">
+                                            <input type="radio" {% if vote_value == 8 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="8">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                        <label class="vote-container">
+                                            <input type="radio" {% if vote_value == 9 %} checked="checked" {% endif %} name="radio" class="vote-radio" data-type="9">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                    </div>
+                                    <div class="number-box">
+                                        <label class="vote-container">&nbsp;&nbsp;7</label>
+                                        <label class="vote-container">&nbsp;&nbsp;8</label>
+                                        <label class="vote-container">&nbsp;&nbsp;9</label>
+                                    </div>
+                                    <div class="hint-box hint_left">
+                                        <ul>
+                                        {% for right_hint in right_hints %}
+                                        <li><span class="hint">{{ right_hint.text }}</span></li>
+                                        {% endfor %}
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </fieldset>
+
+                            <div id="sub-container-portrait">
+                                <div class="section-bar">
+                                    <div class="hint-box hint_left">
+                                        <ul>
+                                            {% for left_hint in left_hints %}
+                                                <li><span class="hint">{{ left_hint.text }}</span></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="vote-box">
+                                        <label class="vote-container">1
+                                            <input type="radio" {% if vote_value == 1 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="1">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                        <label class="vote-container">2
+                                            <input type="radio" {% if vote_value == 2 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="2">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                        <label class="vote-container">3
+                                            <input type="radio" {% if vote_value == 3 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="3">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="section-bar">
+                                    <div class="hint-box hint_left">
+                                        <ul>
+                                            {% for middle_hint in middle_hints %}
+                                                <li><span class="hint">{{ middle_hint.text }}</span></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="vote-box">
+                                        <label class="vote-container">4
+                                            <input type="radio" {% if vote_value == 4 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="4">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                        <label class="vote-container">5
+                                            <input type="radio" {% if vote_value == 5 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="5">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                        <label class="vote-container">6
+                                            <input type="radio" {% if vote_value == 6 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="6">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="section-bar">
+                                    <div class="hint-box hint_left">
+                                        <ul>
+                                            {% for right_hint in right_hints %}
+                                                <li><span class="hint">{{ right_hint.text }}</span></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="vote-box">
+                                        <label class="vote-container">7
+                                            <input type="radio" {% if vote_value == 7 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="7">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                        <label class="vote-container">8
+                                            <input type="radio" {% if vote_value == 8 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="8">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                        <label class="vote-container">9
+                                            <input type="radio" {% if vote_value == 9 %} checked="checked" {% endif %} name="radio2" class="vote-radio" data-type="9">
+                                            <span class="checkmark{% if course_status > 0 %}-revised{% endif %}"></span>
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div>You've answered <strong>{{ question_count }}</strong> out of <strong>54</strong> questions</div>
+                {% endif %}
+                 <a name="graph" />
+
+                {% if not request.user|has_group:"presenters" %}
+
+                <div id="comments" style="box-shadow:5px 10px 10px #D3D3D3;background-color:white;text-align:left;margin-top:30px;border:3px solid #efdcc3;min-height:250px;float:left;width:100%;border-radius:12px;">
+                    <div style="background-color:#efdcc3;text-align:center;font-weight:bold">Comments</div>
+                    <textarea class="form-control" style="color:#000000;border:0px" name="UserComment" id="UserComment" placeholder="Write your comments here...">{{ vote_comment }}</textarea>
+                </div>
+                {% endif %}
+
+                {% if request.user|has_group:"presenters" %}
+                <div style="box-shadow:5px 10px 10px #D3D3D3;background-color:white;text-align:left;margin-top:30px;border:3px solid #efdcc3;min-height:250px;float:left;width:49%;border-radius:12px;">
+                    <div style="background-color:#efdcc3;text-align:center;font-weight:bold">Not voted</div>
+                    <div id="not_voted_users"></div>
+                </div>
+
+                <div style="box-shadow:5px 10px 10px #D3D3D3;background-color:white;text-align:left;margin-top:30px;border:3px solid #efdcc3;min-height:250px;float:right;width:49%;border-radius:12px;">
+                    <div style="background-color:#efdcc3;text-align:center;font-weight:bold">Voted</div>
+                    <div id="voted_users"></div>
+                </div>
+
+
+                <div style="float:left;width:100%;margin-top:30px;">
+                    <form action="" method="post">
+                        <input type="button" value="Reveal previous vote" onClick="revealchart()">
                     </form>
                 </div>
+                {% endif %}
+
+                <div id="cohort_votes" style="{% if request.user|has_group:'presenters' %}display:none{% else %}display:block{% endif %};box-shadow:5px 10px 10px #D3D3D3;background-color:white;text-align:left;margin-top:30px;border:3px solid #efdcc3;min-height:250px;float:left;width:100%;border-radius:12px;">
+                    <div style="background-color:#efdcc3;text-align:center;font-weight:bold">Cohort Votes</div>
+                    <div style="padding:10px;text-align:right;"><p id="vote_label">showing {{ vote_count }} votes</p></div>
+                    <div id="chart" class="graph"></div>
+                </div>
+
+                <div style="float:left;width:100%;margin-top:30px;">
+                    <div style="text-align:center;">
+                        <input id="back_id" value="{{ back_id.id }}" type="hidden">
+                        {% if back_id.id != null  %}
+                            <a href="/members/vote?id_data={{ back_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" id="backid" onclick="savecomment({{ back_id.id }})">Back</a>
+                        {% endif %}
+                        <input id="next_id" value="{{ next_id.id }}" type="hidden">
+                        {% if next_id.id != null  %}
+                            <a href="/members/vote?id_data={{ next_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" style="margin-left:10px;"  onclick="savecomment({{ next_id.id }})">Next</a>
+                        {% endif %}
+                        {% if question.number == 54 %}
+                            <a href="/members/assessment-report/{{ course_id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" style="margin-left:10px;"  onclick="savecomment({{ next_id.id }})">Finish</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-            <!-- end col -->
-			{% else %}
-			<h1>You are not currently enrolled onto a course</h1>
-			{% endif %}
-		</div>
-		<!-- end row -->
-	</div>
-	<!-- end container -->
+
+            <div style="margin-top:30px;float:left">
+                {% if course_status > 0 %}
+                <div style="text-align:center;width:100%;position:relative;float:left">
+                    <div><input type="button" value="Reveal previous vote" onClick="window.location.reload();"></div>
+                </div>
+                {% if vote_value %}
+                <div style="float:right;vertical-align:middle;display:flex;align-items:center;justify-content: center;text-align:center;background-color:#ff7373;color:white;width:20%">PREVIOUS VOTE = {{ original_vote_value }}</div>
+                {% endif %}
+                {% endif %}
+            </div>
+
+
+        </fieldset>
+    </form>
+
+    <!-- end col -->
+    {% else %}
+    <h1>You are not currently enrolled onto a course</h1>
+    {% endif %}
+
+<!-- end row -->
 </div>
 
 {% endblock %}
