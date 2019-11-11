@@ -207,6 +207,42 @@ blockquote {
     VOTE CSS
 -------------------------------------------------------------------*/
 
+.panel-full-width {
+    box-shadow:5px 10px 10px #D3D3D3;
+    background-color:white;
+    text-align:left;
+    margin-top:30px;
+    border:3px solid #efdcc3;
+    min-height:250px;
+    float:left;
+    width:100%;
+    border-radius:12px;"
+}
+
+.panel-half-width-left {
+    box-shadow:5px 10px 10px #D3D3D3;
+    background-color:white;
+    text-align:left;
+    margin-top:30px;
+    border:3px solid #efdcc3;
+    min-height:250px;
+    float:left;
+    width:49%;
+    border-radius:12px;"
+}
+
+.panel-half-width-right {
+    box-shadow:5px 10px 10px #D3D3D3;
+    background-color:white;
+    text-align:left;
+    margin-top:30px;
+    border:3px solid #efdcc3;
+    min-height:250px;
+    float:right;
+    width:49%;
+    border-radius:12px;"
+}
+
 .radar-chart-container {
     margin-left: 20%; margin-right: 20%;
 }

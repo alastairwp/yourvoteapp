@@ -119,14 +119,18 @@
 </div>
 
 <div>
-    <h1>Question Summary</h1>
+    <h1>Question Summary - Stage 1</h1>
+    <div style="text-align:left;padding:10px">You've answered <strong>{{ questions_answered_count }}</strong> out of <strong>54</strong> questions</div>
     <table style="margin-bottom:50px">
         <tr>
-            <th style="text-align:left;padding:10px;border-bottom:1px solid lightblue">#</th><th style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Question</th><th style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Score</th><th style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Revised</th>
+            <th style="text-align:left;padding:10px;border-bottom:1px solid lightblue">#</th><th style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Question</th><th style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Score</th><th style="text-align:left;padding:10px;border-bottom:1px solid lightblue">Revised Score</th>
         </tr>
-        {% for question in questions %}
+        {% for question, values in question_answer_set.items %}
         <tr>
-            <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ question.question.number }}</td><td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ question.question.name }}</td><td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ question.value }}</td><td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ question.revised_value }}</td>
+            <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ question }}</td>
+            <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ values.0 }}</td>
+            <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{% if values.1 == 0 %}<img width="20px" src="{% static "images/missing-question.jpg" %}">{% else %}{{ values.1 }}{% endif %}</td>
+            <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{% if values.2 == 0 %}<img width="20px" src="{% static "images/missing-question.jpg" %}">{% else %}{{ values.2 }}{% endif %}</td>
         </tr>
         {% endfor %}
     </table>

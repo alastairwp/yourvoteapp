@@ -167,7 +167,30 @@ def assessmentreport(request, course_id):
     if cat7revisedavg['revised_value__avg'] is None:
         cat7revisedavg['revised_value__avg'] = 0
 
-    full_question_set = Vote.objects.filter(course_id=course_id, user_id=current_user).order_by('question_id')
+    full_question_set = Question.objects.all().order_by('number')
+    #  get number of questions answered
+    course = Course.objects.get(id=course_id)
+    question_answer_set = {}
+
+    questions_answered = Vote.objects.filter(user_id=current_user, course_id=course_id).exclude(value=0)
+    questions_answered_ids = Vote.objects.filter(user_id=current_user, course_id=course_id).order_by('question_id').values_list('question_id')
+    questions_answered_count = questions_answered.count()
+    for question in full_question_set:
+        blnSwitch = False
+        for answered_question in questions_answered_ids:
+            if question.id in answered_question:
+                vote = Vote.objects.filter(user_id=current_user, course_id=course_id, question_id=question.id).order_by('-created_date')[:1].get()
+                question_answer_set[question.id] = (question.name, vote.value, vote.revised_value)
+                blnSwitch = True
+                break
+
+        if blnSwitch is False:
+            try:
+                vote = Vote.objects.filter(user_id=current_user, course_id=course_id, question_id=question.id).order_by('-created_date')[:1].get()
+                question_answer_set[question.id] = (question.name, vote.value, vote.revised_value)
+            except Vote.DoesNotExist:
+                question_answer_set[question.id] = (question.name, 0)
+
 
     categories = Category.objects.all()
     newcat = True
@@ -285,7 +308,9 @@ def assessmentreport(request, course_id):
             'participants': participants,
             'course_id': course_id,
             'current_user': int(current_user),
-            'questions': full_question_set,
+            'full_question_set': full_question_set,
+            'questions_answered_count': questions_answered_count,
+            'question_answer_set': question_answer_set,
         }
     )
 

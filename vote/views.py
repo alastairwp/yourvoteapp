@@ -234,7 +234,7 @@ def vote(request):
                 right_hints = None
 
             try:
-                vote_values = Vote.objects.filter(question_id__exact=question_id).filter(user_id=current_user.id).first()
+                vote_values = Vote.objects.filter(question_id__exact=question_id).filter(user_id=current_user.id).order_by('-created_date')[:1].get()
                 if vote_values is None:
                     vote_comment = ""
                 else:
