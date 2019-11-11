@@ -299,6 +299,7 @@ def vote(request):
             vote_count = None
             vote_value = None
             course_id = None
+            vote_comment = ""
 
         return render(
             request,
