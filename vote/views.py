@@ -235,14 +235,15 @@ def vote(request):
 
             try:
                 vote_values = Vote.objects.filter(question_id__exact=question_id).filter(user_id=current_user.id).order_by('-created_date')[:1].get()
-                if vote_values is None:
-                    vote_comment = ""
-                else:
-                    vote_comment = vote_values.comment_data
-                    vote_comment = vote_comment.replace("''", "'")
             except Vote.DoesNotExist:
                 vote_values = None
 
+            if vote_values is None:
+                vote_comment = ""
+            else:
+                vote_comment = vote_values.comment_data
+                vote_comment = vote_comment.replace("''", "'")
+                
             try:
                 usercourse = UserCourse.objects.get(user__exact=current_user.id)
                 course_id = usercourse.course_id
