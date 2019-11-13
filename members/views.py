@@ -63,6 +63,9 @@ def assessmentreport(request, course_id):
     else:
         current_user = currentuser.id
 
+#  ----------------------
+#  Assessment QuerySets -
+#  ----------------------
     course_cohort_avg = Vote.objects.filter(course_id=course_id).aggregate(Avg('value'))
     if course_cohort_avg['value__avg'] is None:
         course_cohort_avg['value__avg'] = 0
@@ -70,102 +73,14 @@ def assessmentreport(request, course_id):
     if course_cohort_revised_avg['revised_value__avg'] is None:
         course_cohort_revised_avg['revised_value__avg'] = 0
 
-    #  Get average for all users in whole category
-    cat1_cohort_avg = Vote.objects.filter(question__subcategory__category=1).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value'))
-    if cat1_cohort_avg['value__avg'] is None:
-        cat1_cohort_avg['value__avg'] = 0
-    #  Get average for specific user in a category
-    cat1avg = Vote.objects.filter(user_id=current_user).filter(course_id=course_id).filter(question__subcategory__category=1).filter(value__gt=0).aggregate(Avg('value'))
-    if cat1avg['value__avg'] is None:
-        cat1avg['value__avg'] = 0
-    #  Get revised average for all users in whole category
-    cat1_cohort_revised_avg = Vote.objects.filter(question__subcategory__category=1).filter(course_id=course_id).filter(revised_value__gt=0).aggregate(
-        Avg('revised_value'))
-    if cat1_cohort_revised_avg['revised_value__avg'] is None:
-        cat1_cohort_revised_avg['revised_value__avg'] = 0
-    #  Get revised average for specific user in a category
-    cat1revisedavg = Vote.objects.filter(user_id=current_user).filter(course_id=course_id).filter(
-        question__subcategory__category=1).filter(revised_value__gt=0).aggregate(Avg('revised_value'))
-    if cat1revisedavg['revised_value__avg'] is None:
-        cat1revisedavg['revised_value__avg'] = 0
+    # get all the cohort averages by category
+    cohort_averages_by_category = Vote.objects.values('question__subcategory__category__name').annotate(Avg('value'), Avg('revised_value')).filter(course_id=3).filter(value__gt=0).order_by('question__subcategory__category__id')
 
-    cat2_cohort_avg = Vote.objects.filter(question__subcategory__category=2).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value'))
-    if cat2_cohort_avg['value__avg'] is None:
-        cat2_cohort_avg['value__avg'] = 0
-    cat2avg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=2).filter(value__gt=0).aggregate(Avg('value'))
-    if cat2avg['value__avg'] is None:
-        cat2avg['value__avg'] = 0
-    cat2_cohort_revised_avg = Vote.objects.filter(question__subcategory__category=2).filter(course_id=course_id).filter(revised_value__gt=0).aggregate(Avg('revised_value'))
-    if cat2_cohort_revised_avg['revised_value__avg'] is None:
-        cat2_cohort_revised_avg['revised_value__avg'] = 0
-    cat2revisedavg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=2).filter(revised_value__gt=0).aggregate(Avg('revised_value'))
-    if cat2revisedavg['revised_value__avg'] is None:
-        cat2revisedavg['revised_value__avg'] = 0
+    # get all the cohort averages by sub-category
+    user_averages_by_category = Vote.objects.values('question__subcategory__category__name').annotate(Avg('value'), Avg('revised_value')).filter(course_id=3).filter(value__gt=0).filter(user_id=current_user).order_by('question__subcategory__category__id')
 
-    cat3_cohort_avg = Vote.objects.filter(question__subcategory__category=3).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value'))
-    if cat3_cohort_avg['value__avg'] is None:
-        cat3_cohort_avg['value__avg'] = 0
-    cat3avg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=3).filter(value__gt=0).aggregate(Avg('value'))
-    if cat3avg['value__avg'] is None:
-        cat3avg['value__avg'] = 0
-    cat3_cohort_revised_avg = Vote.objects.filter(question__subcategory__category=3).filter(course_id=course_id).filter(revised_value__gt=0).aggregate(Avg('revised_value'))
-    if cat3_cohort_revised_avg['revised_value__avg'] is None:
-        cat3_cohort_revised_avg['revised_value__avg'] = 0
-    cat3revisedavg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=3).filter(revised_value__gt=0).aggregate(Avg('revised_value'))
-    if cat3revisedavg['revised_value__avg'] is None:
-        cat3revisedavg['revised_value__avg'] = 0
-
-    cat4_cohort_avg = Vote.objects.filter(question__subcategory__category=4).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value'))
-    if cat4_cohort_avg['value__avg'] is None:
-        cat4_cohort_avg['value__avg'] = 0
-    cat4avg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=4).filter(value__gt=0).aggregate(Avg('value'))
-    if cat4avg['value__avg'] is None:
-        cat4avg['value__avg'] = 0
-    cat4_cohort_revised_avg = Vote.objects.filter(question__subcategory__category=4).filter(course_id=course_id).filter(revised_value__gt=0).aggregate(Avg('revised_value'))
-    if cat4_cohort_revised_avg['revised_value__avg'] is None:
-        cat4_cohort_revised_avg['revised_value__avg'] = 0
-    cat4revisedavg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=4).filter(revised_value__gt=0).aggregate(Avg('revised_value'))
-    if cat4revisedavg['revised_value__avg'] is None:
-        cat4revisedavg['revised_value__avg'] = 0
-
-    cat5_cohort_avg = Vote.objects.filter(question__subcategory__category=5).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value'))
-    if cat5_cohort_avg['value__avg'] is None:
-        cat5_cohort_avg['value__avg'] = 0
-    cat5avg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=5).filter(value__gt=0).aggregate(Avg('value'))
-    if cat5avg['value__avg'] is None:
-        cat5avg['value__avg'] = 0
-    cat5_cohort_revised_avg = Vote.objects.filter(question__subcategory__category=5).filter(course_id=course_id).filter(revised_value__gt=0).aggregate(Avg('revised_value'))
-    if cat5_cohort_revised_avg['revised_value__avg'] is None:
-        cat5_cohort_revised_avg['revised_value__avg'] = 0
-    cat5revisedavg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=5).filter(revised_value__gt=0).aggregate(Avg('revised_value'))
-    if cat5revisedavg['revised_value__avg'] is None:
-        cat5revisedavg['revised_value__avg'] = 0
-
-    cat6_cohort_avg = Vote.objects.filter(question__subcategory__category=6).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value'))
-    if cat6_cohort_avg['value__avg'] is None:
-        cat6_cohort_avg['value__avg'] = 0
-    cat6avg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=6).filter(value__gt=0).aggregate(Avg('value'))
-    if cat6avg['value__avg'] is None:
-        cat6avg['value__avg'] = 0
-    cat6_cohort_revised_avg = Vote.objects.filter(question__subcategory__category=6).filter(course_id=course_id).filter(revised_value__gt=0).aggregate(Avg('revised_value'))
-    if cat6_cohort_revised_avg['revised_value__avg'] is None:
-        cat6_cohort_revised_avg['revised_value__avg'] = 0
-    cat6revisedavg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=6).filter(revised_value__gt=0).aggregate(Avg('revised_value'))
-    if cat6revisedavg['revised_value__avg'] is None:
-        cat6revisedavg['revised_value__avg'] = 0
-
-    cat7_cohort_avg = Vote.objects.filter(question__subcategory__category=7).filter(course_id=course_id).filter(value__gt=0).aggregate(Avg('value'))
-    if cat7_cohort_avg['value__avg'] is None:
-        cat7_cohort_avg['value__avg'] = 0
-    cat7avg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=7).filter(value__gt=0).aggregate(Avg('value'))
-    if cat7avg['value__avg'] is None:
-        cat7avg['value__avg'] = 0
-    cat7_cohort_revised_avg = Vote.objects.filter(question__subcategory__category=7).filter(course_id=course_id).filter(revised_value__gt=0).aggregate(Avg('revised_value'))
-    if cat7_cohort_revised_avg['revised_value__avg'] is None:
-        cat7_cohort_revised_avg['revised_value__avg'] = 0
-    cat7revisedavg = Vote.objects.filter(user_id=current_user).filter(question__subcategory__category=7).filter(revised_value__gt=0).aggregate(Avg('revised_value'))
-    if cat7revisedavg['revised_value__avg'] is None:
-        cat7revisedavg['revised_value__avg'] = 0
+    # get all the cohort averages by sub-category
+    user_averages_by_subcategory = Vote.objects.values('question__subcategory__category__name', 'question__subcategory__name').annotate(Avg('value'), Avg('revised_value')).filter(course_id=3).filter(value__gt=0).filter(user_id=current_user).order_by('question__subcategory__id')
 
     full_question_set = Question.objects.all().order_by('number')
     #  get number of questions answered
@@ -194,78 +109,24 @@ def assessmentreport(request, course_id):
             except Vote.DoesNotExist:
                 question_answer_set[question.id] = (question.name, 0)
 
+#  -----------------------
+#  Radar chart QuerySets -
+#  -----------------------
+    radar_user_category_averages = []
+    for user_category_average in user_averages_by_category:
+        radar_user_category_averages.append(user_category_average['value__avg'])
 
-    categories = Category.objects.all()
-    newcat = True
-    newsubcat = True
-    reportscores = {}
+    radar_user_category_revised_averages = []
+    for user_category_revised_average in user_averages_by_category:
+        radar_user_category_revised_averages.append(user_category_revised_average['revised_value__avg'])
 
-    for category in categories:
-        if newcat is True:
-            reportscores = {category.name: 0}  # this sets up the category level in the dictionary
-        else:
-            reportscores[category.name] = 0
+    radar_cohort_category_averages = []
+    for cohort_category_average in cohort_averages_by_category:
+        radar_cohort_category_averages.append(cohort_category_average['value__avg'])
 
-        subcategories = SubCategory.objects.filter(category_id=category.id)
-        for subcategory in subcategories:
-
-            if newsubcat is True:
-                reportscores[category.name] = {subcategory.name: 0}  # this sets up the subcategory level in the dictionary
-            else:
-                reportscores[category.name][subcategory.name] = 0
-
-            questions = Question.objects.filter(subcategory_id=subcategory.id)
-            totalvotescore = Vote.objects.filter(user_id=current_user).filter(question_id__in=questions).aggregate(Sum('value'))
-            totalvoterevisedscore = Vote.objects.filter(user_id=current_user).filter(question_id__in=questions).aggregate(
-                Sum('revised_value'))
-
-            try:
-                tvs = str(totalvotescore['value__sum'])
-                tvs = int(tvs)
-            except ValueError:
-                tvs = 0
-
-            try:
-                tvr = str(totalvoterevisedscore['revised_value__sum'])
-                tvr = int(tvr)
-            except ValueError:
-                tvr = 0
-
-            question_count = len(questions)
-
-            if tvs != 0:
-                average_score = tvs / question_count
-            else:
-                average_score = 0
-
-            if tvr != 0:
-                average_revised = tvr / question_count
-            else:
-                average_revised = 0
-
-            reportscores[category.name][subcategory.name] = {"score": int(average_score), "revised": int(average_revised)}
-            newcat = False
-            newsubcat = False
-
-        newsubcat = True
-
-    newcat = True
-
-    originalData = [cat1avg['value__avg'], cat2avg['value__avg'], cat3avg['value__avg'], cat4avg['value__avg'],
-                    cat5avg['value__avg'], cat6avg['value__avg'], cat7avg['value__avg']]
-
-    revisedData = [cat1revisedavg['revised_value__avg'], cat2revisedavg['revised_value__avg'],
-                   cat3revisedavg['revised_value__avg'], cat4revisedavg['revised_value__avg'],
-                   cat5revisedavg['revised_value__avg'], cat6revisedavg['revised_value__avg'],
-                   cat7revisedavg['revised_value__avg']]
-
-    originalCohortData = [cat1_cohort_avg['value__avg'], cat2_cohort_avg['value__avg'], cat3_cohort_avg['value__avg'], cat4_cohort_avg['value__avg'],
-                    cat5_cohort_avg['value__avg'], cat6_cohort_avg['value__avg'], cat7_cohort_avg['value__avg']]
-
-    revisedCohortData = [cat1_cohort_revised_avg['revised_value__avg'], cat2_cohort_revised_avg['revised_value__avg'],
-                   cat3_cohort_revised_avg['revised_value__avg'], cat4_cohort_revised_avg['revised_value__avg'],
-                   cat5_cohort_revised_avg['revised_value__avg'], cat6_cohort_revised_avg['revised_value__avg'],
-                   cat7_cohort_revised_avg['revised_value__avg']]
+    radar_cohort_category_revised_averages = []
+    for cohort_category_revised_average in cohort_averages_by_category:
+        radar_cohort_category_revised_averages.append(cohort_category_revised_average['revised_value__avg'])
 
     participants = UserCourse.objects.filter(course_id=course_id)
     return render(
@@ -273,47 +134,21 @@ def assessmentreport(request, course_id):
         'members/assessment-report.html',
         {
             'title': 'Assessment Report',
-            'reportscores': reportscores,
-            'cat1avg': cat1avg,
-            'cat1revisedavg': cat1revisedavg,
-            'cat2avg': cat2avg,
-            'cat2revisedavg': cat2revisedavg,
-            'cat3avg': cat3avg,
-            'cat3revisedavg': cat3revisedavg,
-            'cat4avg': cat4avg,
-            'cat4revisedavg': cat4revisedavg,
-            'cat5avg': cat5avg,
-            'cat5revisedavg': cat5revisedavg,
-            'cat6avg': cat6avg,
-            'cat6revisedavg': cat6revisedavg,
-            'cat7avg': cat7avg,
-            'cat7revisedavg': cat7revisedavg,
-            'gl_cohort_score': cat1_cohort_avg['value__avg'],
-            'gl_cohort_revised_score': cat1_cohort_revised_avg['revised_value__avg'],
-            'ec_cohort_score': cat2_cohort_avg['value__avg'],
-            'ec_cohort_revised_score': cat2_cohort_revised_avg['revised_value__avg'],
-            'ci_cohort_score': cat3_cohort_avg['value__avg'],
-            'ci_cohort_revised_score': cat3_cohort_revised_avg['revised_value__avg'],
-            'bp_cohort_score': cat4_cohort_avg['value__avg'],
-            'bp_cohort_revised_score': cat4_cohort_revised_avg['revised_value__avg'],
-            'rp_cohort_score': cat5_cohort_avg['value__avg'],
-            'rp_cohort_revised_score': cat5_cohort_revised_avg['revised_value__avg'],
-            'esu_cohort_score': cat6_cohort_avg['value__avg'],
-            'esu_cohort_revised_score': cat6_cohort_revised_avg['revised_value__avg'],
-            'ao_cohort_score': cat7_cohort_avg['value__avg'],
-            'ao_cohort_revised_score': cat7_cohort_revised_avg['revised_value__avg'],
             'course_cohort_avg': course_cohort_avg['value__avg'],
             'course_cohort_revised_avg': course_cohort_revised_avg['revised_value__avg'],
-            'originalData': originalData,
-            'revisedData': revisedData,
-            'originalCohortData': originalCohortData,
-            'revisedCohortData': revisedCohortData,
+            'radar_user_category_averages': radar_user_category_averages,
+            'radar_user_category_revised_averages': radar_user_category_revised_averages,
+            'radar_cohort_category_averages': radar_cohort_category_averages,
+            'radar_cohort_category_revised_averages': radar_cohort_category_revised_averages,
             'participants': participants,
             'course_id': course_id,
             'current_user': int(current_user),
             'full_question_set': full_question_set,
             'questions_answered_count': questions_answered_count,
             'question_answer_set': question_answer_set,
+            'cohort_averages_by_category': cohort_averages_by_category,
+            'user_averages_by_subcategory': user_averages_by_subcategory,
+            'user_averages_by_category': user_averages_by_category,
         }
     )
 
