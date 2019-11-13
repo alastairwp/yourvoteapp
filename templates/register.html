@@ -77,9 +77,14 @@
                                     {% endfor %}
                                 {% endif %}
 
-                                <p class="signin button">
-                                    <input type="submit" class="btn btn-light btn-radius btn-brd grd1" value="Sign up"/>
-                                </p>
+                                <div>
+                                    <input required="required" style="width:24px;height:24px" id="gdpr-optin" name="gdpr-optin" type="checkbox">
+                                    <span>By registering your details on our website you agree to our <a href="/website-terms/">Terms and Conditions</a> and <a href="/privacy-policy/">Privacy Policy</a>.</span>
+                                </div>
+
+                                <div style="margin:20px">
+                                    <input type="submit" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" value="Sign up"/>
+                                </div>
 
                                 <p class="change_link">
                                     Already a member ?

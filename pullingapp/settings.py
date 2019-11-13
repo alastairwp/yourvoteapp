@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'pullingapp',
     'send_email',
     'members',
-    'chartjs'
+    'chartjs',
+    'register',
 ]
 
 MIDDLEWARE = [

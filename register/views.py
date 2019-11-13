@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, Group
 from domain_admin.models import UserCentre
+from register.models import UserDataCapture
 from btbadmin.models import Centre
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -43,6 +44,10 @@ def register(request):
                 none_group = Group.objects.get(name="none")
                 user.groups.add(members_group)
                 user.groups.add(none_group)
+
+                # Save GDPR data opt-in
+                gdpr_optin = UserDataCapture(email=email, first_name=first_name, last_name=last_name, gdpr_opt_in=True)
+                gdpr_optin.save()
 
                 current_site = get_current_site(request)
 
