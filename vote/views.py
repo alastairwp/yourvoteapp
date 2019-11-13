@@ -243,7 +243,7 @@ def vote(request):
             else:
                 vote_comment = vote_values.comment_data
                 vote_comment = vote_comment.replace("''", "'")
-                
+
             try:
                 usercourse = UserCourse.objects.get(user__exact=current_user.id)
                 course_id = usercourse.course_id

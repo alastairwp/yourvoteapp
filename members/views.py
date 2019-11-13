@@ -180,7 +180,10 @@ def assessmentreport(request, course_id):
         for answered_question in questions_answered_ids:
             if question.id in answered_question:
                 vote = Vote.objects.filter(user_id=current_user, course_id=course_id, question_id=question.id).order_by('-created_date')[:1].get()
-                question_answer_set[question.id] = (question.name, vote.value, vote.revised_value)
+                if vote:
+                    question_answer_set[question.id] = (question.name, vote.value, vote.revised_value)
+                else:
+                    question_answer_set[question.id] = (question.name, 0, 0)
                 blnSwitch = True
                 break
 
