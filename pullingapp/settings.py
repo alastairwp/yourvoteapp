@@ -107,13 +107,14 @@ WSGI_APPLICATION = 'pullingapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': 'votedb2',
-        'USER': 'alastairwp',
-        'PASSWORD': 'Ilove2code1136',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.environ.get('YOURVOTE_DBNAME'),
+        'USER': os.environ.get('YOURVOTE_DBUSER'),
+        'PASSWORD': os.environ.get('YOURVOTE_DBPASSWORD'),
+        'HOST': os.environ.get('YOURVOTE_DBHOST'),
+        'PORT': os.environ.get('YOURVOTE_DBPORT'),
     }
 }
+
 
 DATABASE_ROUTERS = (
     'django_tenants.routers.TenantSyncRouter',
@@ -125,14 +126,6 @@ TENANT_DOMAIN_MODEL = "customers.Domain"  # app.Model
 # import dj_database_url
 # DATABASES['default'] = dj_database_url.config()
 
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'sqlite3.db'),
-    }
-}
-"""
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

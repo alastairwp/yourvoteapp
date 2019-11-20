@@ -2,25 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="936d9c73-59ae-44bd-a027-3356d22b3598" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/customers/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/customers/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/customers/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/customers/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/customers/migrations/0002_client_landing_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/customers/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/customers/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/customers/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/customers/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pullingapp/middleware.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/buildingslookingup.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/logos/lancaster-logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/lancaster.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yourvote.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pullingapp/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/pullingapp/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pullingapp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/pullingapp/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sqlite3.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vote/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/vote/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
