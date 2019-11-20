@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from .models import Question, Vote, Hint
 from domain_admin.models import UserCourse, Course
 from btbadmin.models import Centre
@@ -138,14 +138,26 @@ def get_chart_data(request):
 
 def homepage(request):
     centres = Centre.objects.all()
-    return render(
-        request,
-        'index.html',
-        {
-            'title': 'Homepage',
-            'centres': centres
-        }
-    )
+    if request.site == "/":
+        return render(
+            request,
+            'index.html',
+            {
+                'title': 'Homepage',
+                'centres': centres
+            }
+        )
+    else:
+        template_url = request.site + ".html"
+        return render(
+            request,
+            template_url,
+            {
+                'title': 'Homepage',
+                'centres': centres
+            }
+        )
+
 
 
 def cookiepolicy(request):

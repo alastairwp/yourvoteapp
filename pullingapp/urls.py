@@ -9,6 +9,7 @@ import send_email.views as send_email_views
 import register.views as register_views
 import vote.views as vote_views
 import members.views as members_views
+import customers.views as customers_views
 
 
 handler404 = 'members.views.handler404'
@@ -17,6 +18,7 @@ handler500 = 'members.views.handler500'
 urlpatterns = [
     path('404/', members_views.handler404, name='404'),
     path('', vote_views.homepage, name='homepage'),
+    path('lancaster/', customers_views.lancaster_homepage, name='lancaster_homepage'),
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', register_views.activate, name='activate'),
     path('sendmail/', send_email_views.send_email),
     path('save_vote_data/', vote_views.save_vote_data),

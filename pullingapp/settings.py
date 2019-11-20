@@ -30,8 +30,8 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-INSTALLED_APPS = [
-    'vote.apps.VoteConfig',
+SHARED_APPS = [
+    'django_tenants',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,10 +45,31 @@ INSTALLED_APPS = [
     'members',
     'chartjs',
     'register',
+    'customers',
 ]
 
+TENANT_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'vote.apps.VoteConfig',
+    'btbadmin',
+    'domain_admin.apps.DomainAdminConfig',
+    'pullingapp',
+    'send_email',
+    'members',
+    'chartjs',
+    'register',
+]
+
+INSTALLED_APPS = list(set(SHARED_APPS + TENANT_APPS))
+
 MIDDLEWARE = [
+    'django_tenants.middleware.main.TenantMainMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'pullingapp.middleware.MultiSiteMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -83,20 +104,26 @@ WSGI_APPLICATION = 'pullingapp.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        'ENGINE': 'django_tenants.postgresql_backend',
+        'NAME': 'votedb2',
+        'USER': 'alastairwp',
+        'PASSWORD': 'Ilove2code1136',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
+
+TENANT_MODEL = "customers.Client"  # app.Model
+TENANT_DOMAIN_MODEL = "customers.Domain"  # app.Model
+
+# import dj_database_url
+# DATABASES['default'] = dj_database_url.config()
 
 """
 DATABASES = {
@@ -162,7 +189,7 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.environ.get('YOURVOTE_DEFAULT_FROM_EMAIL')
 
 # settings.py
-"""LOGGING = {
+LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
@@ -178,7 +205,7 @@ DEFAULT_FROM_EMAIL = os.environ.get('YOURVOTE_DEFAULT_FROM_EMAIL')
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'mysite.log',
+            'filename': 'yourvote.log',
             'formatter': 'verbose'
         },
     },
@@ -193,4 +220,4 @@ DEFAULT_FROM_EMAIL = os.environ.get('YOURVOTE_DEFAULT_FROM_EMAIL')
             'level': 'DEBUG',
         },
     }
-}"""
+}
