@@ -38,6 +38,7 @@ SHARED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'vote.apps.VoteConfig',
     'btbadmin',
     'domain_admin.apps.DomainAdminConfig',
     'pullingapp',
