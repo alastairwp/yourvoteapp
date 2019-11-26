@@ -47,7 +47,7 @@ setInterval(function () {
                     drawChart(votes,cheknewarray);
                    }
                });
-        },500);
+        },1000);
 
 function drawChart(x,y) {
     var trace = {
