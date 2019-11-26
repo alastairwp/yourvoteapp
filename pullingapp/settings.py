@@ -209,7 +209,7 @@ LOGGING = {
             'propagate': True,
             'level': 'DEBUG',
         },
-        'pullingapp': {
+        'pullingapp': { 
             'handlers': ['file'],
             'level': 'DEBUG',
         },
