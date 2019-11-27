@@ -277,14 +277,6 @@ def vote(request):
             except Vote.DoesNotExist:
                 vote_count = 0
 
-            #  get number of questions answered
-            try:
-                if int(course.status) == 0:
-                    questions_answered = Vote.objects.filter(user_id=current_user.id, course_id=course_id).exclude(value=0)
-                    question_count = questions_answered.count()
-            except Vote.DoesNotExist:
-                question_count = 0
-
             if course.status is not None:
                 if course.status == 0:
                     if vote_values:
@@ -331,7 +323,6 @@ def vote(request):
                 'course_status': course.status,
                 'vote_comment': vote_comment,
                 'original_vote_value': original_vote_value,
-                'question_count': question_count,
             }
         )
 
