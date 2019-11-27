@@ -74,13 +74,13 @@ def assessmentreport(request, course_id):
         course_cohort_revised_avg['revised_value__avg'] = 0
 
     # get all the cohort averages by category
-    cohort_averages_by_category = Vote.objects.values('question__subcategory__category__name').annotate(Avg('value'), Avg('revised_value')).filter(course_id=3).filter(value__gt=0).order_by('question__subcategory__category__id')
+    cohort_averages_by_category = Vote.objects.values('question__subcategory__category__name').annotate(Avg('value'), Avg('revised_value')).filter(course_id=course_id).filter(value__gt=0).order_by('question__subcategory__category__id')
 
     # get all the cohort averages by sub-category
-    user_averages_by_category = Vote.objects.values('question__subcategory__category__name').annotate(Avg('value'), Avg('revised_value')).filter(course_id=3).filter(value__gt=0).filter(user_id=current_user).order_by('question__subcategory__category__id')
+    user_averages_by_category = Vote.objects.values('question__subcategory__category__name').annotate(Avg('value'), Avg('revised_value')).filter(course_id=course_id).filter(value__gt=0).filter(user_id=current_user).order_by('question__subcategory__category__id')
 
     # get all the cohort averages by sub-category
-    user_averages_by_subcategory = Vote.objects.values('question__subcategory__category__name', 'question__subcategory__name').annotate(Avg('value'), Avg('revised_value')).filter(course_id=3).filter(value__gt=0).filter(user_id=current_user).order_by('question__subcategory__id')
+    user_averages_by_subcategory = Vote.objects.values('question__subcategory__category__name', 'question__subcategory__name').annotate(Avg('value'), Avg('revised_value')).filter(course_id=course_id).filter(value__gt=0).filter(user_id=current_user).order_by('question__subcategory__id')
 
     full_question_set = Question.objects.all().order_by('number')
     #  get number of questions answered

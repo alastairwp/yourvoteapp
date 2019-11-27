@@ -38,9 +38,9 @@ SHARED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'vote.apps.VoteConfig',
+    'vote',
     'btbadmin',
-    'domain_admin.apps.DomainAdminConfig',
+    'domain_admin',
     'pullingapp',
     'send_email',
     'members',
@@ -55,9 +55,9 @@ TENANT_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'vote.apps.VoteConfig',
+    'vote',
     'btbadmin',
-    'domain_admin.apps.DomainAdminConfig',
+    'domain_admin',
     'pullingapp',
     'send_email',
     'members',
@@ -85,8 +85,7 @@ ROOT_URLCONF = 'pullingapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

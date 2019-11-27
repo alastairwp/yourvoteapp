@@ -62,12 +62,15 @@
         </div>
 
         {% for user_average in user_averages_by_subcategory %}
+        {% if user_average.question__subcategory__category__name == user_category_average.question__subcategory__category__name %}
         <div class="sub-theme-title-wrapper">
             <div class="sub-theme-title">{{ user_average.question__subcategory__name }}</div>
             <div class="score-box score-{{ user_average.revised_value__avg|floatformat:"0" }} right">{{ user_average.revised_value__avg|floatformat:"1" }}</div>
             <div class="score-box score-{{ user_average.value__avg|floatformat:"0" }} right">{{ user_average.value__avg|floatformat:"1" }}</div>
         </div>
+        {% endif %}
         {% endfor %}
+
 
         <!--{% for key, averages in subcat.items %}
         <div class="sub-theme-title-wrapper">
@@ -92,8 +95,8 @@
         <tr>
             <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ question }}</td>
             <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{{ values.0 }}</td>
-            <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{% if values.1 == 0 %}<img width="20px" src="{% static "images/missing-question.jpg" %}">{% else %}{{ values.1 }}{% endif %}</td>
-            <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{% if values.2 == 0 %}<img width="20px" src="{% static "images/missing-question.jpg" %}">{% else %}{{ values.2 }}{% endif %}</td>
+            <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{% if values.1 == 0 %}<img width="20px" src="{% static 'images/missing-question.jpg' %}">{% else %}{{ values.1 }}{% endif %}</td>
+            <td style="text-align:left;padding:10px;border-bottom:1px solid lightblue">{% if values.2 == 0 %}<img width="20px" src="{% static 'images/missing-question.jpg' %}">{% else %}{{ values.2 }}{% endif %}</td>
         </tr>
         {% endfor %}
     </table>
