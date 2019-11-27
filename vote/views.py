@@ -121,11 +121,21 @@ def get_chart_data(request):
 
     try:
         if int(course_status) > 0:
-            revised_votes = Vote.objects.filter(question_id=question_id, course_id=course_id, revised_value__gt=0)
-            vote_count = revised_votes.count()
+            votes_by_userid = Vote.objects.filter(question_id=question_id, course_id=course_id, revised_value__gt=0).values(
+                'user_id')
+            votes = Vote.objects.filter(question_id=question_id, course_id=course_id, revised_value__gt=0)
+            users_yet_to_vote = UserCourse.objects.filter(course_id=course_id).exclude(user_id__in=votes_by_userid)
+            vote_count = votes.count()
+            not_voted_users = []
             voted_users = []
-            for uvote in revised_votes:
-                voted_users.append("<div style='float:left;margin-top:10px;border-radius:5px;margin-left:10px;color:white;display:inline;border:1px solid green;padding:5px;background-color:#009900'>" + uvote.user.first_name + ' ' + uvote.user.last_name + "</div>")
+            for unvote in users_yet_to_vote:
+                if not unvote.user.groups.filter(name__in=['domain_admins', 'presenters', 'btbadmins']).exists():
+                    not_voted_users.append(
+                        "<div style='float:left;margin-top:10px;border-radius:5px;margin-left:10px;color:white;display:inline;border:1px solid green;padding:5px;background-color:#23527c'>" + unvote.user.first_name + ' ' + unvote.user.last_name + "</div>")
+
+            for uvote in votes:
+                voted_users.append(
+                    "<div style='float:left;margin-top:10px;border-radius:5px;margin-left:10px;color:white;display:inline;border:1px solid green;padding:5px;background-color:#009900'>" + uvote.user.first_name + ' ' + uvote.user.last_name + "</div>")
     except Vote.DoesNotExist:
         vote_count = 0
 
