@@ -94,68 +94,6 @@ function drawChart(x,y) {
 }
 
 
-$('document').ready(function () {
-
-   $('.vote-radio').click(function () {
-       var valueget = $(this).attr('data-type');
-       var question_id = $('#question_id').val();
-       var next_iddata  = $('#next_id').val();
-       var back_iddata  = $('#back_id').val();
-       var question_comment = $('#UserComment').val();
-       var course_id = $('#course_id').val();
-       var original_vote_value = $('#original_vote_value').val();
-       var url = '/save_vote_data/';
-       $.ajax({
-           url: url,
-           type: "POST",
-           data: {question_id:question_id,value:valueget,question_comment:question_comment,course_id:course_id,original_vote_value:original_vote_value,csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()},
-           success: function (result) {
-               console.log(result)
-               if(result.resultdata==1){
-                   if(next_iddata!=''){
-
-                     window.location.href = '?id_data=' + question_id + "#graph";
-                  }
-               }
-           }
-       });
-   });
-});
-
-
-function savecomment(id) {
-    var question_id = $('#question_id').val();
-    var next_iddata  = $('#next_id').val();
-    var back_iddata  = $('#back_id').val();
-    var question_comment = $('#UserComment').val();
-    var course_id = $('#course_id').val();
-    var url = '/save_comment_data/';
-       $.ajax({
-           url: url,
-           type: "POST",
-           data: {question_id:question_id,question_comment:question_comment,course_id:course_id,csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()},
-           success: function (result) {
-               console.log(result)
-               if(result.resultdata==1){
-                   if(next_iddata!=''){
-                     window.location.href = '?id_data='+id;
-                  }
-               }
-           }
-       });
-   }
-
-
-function revealchart() {
-    var reveal_chart = document.getElementById('cohort_votes').style.display;
-    chart_object = document.getElementById('cohort_votes');
-    if (reveal_chart == 'none') {
-        chart_object.style.display = 'block';
-      } else {
-        chart_object.style.display = 'none';
-    }
-}
-
 
      // using jQuery
 function getCookie(name) {

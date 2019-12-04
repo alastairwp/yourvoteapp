@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse
 from .models import Question, Vote, Hint
 from domain_admin.models import UserCourse, Course
 from btbadmin.models import Centre
@@ -7,6 +7,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.utils import timezone
 from django.core import serializers
 import json
+from django.utils.safestring import mark_safe
 from django import template
 from django.urls import reverse
 
@@ -18,43 +19,6 @@ register = template.Library()
 def has_group(user, group_name):
     group = Group.objects.get(name=group_name)
     return True if group in user.groups.all() else False
-
-
-def save_vote_data(request):
-    if request.is_ajax():
-        current_user = request.user
-        question_id = request.POST['question_id']
-        value_data = request.POST['value']
-        comment_data = request.POST['question_comment']
-        course_id = request.POST['course_id']
-        now = timezone.now()
-
-        #  Is the course at 1st or 2nd stage? If 2nd Stage then the vote-value is the revised-value
-        course = Course.objects.get(id=course_id)
-
-        try:
-            checkvote = Vote.objects.filter(user__exact=current_user.id, question_id__exact=question_id,
-                                            course_id=course_id).count()
-        except Question.DoesNotExist:
-            checkvote = 0
-
-        if checkvote != 0:
-            checkvote = Vote.objects.get(user__exact=current_user.id, question_id__exact=question_id,
-                                         course_id=course_id)
-            checkvote.save()
-            if course.status == 0:
-                Vote.objects.filter(id=checkvote.id).update(comment_data=comment_data, value=value_data,
-                                                            course_id=course_id, updated_date=now)
-            elif course.status == 1:
-                Vote.objects.filter(id=checkvote.id).update(comment_data=comment_data, revised_value=value_data,
-                                                            course_id=course_id, updated_date=now)
-
-        else:
-            savequestion = Vote(user=current_user, question_id=question_id, value=value_data,
-                                comment_data=comment_data, course_id=course_id, updated_date=now)
-            savequestion.save()
-
-        return JsonResponse({'resultdata': 1})
 
 
 def save_comment_data(request):
@@ -85,67 +49,6 @@ def save_comment_data(request):
         # var question = Question('')
 
 
-def get_chart_data(request):
-
-    try:
-        question_id = request.POST['question_id']
-    except MultiValueDictKeyError:
-        question_id = None
-
-    try:
-        course_id = request.POST['course_id']
-    except MultiValueDictKeyError:
-        course_id = None
-
-    try:
-        course_status = request.POST['course_status']
-    except MultiValueDictKeyError:
-        course_status = 0
-
-    try:
-        if int(course_status) == 0:
-            votes_by_userid = Vote.objects.filter(question_id=question_id, course_id=course_id, value__gt=0).values('user_id')
-            votes = Vote.objects.filter(question_id=question_id, course_id=course_id, value__gt=0)
-            users_yet_to_vote = UserCourse.objects.filter(course_id=course_id).exclude(user_id__in=votes_by_userid)
-            vote_count = votes.count()
-            not_voted_users = []
-            voted_users = []
-            for unvote in users_yet_to_vote:
-                if not unvote.user.groups.filter(name__in=['domain_admins', 'presenters', 'btbadmins']).exists():
-                    not_voted_users.append("<div style='float:left;margin-top:10px;border-radius:5px;margin-left:10px;color:white;display:inline;border:1px solid green;padding:5px;background-color:#23527c'>" + unvote.user.first_name + ' ' + unvote.user.last_name + "</div>")
-
-            for uvote in votes:
-                voted_users.append("<div style='float:left;margin-top:10px;border-radius:5px;margin-left:10px;color:white;display:inline;border:1px solid green;padding:5px;background-color:#009900'>" + uvote.user.first_name + ' ' + uvote.user.last_name + "</div>")
-    except Vote.DoesNotExist:
-        vote_count = 0
-
-    try:
-        if int(course_status) > 0:
-            votes_by_userid = Vote.objects.filter(question_id=question_id, course_id=course_id, revised_value__gt=0).values(
-                'user_id')
-            votes = Vote.objects.filter(question_id=question_id, course_id=course_id, revised_value__gt=0)
-            users_yet_to_vote = UserCourse.objects.filter(course_id=course_id).exclude(user_id__in=votes_by_userid)
-            vote_count = votes.count()
-            not_voted_users = []
-            voted_users = []
-            for unvote in users_yet_to_vote:
-                if not unvote.user.groups.filter(name__in=['domain_admins', 'presenters', 'btbadmins']).exists():
-                    not_voted_users.append(
-                        "<div style='float:left;margin-top:10px;border-radius:5px;margin-left:10px;color:white;display:inline;border:1px solid green;padding:5px;background-color:#23527c'>" + unvote.user.first_name + ' ' + unvote.user.last_name + "</div>")
-
-            for uvote in votes:
-                voted_users.append(
-                    "<div style='float:left;margin-top:10px;border-radius:5px;margin-left:10px;color:white;display:inline;border:1px solid green;padding:5px;background-color:#009900'>" + uvote.user.first_name + ' ' + uvote.user.last_name + "</div>")
-    except Vote.DoesNotExist:
-        vote_count = 0
-
-    allVote = Vote.objects.filter(question_id__exact=question_id, course_id=course_id)
-    tmpJson = serializers.serialize("json", allVote)
-    tmpObj = json.loads(tmpJson)
-
-    return JsonResponse({'alldata': tmpObj, 'vote_count': vote_count, 'voted_users': voted_users, 'not_voted_users': not_voted_users})
-
-
 def homepage(request):
     centres = Centre.objects.all()
     if request.site == "/":
@@ -167,7 +70,6 @@ def homepage(request):
                 'centres': centres
             }
         )
-
 
 
 def cookiepolicy(request):
@@ -200,16 +102,17 @@ def privacy_policy(request):
     )
 
 
-def vote(request):
+def vote(request, question_id):
+    """
     try:
         getid = request.GET['id_data']
     except MultiValueDictKeyError:
         getid = False
-
+    """
     current_user = request.user
     if current_user.is_authenticated:
 
-        if getid is False:
+        if question_id is None:
             try:
                 question = Question.objects.order_by('id').first()
 
@@ -220,9 +123,6 @@ def vote(request):
                 question_id = question.id
             else:
                 question_id = ''
-
-        else:
-            question_id = getid
 
         if question_id != '':
             try:
@@ -333,6 +233,7 @@ def vote(request):
                 'course_status': course.status,
                 'vote_comment': vote_comment,
                 'original_vote_value': original_vote_value,
+                'question_id_json': mark_safe(json.dumps(question_id)),
             }
         )
 

@@ -208,7 +208,19 @@
 
                             </form>
                         </div>
-                        <div style="text-align:right;padding:10px">You've answered <strong>{{ vote_count }}</strong> out of <strong>54</strong> questions</div>
+                        <br>
+                        <div style="margin-top:30px;float:left;width:200px;">
+                            {% if course_status > 0 %}
+                            <div style="text-align:center;width:100%;position:relative;float:left">
+                                <div>
+                                    <div id="previous_vote_label" style="float:right;text-align:center;background-color:#ff7373;color:white;width:20%">{{ original_vote_value }}</div>
+                                    <input type="button" value="Reveal previous vote" onClick="revealPreviousVote()">
+
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div style="float:right;padding:10px; width:175px">You've answered <strong>{{ vote_count }}</strong> out of <strong>54</strong> questions</div>
                     </div>
                     {% endif %}
 
@@ -246,8 +258,11 @@
                     <!-- Chart panel -->
                     <div id="cohort_votes" style="{% if request.user|has_group:'presenters' %}display:none{% else %}display:block{% endif %};" class="panel-full-width">
                         <div style="background-color:#efdcc3;text-align:center;font-weight:bold">Cohort Votes</div>
-                        <div style="padding:10px;text-align:right;"><p id="vote_label">showing {{ vote_count }} votes</p></div>
-                        <div id="chart" class="graph"></div>
+                        <canvas id="myChart"></canvas>
+                        <div style="padding:10px;text-align:right;">
+                        <input style="border:0; text-align:right;" id="vote_label" type="text" value="showing {{ vote_count }} votes">
+                        </div>
+                        <!--<div id="chart" class="graph"></div>-->
                     </div>
 
                     <!-- Back and Next buttons -->
@@ -255,28 +270,17 @@
                         <div style="text-align:center;">
                             <input id="back_id" value="{{ back_id.id }}" type="hidden">
                             {% if back_id.id != null  %}
-                                <a href="/members/vote?id_data={{ back_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" id="backid" onclick="savecomment({{ back_id.id }})">Back</a>
+                                <a href="/members/vote/{{ back_id.id }}/" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" id="backid" onclick="savecomment({{ back_id.id }})">Back</a>
                             {% endif %}
                             <input id="next_id" value="{{ next_id.id }}" type="hidden">
                             {% if next_id.id != null  %}
-                                <a href="/members/vote?id_data={{ next_id.id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" style="margin-left:10px;"  onclick="savecomment({{ next_id.id }})">Next</a>
+                                <a href="/members/vote/{{ next_id.id }}/" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" style="margin-left:10px;"  onclick="savecomment({{ next_id.id }})">Next</a>
                             {% endif %}
                             {% if question.number == 54 %}
                                 <a href="/members/assessment-report/{{ course_id }}" class="btn btn-blue btn-light grd1 effect-1 btn-radius btn-brd" style="margin-left:10px;"  onclick="savecomment({{ next_id.id }})">Finish</a>
                             {% endif %}
                         </div>
                     </div>
-                </div>
-
-                <div style="margin-top:30px;float:left">
-                    {% if course_status > 0 %}
-                    <div style="text-align:center;width:100%;position:relative;float:left">
-                        <div><input type="button" value="Reveal previous vote" onClick="window.location.reload();"></div>
-                    </div>
-                    {% if vote_value %}
-                    <div style="float:right;vertical-align:middle;display:flex;align-items:center;justify-content: center;text-align:center;background-color:#ff7373;color:white;width:20%">PREVIOUS VOTE = {{ original_vote_value }}</div>
-                    {% endif %}
-                    {% endif %}
                 </div>
 
 
@@ -291,4 +295,150 @@
     <!-- end row -->
     </div>
 
+<script>
+    var questionID = {{ question_id_json }};
+
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/members/vote/' + questionID + '/');
+
+    chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var vote = data['vote'];
+        var original_vote = data['original_vote'];
+        var allvotes = data['allvotes'];
+        var vote_count = data['vote_count'];
+        var voted_users = data['voted_users'];
+        var not_voted_users = data['not_voted_users'];
+        voted_users_list = voted_users.toString();
+        not_voted_users_list = not_voted_users.toString();
+        if (document.getElementById("voted_users")) {
+            document.getElementById("voted_users").innerHTML = voted_users_list.replace(/,/g, '');
+            }
+        if (document.getElementById("not_voted_users")) {
+            document.getElementById("not_voted_users").innerHTML = not_voted_users_list.replace(/,/g, '');
+            }
+        drawChart(allvotes);
+        updateVoteLabel(vote_count);
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    function updateVoteLabel(vote_count) {
+        var vote_label = document.querySelector('#vote_label');
+        vote_label.value = "showing " + vote_count + " votes";
+     }
+
+    window.onload = function() {
+        var vote = 0
+        document.getElementById('previous_vote_label').style.display = 'none';
+        var course = document.querySelector('#course_id').value;
+        var question = document.querySelector('#question_id').value;
+        var course_status = document.querySelector('#course_status').value;
+        var comment = ""
+        if(document.body.contains(document.getElementById('#UserComment'))){
+            comment = document.querySelector('#UserComment').value;
+            }
+        chatSocket.send(JSON.stringify({
+            'vote': vote,
+            'course': course,
+            'question': question,
+            'comment': comment
+        }));
+
+    };
+
+    $('document').ready(function () {
+        $('.vote-radio').click(function () {
+            var valueget = $(this).attr('data-type');
+            var vote = valueget;
+            var course = document.querySelector('#course_id').value;
+            var question = document.querySelector('#question_id').value;
+            var course_status = document.querySelector('#course_status').value;
+            var comment = document.querySelector('#UserComment').value;
+            chatSocket.send(JSON.stringify({
+                'vote': vote,
+                'course': course,
+                'question': question,
+                'comment': comment
+            }));
+        });
+    });
+
+    function drawChart(allvotes) {
+        var barOptions = {
+            scales: {
+                 yAxes: [{
+                     ticks: {
+                         beginAtZero:true,
+                         stepSize: 1,
+                     },
+
+                 }]
+             },
+            scaleShowGridLines: true,
+            tooltips: {enabled: false},
+            scaleGridLineColor: "rgba(0,0,0,.05)",
+            legend: {
+                display: true,
+                position: 'bottom'
+                },
+            scaleGridLineWidth: 1,
+            barValueSpacing: 5,
+            barDatasetSpacing: 1,
+            responsive: true,
+        };
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+                datasets: [{
+                    label: 'Cohort Votes',
+                    backgroundColor: ['#ff0000', '#f92d06', '#f35a0b', '#ed8711', '#e7b416', '#adc711', '#74da0b', '#3aec06', '#00ff00'],
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: allvotes,
+                }]
+            },
+            options: barOptions
+        });
+    }
+
+    function savecomment(id) {
+    var course = document.querySelector('#course_id').value;
+    var question = document.querySelector('#question_id').value;
+    var comment = document.querySelector('#UserComment').value;
+    var url = '/save_comment_data/';
+       $.ajax({
+           url: url,
+           type: "POST",
+           data: {question_id:question,question_comment:comment,course_id:course,csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()},
+           success: function (result) {
+           }
+       });
+   }
+
+   function revealchart() {
+    var reveal_chart = document.getElementById('cohort_votes').style.display;
+    chart_object = document.getElementById('cohort_votes');
+    if (reveal_chart == 'none') {
+        chart_object.style.display = 'block';
+        } else {
+        chart_object.style.display = 'none';
+        }
+    }
+
+    function revealPreviousVote() {
+        var previous_vote_label = document.getElementById('previous_vote_label').style.display;
+        objPreviousVoteLabel = document.getElementById('previous_vote_label');
+        if (previous_vote_label == 'none') {
+            objPreviousVoteLabel.style.display = 'block';
+            } else {
+            objPreviousVoteLabel.style.display = 'none';
+        }
+    };
+
+</script>
 {% endblock %}

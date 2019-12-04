@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 SHARED_APPS = [
+    'channels',
     'django_tenants',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -97,9 +98,16 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'pullingapp.wsgi.application'
-
+ASGI_APPLICATION = "pullingapp.routing.application"
+#  WSGI_APPLICATION = 'pullingapp.wsgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -182,6 +190,7 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.environ.get('YOURVOTE_DEFAULT_FROM_EMAIL')
 
 # settings.py
+"""
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -214,3 +223,4 @@ LOGGING = {
         },
     }
 }
+"""
