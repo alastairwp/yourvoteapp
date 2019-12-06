@@ -298,7 +298,7 @@
     var questionID = {{ question_id_json }};
 
     var chatSocket = new WebSocket(
-        'wss://' + window.location.host +
+        'ws://' + window.location.host +
         '/ws/members/vote/' + questionID + '/');
 
     chatSocket.onmessage = function(e) {
