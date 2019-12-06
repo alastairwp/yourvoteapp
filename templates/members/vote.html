@@ -2,7 +2,6 @@
 
 {% block head %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -333,7 +332,9 @@
 
     window.onload = function() {
         var vote = 0
-        document.getElementById('previous_vote_label').style.display = 'none';
+        if (document.getElementById("previous_vote_label")) {
+            document.getElementById("previous_vote_label").style.display = 'none';
+            }
         var course = document.querySelector('#course_id').value;
         var question = document.querySelector('#question_id').value;
         var course_status = document.querySelector('#course_status').value;
