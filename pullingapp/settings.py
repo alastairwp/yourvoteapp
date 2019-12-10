@@ -98,13 +98,15 @@ TEMPLATES = [
         },
     },
 ]
+
+REDIS_URL = os.environ.get('YOURVOTE_REDIS_URL')
 ASGI_APPLICATION = "pullingapp.routing.application"
 #  WSGI_APPLICATION = 'pullingapp.wsgi.application'
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": config("REDIS_URL", default='redis://localhost:6379/1'),
         },
     },
 }
