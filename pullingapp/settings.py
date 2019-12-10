@@ -99,14 +99,13 @@ TEMPLATES = [
     },
 ]
 
-REDIS_URL = os.environ.get('YOURVOTE_REDIS_URL')
 ASGI_APPLICATION = "pullingapp.routing.application"
 #  WSGI_APPLICATION = 'pullingapp.wsgi.application'
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": REDIS_URL,
+            "hosts": os.environ.get('REDIS_URL'),
         },
     },
 }
