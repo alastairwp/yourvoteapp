@@ -11,7 +11,7 @@ chartjs==1.2
 constantly==15.1.0
 cryptography==2.8
 daphne==2.4.0
-Django==2.2.4
+Django==2.2.22
 django-tenants==2.2.3
 h2==3.1.1
 hiredis==1.0.1
